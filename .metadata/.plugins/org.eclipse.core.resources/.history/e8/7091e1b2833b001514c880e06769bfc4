@@ -1,0 +1,7 @@
+package com.strod.yssl.pages.account;
+
+import com.roid.ui.FragmentControlActivity;
+
+public class SplashActivity extends FragmentControlActivity{
+
+}

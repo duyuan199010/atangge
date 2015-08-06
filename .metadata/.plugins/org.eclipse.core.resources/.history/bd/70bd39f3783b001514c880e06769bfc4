@@ -1,0 +1,23 @@
+package com.strod.yssl.clientcore;
+
+public class Config extends AbsConfig{
+
+	/**config instance*/
+	private static Config mInstance;
+	
+	/**
+	 * get siglon instance
+	 * @return
+	 */
+	public static Config getInstance(){
+		if(mInstance == null){
+			mInstance = new Config();
+		}
+		return mInstance;
+	}
+	
+
+	public void init(){
+		
+	}
+}

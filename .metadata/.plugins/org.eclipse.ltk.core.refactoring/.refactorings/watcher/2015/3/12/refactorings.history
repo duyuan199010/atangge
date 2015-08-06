@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;watcher&apos;&#x0A;- Original project: &apos;watcher&apos;&#x0A;- Original elements:&#x0A;     BluetoothLeService.java.mine&#x0A;     BluetoothLeService.java.r155&#x0A;     BluetoothLeService.java.r158" description="Delete elements" element1="src/com/smartdline/watcher/bluetooth/ble/BluetoothLeService.java.mine" element2="src/com/smartdline/watcher/bluetooth/ble/BluetoothLeService.java.r155" element3="src/com/smartdline/watcher/bluetooth/ble/BluetoothLeService.java.r158" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="3" stamp="1426775258195" subPackages="false" version="1.0"/>
+</session>

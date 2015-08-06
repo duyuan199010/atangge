@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<color name="red">#ffff0000</color>
+	<color name="green">#ff00ff00</color>
+	<color name="darkgreen">#ff006400</color>
+	<color name="lightgreen">#ff00fa9a</color>
+	<color name="blue">#ff0000ff</color>
+	<color name="gray">#ffbebebe</color>
+	<color name="lightgray">#ffc1c1c1</color>
+	<color name="darkgray">#ff696969</color>
+	<color name="title_backcolor">#ff808890</color>
+	<color name="white">#ffffffff</color>
+	<color name="price_inc_text_color">#ff6cc800</color>
+	<color name="price_dec_text_color">#ffff2424</color>
+	<color name="price_unchange_text_color">#ffffffff</color>
+	<color name="black">#ff000000</color>
+	<color name="subtitle">#ff00008B</color>
+	<color name="text_color_dark">#ff000000</color>
+	<color name="text_color_light">#ffffffff</color>
+	<color name="default_text_color">#ffffffff</color>
+	<color name="deep_sky_blue">#ff00bfff</color>
+	<color name="cyan">#ff00ffff</color>
+	<color name="gray21">#ff363636</color>
+	<color name="app_background">#fff5f5f5</color>
+    
+    <color name="tab_press_start_color">#ff006400</color>
+	<color name="tab_press_end_color">#ff00fa9a</color>
+	<color name="tab_press_stroke_color">#ff00ff00</color>
+	<color name="tab_press_bottom_line_color">#ff00ff00</color>
+
+	<color name="tab_focus_start_color">#ff006400</color>
+	<color name="tab_focus_end_color">#ff00fa9a</color>
+	<color name="tab_focus_stroke_color">#ff00ff00</color>
+	<color name="tab_focus_bottom_line_color">#ff00ff00</color>
+	
+	<color name="tab_selected_start_color">#ffc09f65</color>
+	<color name="tab_selected_end_color">#ffeec98a</color>
+	<color name="tab_selected_stroke_color">#ffeec98a</color>
+	<color name="tab_selected_bottom_line_color">#ffc09f65</color>
+		
+	<color name="tab_unselected_start_color">#ff6b6b6b</color>
+	<color name="tab_unselected_end_color">#ffaaaaaa</color>
+	<color name="tab_unselected_stroke_color">#ffbebebe</color>
+	<color name="tab_unselected_bottom_line_color">#ffbebebe</color>
+	
+	<color name="common_list_item_bg_color">#b3353535</color>
+	<color name="common_list_item_div_color">#33cecece</color>
+	<color name="common_title_bar_bg_color">#40f3f0f0</color>
+	
+	<color name="gold_color">#ffe1c07a</color>
+	<color name="price_rise_bgcolor">#ff50a93f</color>
+	<color name="price_drop_bgcolor">#ffe43b3b</color>
+	<color name="price_unchange_bgcolor">#ff424242</color>
+	
+	<color name="gold_btn_text_color">#ffffffff</color>
+	<color name="hint_text_color">#ff888888</color>
+	<color name="hint_text_color_ex">#ff8c8c8c</color>
+	<color name="title_text_color">#ff4e3107</color>
+	<color name="sub_info_text_color">#ffaaaaaa</color>
+	<color name="price_inc_caption_color">#ff95cf99</color>
+	<color name="price_dec_caption_color">#fff49e9e</color>
+	<color name="price_idle_caption_color">#ffaaaaaa</color>
+	
+	<color name="toggle_switch_checked_color">#ffffffff</color>
+	<color name="toggle_switch_unchecked_color">#ff7f7f7f</color>
+	<color name="toggle_switch_checked_color_gold">#ff5c390a</color>
+	<color name="toggle_switch_unchecked_color_gold">#fffdd091</color>
+	<color name="hint_edit_input_color">#68ffffff</color>
+	<color name="hint_login_input_color">#ffd7bc8d</color>
+	<color name="hint_login_text_color">#ff5c390a</color>
+		
+	<color name="plain_item_bar_dark_gray">#ff1d1d1d</color>
+	<color name="plain_item_bar_dark_gray_ex">#8c8c8c</color>
+	<color name="tier_price_bg">#ffb4b4b4</color>
+	<color name="tier_ask_price">#ff326800</color>
+	<color name="tier_bid_price">#ff820000</color>
+	
+	<color name="mtf_bg">#ff1e1e1e</color>
+	<color name="mtf_quote_list_bg">#ff505050</color>
+	<color name="mtf_price_rise_bg">#ff0d3a01</color>
+	<color name="mtf_price_fall_bg">#ff450000</color>
+	<color name="mtf_tier_price_bg">#ff353535</color>
+	<color name="mtf_new_tier_price_bg">#ff828282</color>
+	<color name="mtf_tier_bid_price_color">#ff38ab31</color>
+	<color name="mtf_tier_ask_price_color">#fffc1203</color>
+	<color name="mtf_order_tier_price_color">#ffffff00</color>
+	<color name="mtf_volume_color">#ffb4b4b4</color>
+	<color name="mtf_login_bg">#ff323232</color>
+	<color name="mtf_login_hint_color">#ff646464</color>
+	<color name="mtf_login_mode_text_color">#ff464646</color>
+	<color name="mtf_lang_color">#ffc8c8c8</color>
+	<color name="mtf_lang_bg_color">#ff464646</color>
+	
+	<color name="profit_bg">#ff3c3c3c</color>
+	<color name="user_info_bg">#ffaaaaaa</color>
+	<color name="mtf_sub_title_color">#ff505050</color>
+</resources>

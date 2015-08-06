@@ -1,0 +1,5 @@
+package com.strod.yssl.clientcore.chache;
+
+class StrictLineReader {
+
+}

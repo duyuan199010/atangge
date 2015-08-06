@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<item name="dialog_id_crash_report" type="id"/>
+	<item name="anim_duration" type="integer">100</item>
+</resources>

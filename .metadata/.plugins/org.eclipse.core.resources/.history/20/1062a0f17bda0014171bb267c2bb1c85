@@ -1,0 +1,367 @@
+package com.smartdline.watcher.receiver;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
+import com.roidlibrary.utils.Logger;
+import com.roidlibrary.utils.Toaster;
+import com.smartdline.watcher.MyApplication;
+import com.smartdline.watcher.R;
+import com.smartdline.watcher.bluetooth.BluetoothHandlerListener;
+import com.smartdline.watcher.bluetooth.IBluetoothSent;
+import com.smartdline.watcher.bluetooth.ble.BluetoothLeService;
+import com.smartdline.watcher.bluetooth.ble.SampleGattAttributes;
+import com.smartdline.watcher.common.BluetoothCmd;
+import com.smartdline.watcher.common.Constants;
+import com.smartdline.watcher.service.BluetoothEncoderService;
+import com.smartdline.watcher.utils.StringUtil;
+
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.provider.ContactsContract;
+import android.telephony.SmsMessage;
+
+public class SMSReceiver extends BroadcastReceiver implements BluetoothHandlerListener{
+
+	public static final String TAG = SMSReceiver.class.getSimpleName();
+
+	public static final String SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED";
+
+	
+	
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		if (intent.getAction().equals(SMS_RECEIVED_ACTION))
+		{
+			MyApplication.getInstance().getBluetoothHandler().addObserver(this);
+			SmsMessage[] messages = getMessagesFromIntent(intent);
+			
+			new Thread(new SendMsgThread(messages)).start();
+			
+//			for (SmsMessage message : messages)
+//			{
+//				String phoneNumber = message.getOriginatingAddress();
+//				String sms = message.getDisplayMessageBody();
+//				Logger.e(TAG, "phoneNumber:"+phoneNumber);
+//				Logger.e(TAG, "sms:"+sms);
+//
+//				new Thread(new SendMsgThread(phoneNumber, sms)).start();
+//			}
+
+		}
+	}
+
+	public SmsMessage[] getMessagesFromIntent(Intent intent)
+
+	{
+
+		Object[] messages = (Object[]) intent.getSerializableExtra("pdus");
+
+		byte[][] pduObjs = new byte[messages.length][];
+
+		for (int i = 0; i < messages.length; i++)
+
+		{
+
+			pduObjs[i] = (byte[]) messages[i];
+
+		}
+
+		byte[][] pdus = new byte[pduObjs.length][];
+
+		int pduCount = pdus.length;
+
+		SmsMessage[] msgs = new SmsMessage[pduCount];
+
+		for (int i = 0; i < pduCount; i++)
+
+		{
+
+			pdus[i] = pduObjs[i];
+
+			msgs[i] = SmsMessage.createFromPdu(pdus[i]);
+
+		}
+
+		return msgs;
+
+	}
+	
+	private class SendMsgThread implements Runnable{
+
+//		private String phoneName;
+//		private String sms;
+		private SmsMessage[] messages;
+//		public SendMsgThread(String phoneName,String sms){
+//			this.phoneName = phoneName;
+//			this.sms = sms;
+//		}
+		
+		public SendMsgThread(SmsMessage[] messages){
+//			this.phoneName = phoneName;
+			this.messages = messages;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			String totalSms="";
+			String phoneNumber="";
+			for (SmsMessage message : messages)
+				{
+					phoneNumber = message.getOriginatingAddress();
+					String sms = message.getDisplayMessageBody();
+					totalSms+=sms;
+				}
+			
+			Logger.e(TAG, "phoneNumber:"+phoneNumber);
+			Logger.e(TAG, "sms:"+totalSms);
+			if(totalSms.length()>250){
+				
+			}
+			
+			sendMsg(phoneNumber,totalSms);
+			
+		}
+		
+	}
+	
+	private synchronized void sendMsg(String phoneName,String sms){
+		byte[] smsByte = null;
+		//计算总包数
+		try {
+			smsByte = sms.getBytes(Constants.GBK);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int totalPackage=1;
+		int len = smsByte.length/16;
+		final int mod = smsByte.length%16;
+		
+		if(len==0){
+			totalPackage = 2;
+		}else{
+			if(mod==0){
+				totalPackage = len+1;
+			}else{
+				totalPackage = len+2;
+			}
+		}
+		
+		//
+		sendBluetoothCmd(BluetoothEncoderService.getInstance().sendMessage(BluetoothCmd.SEND_MESSAGE_CN,
+				totalPackage,
+				getContactNameFromPhoneBook(phoneName),
+				phoneName),
+				SampleGattAttributes.WATCHER_CHARACTERISTIC_1,
+				SampleGattAttributes.WATCHER_CHARACTERISTIC_4);
+		
+		try {
+			wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(int i=1;i<totalPackage;i++){
+			int currentLen = 0;
+			
+			if(i<totalPackage-1){
+				currentLen=16;
+			}else if(i==totalPackage-1){
+				if(mod==0){
+					currentLen=16;
+				}else{
+					currentLen=mod;
+				}
+			}
+			byte[] currentData = new byte[currentLen];
+			System.arraycopy(smsByte, (i-1)*16, currentData, 0, currentLen);
+			
+			sendBluetoothCmd(BluetoothEncoderService.getInstance().sendMessage(BluetoothCmd.SEND_MESSAGE_CN, 
+					i, 
+					totalPackage,
+					currentLen,
+					currentData),
+					SampleGattAttributes.WATCHER_CHARACTERISTIC_1,
+					SampleGattAttributes.WATCHER_CHARACTERISTIC_4);
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+//	private synchronized void sendMsg(String phoneName,String sms){
+//		byte[] smsByte = null;
+//		//计算总包数
+//		try {
+//			smsByte = sms.getBytes(Constants.GBK);
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		int totalPackage=1;
+//		int len = smsByte.length/16;
+//		final int mod = smsByte.length%16;
+//		
+//		if(len==0){
+//			totalPackage = 2;
+//		}else{
+//			if(mod==0){
+//				totalPackage = len+1;
+//			}else{
+//				totalPackage = len+2;
+//			}
+//		}
+//		
+//		//
+//		sendBluetoothCmd(BluetoothEncoderService.getInstance().sendMessage(BluetoothCmd.SEND_MESSAGE_CN,
+//				totalPackage,
+//				getContactNameFromPhoneBook(phoneName),
+//				phoneName),
+//				SampleGattAttributes.WATCHER_CHARACTERISTIC_1,
+//				SampleGattAttributes.WATCHER_CHARACTERISTIC_4);
+//		
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		for(int i=1;i<totalPackage;i++){
+//			int currentLen = 0;
+//			
+//			if(i<totalPackage-1){
+//				currentLen=16;
+//			}else if(i==totalPackage-1){
+//				if(mod==0){
+//					currentLen=16;
+//				}else{
+//					currentLen=mod;
+//				}
+//			}
+//			byte[] currentData = new byte[currentLen];
+//			System.arraycopy(smsByte, (i-1)*16, currentData, 0, currentLen);
+//			
+//			sendBluetoothCmd(BluetoothEncoderService.getInstance().sendMessage(BluetoothCmd.SEND_MESSAGE_CN, 
+//					i, 
+//					totalPackage,
+//					currentLen,
+//					currentData),
+//					SampleGattAttributes.WATCHER_CHARACTERISTIC_1,
+//					SampleGattAttributes.WATCHER_CHARACTERISTIC_4);
+//			try {
+//				Thread.sleep(3000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+
+	/**
+	 * 根据电话号码获取联系人
+	 * @param context
+	 * @param phoneNum
+	 * @return
+	 */
+    public String getContactNameFromPhoneBook(String phoneNum) {  
+        String contactName = "";  
+        ContentResolver cr = MyApplication.getInstance().getContentResolver();  
+        Cursor pCur = cr.query(  
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,  
+                ContactsContract.CommonDataKinds.Phone.NUMBER + " = ?",  
+                new String[] { phoneNum }, null);  
+        if (pCur.moveToFirst()) {  
+            contactName = pCur  
+                    .getString(pCur  
+                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));  
+            pCur.close();  
+        }else{  
+        	contactName="UNKNOWN";
+        }
+        return contactName;  
+//    	HashMap<String, String> contacts = (HashMap<String, String>) MyApplication.getInstance().getContacts();
+//    	
+//    	if(contacts.containsKey(phoneNum))
+//    		return contacts.get(phoneNum);
+//    	else if(contacts.containsKey("+86"+phoneNum))
+//    		return contacts.get("+86"+phoneNum);
+//    	else
+//    		return "UNKNOWN";
+    }  
+	
+	private void sendBluetoothCmd(byte[] sendData,String writeKey,String readKey) {
+		BluetoothLeService mBluetoothLeService=MyApplication.getInstance().getBluetoothLeService();
+		if(mBluetoothLeService==null){
+			return;
+		}
+		BluetoothGattCharacteristic characteristic = mBluetoothLeService.getGattCharacteristics().get(writeKey);
+		if(characteristic==null){
+			return;
+		}
+		BluetoothGattCharacteristic characteristicNotify = mBluetoothLeService.getGattCharacteristics().get(readKey);
+		characteristic.setValue(sendData);
+		mBluetoothLeService.setAckFlag(false);
+		mBluetoothLeService.writeCharacteristic(characteristic);
+		
+//		mBluetoothLeService.setCharacteristicNotification(characteristicNotify, true);
+		
+//		 final int charaProp = characteristicNotify.getProperties();
+//		 if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+//		     // If there is an active notification on a characteristic, clear
+//		     // it first so it doesn't update the data field on the user interface.
+//		     if (characteristicNotify != null) {
+//		         mBluetoothLeService.setCharacteristicNotification(
+//		        		 characteristicNotify, false);
+//		     }
+//		     mBluetoothLeService.readCharacteristic(characteristicNotify);
+//		 }
+//		 if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+//		     mBluetoothLeService.setCharacteristicNotification(
+//		    		 characteristicNotify, true);
+//		 }
+		Logger.e(TAG, "write"+StringUtil.toHexString(sendData));
+	}
+
+	@Override
+	public void connected(Object device) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void disConnect(Object device) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public synchronized void exceptionCaught(Object device, final Throwable cause) throws Exception {
+		// TODO Auto-generated method stub
+		if(cause.getMessage().equals("timeout")){
+			notifyAll();
+		}
+	}
+
+	@Override
+	public synchronized void messageReceived(Object device, Object message) throws Exception {
+		// TODO Auto-generated method stub
+		BluetoothGattCharacteristic receiver = (BluetoothGattCharacteristic) message;
+		byte[] data = receiver.getValue();
+		Logger.d(TAG, StringUtil.toHexString(data));
+		if(data[0]==BluetoothCmd.SEND_MESSAGE_CN){
+			notifyAll();
+		}
+	}
+
+}

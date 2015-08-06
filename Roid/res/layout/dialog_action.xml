@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="match_parent"
+	android:layout_gravity="center"
+	android:minWidth="400dip"
+	android:padding="4dip"
+	android:orientation="vertical"
+	android:clickable="true" >
+	
+	<ViewStub 
+		android:id="@+id/action_titlebar_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+	
+	<TextView android:id="@+id/action_titlebar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:minHeight="@dimen/action_dialog_title_height"
+		android:background="@drawable/headerpagebg"
+		android:gravity="center"
+		android:paddingLeft="4dip"
+		android:paddingRight="4dip"
+		style="@style/basic_text_style_title"/>
+
+	<ViewStub
+		android:id="@+id/action_content"
+		android:layout_width="match_parent"
+		android:layout_height="0dip"
+		android:layout_weight="1" />
+	
+	<LinearLayout
+		android:id="@+id/action_btn_bar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:minWidth="400dip"
+		android:paddingTop="@dimen/common_btn_margin"
+		android:paddingBottom="@dimen/common_btn_margin"
+		android:orientation="horizontal" >
+
+		<Button
+			android:id="@+id/action_btn_pos"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|left"
+			android:layout_weight="1"
+			android:layout_marginLeft="@dimen/common_btn_margin"
+			android:layout_marginRight="@dimen/common_btn_margin"
+			android:background="@drawable/btn_common_bg"
+			style="@style/basic_text_style_medium"
+			android:minHeight="@dimen/common_btn_height"
+			android:textColor="@color/gold_btn_text_color"
+			android:text="@string/btn_ok" />
+
+		<Button
+			android:id="@+id/action_btn_neg"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|right"
+			android:layout_weight="1"
+			android:layout_marginLeft="@dimen/common_btn_margin"
+			android:layout_marginRight="@dimen/common_btn_margin"
+			android:background="@drawable/btn_common_bg"
+			style="@style/basic_text_style_medium"
+			android:minHeight="@dimen/common_btn_height"
+			android:textColor="@color/gold_btn_text_color"
+			android:text="@string/btn_cancel" />
+	</LinearLayout>
+		
+</LinearLayout>

@@ -1,0 +1,76 @@
+<resources>
+
+    <style name="basic_text_style_large">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_medium">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_small">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_exta_small">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_xx_small">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_xxx_small">
+        <item name="android:typeface">serif</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="basic_text_style_title" parent="@style/basic_text_style_large">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="dialog_loading_bar" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/alert_diaglog_small_bg</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="dialog_loading_bar_no_frame" parent="@style/dialog_loading_bar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="dialog_anim_fading">
+        <item name="android:windowEnterAnimation">@animator/anim_fade_in</item>
+        <item name="android:windowExitAnimation">@animator/anim_fade_out</item>
+    </style>
+
+    <style name="dialog_anim_sliding_top">
+        <item name="android:windowEnterAnimation">@animator/anim_slide_top_enter</item>
+        <item name="android:windowExitAnimation">@animator/anim_slide_top_exit</item>
+    </style>
+
+    <style name="dialog_anim_sliding_left">
+        <item name="android:windowEnterAnimation">@animator/anim_slide_left_enter</item>
+        <item name="android:windowExitAnimation">@animator/anim_slide_left_exit</item>
+    </style>
+
+</resources>

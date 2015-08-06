@@ -1,0 +1,73 @@
+package com.roid.ui;
+
+import java.lang.reflect.Field;
+
+import com.gwtsz.gts2.pages.PushMsgTabFragment;
+import com.gwtsz.gts2.util.FragmentsManagerUtil;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+
+public class AbsFragment extends Fragment{
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		Fragment parent = getParentFragment();
+		mFragmentManager = getChildFragmentManager();
+
+		if (parent instanceof PushMsgTabFragment)
+			mParent = (PushMsgTabFragment) parent;
+		
+		/***
+		 * 避免被系统回收后引起黑屏问题
+		 */
+        if(null != savedInstanceState){
+        	if (savedInstanceState.getBoolean("isHidden")) {
+        		mFragmentManager.beginTransaction().hide(this).commit();
+            }
+		}
+	}
+	
+	@Override
+	public void onDetach() {
+	    super.onDetach();
+	    try {
+	        Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+	        childFragmentManager.setAccessible(true);
+	        childFragmentManager.set(this, null);
+
+	    } catch (NoSuchFieldException e) {
+	        throw new RuntimeException(e);
+	    } catch (IllegalAccessException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean("isHidden", isHidden());
+	}
+	
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		System.out.println(this.getClass().getSimpleName() + " onDestroyView");
+		try {
+			if(!"".equals(fragmentTag) && null != getActivity() && !getActivity().isFinishing()){
+				PushMsgTabFragment fragment = FragmentsManagerUtil.getFragmentbyTag(getActivity(), fragmentTag);
+				if(null != fragment){
+					if(null == mParent){
+						FragmentTransaction	mTransaction = getActivity().getSupportFragmentManager().beginTransaction();	
+						mTransaction.remove(fragment);
+						mTransaction.commitAllowingStateLoss();
+					}
+				}
+				fragmentTag = "";
+			}
+		} catch (Exception e) {
+		}
+	}
+}

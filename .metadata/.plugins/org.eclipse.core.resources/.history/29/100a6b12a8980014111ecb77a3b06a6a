@@ -1,0 +1,110 @@
+package com.smartdline.watcher.fragment;
+
+/**
+ * 物品列表页面
+ * 
+ */
+import roboguice.inject.InjectView;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.roidlibrary.fragment.BaseFragment;
+import com.roidlibrary.fragment.FragmentStack;
+import com.smartdline.watcher.R;
+
+public class GoodsListFragment extends BaseFragment implements OnClickListener {
+
+	/**标题返回键*/
+	private ImageView title_back;
+	/**标题*/
+	private TextView title_text;
+	
+	private ViewPager mViewPager;
+	
+	@Override
+	protected int getViewId() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_goods_list;
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		initTitle(view);
+		initView(view);
+
+		return view;
+	}
+
+	@Override
+	public void initTitle(View view) {
+		// TODO Auto-generated method stub
+		title_back = (ImageView) view.findViewById(R.id.title_back);
+		title_back.setOnClickListener(this);
+
+		title_text = (TextView) view.findViewById(R.id.title_text);
+		title_text.setText(R.string.goods_list);
+		
+		mViewPager = (ViewPager) view.findViewById(R.id.mViewPager);
+
+	}
+
+	private void initView(View view) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onUpdateUI(int taskId, Object data) {
+		// TODO Auto-generated method stub
+		super.onUpdateUI(taskId, data);
+	}
+
+	@Override
+	public void onClick(View view) {
+		// TODO Auto-generated method stub
+		switch (view.getId()) {
+		case R.id.title_back:// 返回
+			FragmentStack.getInstance().backFragment();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	class GoodListFragmentAdapter extends FragmentPagerAdapter {
+
+		private int mCount = 4;
+
+		public GuideFragmentAdapter(FragmentManager fm) {
+			super(fm);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			// TODO Auto-generated method stub
+			return GuideFragment.newInsatnce(position);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return mCount;
+		}
+
+		
+	}
+
+}

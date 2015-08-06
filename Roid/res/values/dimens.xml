@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="corner_radius">4dip</dimen>
+	<dimen name="tab_space_top">1dip</dimen>
+	<dimen name="tab_space">1dip</dimen>
+	<dimen name="tab_space_plus1">2dip</dimen>
+	<dimen name="tab_height">58dip</dimen>
+	<dimen name="tab_bottom_line">57dip</dimen>
+	<dimen name="tab_bottom_shadow">54dip</dimen>
+	<dimen name="tab_bottom_shadow_thin">56dip</dimen>
+	<dimen name="action_dialog_title_height">40dip</dimen>
+	<dimen name="action_dialog_min_item_height_large">48dip</dimen>
+	<dimen name="action_dialog_min_item_height_medium">40dip</dimen>
+	<dimen name="action_dialog_min_item_height_small">32dip</dimen>
+	<dimen name="action_dialog_min_item_height_extra_small">26dip</dimen>
+	<dimen name="action_dialog_min_item_height_extra_extra_small">20dip</dimen>
+	<dimen name="new_order_caption_width">80dp</dimen>
+	<dimen name="new_order_caption_width_large">100dp</dimen>
+	<dimen name="new_order_caption_width_small">65dp</dimen>
+	<dimen name="new_order_caption_sub_info_width">70dp</dimen>
+		
+	<dimen name="common_list_item_spacing">4dip</dimen>
+	<dimen name="common_list_item_margin_left">8dip</dimen>
+	<dimen name="common_list_item_margin_right">8dip</dimen>
+	<dimen name="dialog_result_margin">12dp</dimen>
+	<dimen name="dialog_result_margin_half">6dp</dimen>
+	<dimen name="background_frame_padding">8dp</dimen>
+
+	<dimen name="info_item_padding">4dp</dimen>
+	<dimen name="info_item_height">45dp</dimen>
+	<dimen name="info_item_double_height">84dp</dimen>
+	<dimen name="info_item_height_wp">50dp</dimen>
+	<dimen name="info_item_double_height_wp">96dp</dimen>
+	<dimen name="info_item_triple_height_wp">124dp</dimen>
+	<dimen name="info_item_small_height">32dp</dimen>
+	<dimen name="info_item_small_double_height">64dp</dimen>
+	<dimen name="info_item_small_double_height_wp">76dp</dimen>
+	<dimen name="info_item_small_2_rows_wp">64dp</dimen>
+
+	<dimen name="common_btn_height">42dp</dimen>
+	<dimen name="common_btn_margin">6dp</dimen>
+	<dimen name="navigation_drawer_width">280dp</dimen>
+</resources>

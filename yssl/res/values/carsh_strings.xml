@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 异常信息 -->
+    <string name="crash_notif_ticker_text">意外错误，请发送报告...</string>
+    <string name="crash_notif_title">应用程序已崩溃...</string>
+    <string name="crash_notif_text">请点击这里，以帮助解决问题.</string>
+    <string name="crash_dialog_title">应用程序已崩溃</string>
+    <string name="crash_dialog_text">发生意外的错误迫使应用程序停止。\n请向我们发送错误数据以修正这个问题.
+        \n你所要做的就是点击确定</string>
+    <string name="crash_dialog_comment_prompt">您可以添加您的宝贵意见对下面的问题:</string>
+    <string name="crash_dialog_ok_toast">谢谢!</string>
+
+</resources>

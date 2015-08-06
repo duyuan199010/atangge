@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;yssl/src/com.strod.yssl.clientcore&apos;&#x0A;- Original project: &apos;Roidlibrary2&apos;&#x0A;- Destination element: &apos;yssl/src/com.strod.yssl.clientcore&apos;&#x0A;- Original elements:&#x0A;     com.roidlibrary.core.NetworkReceiver.java&#x0A;     com.roidlibrary.core.NetworkMonitor.java" description="Copy compilation units" destination="=yssl/src&lt;com.strod.yssl.clientcore" element1="/src&lt;com.roidlibrary.core{NetworkReceiver.java" element2="/src&lt;com.roidlibrary.core{NetworkMonitor.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1438788724314" units="2" version="1.0"/>
+</session>

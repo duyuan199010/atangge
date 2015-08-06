@@ -1,0 +1,123 @@
+package com.smartdline.watcher.fragment;
+
+/**
+ * 物品列表页面
+ * 
+ */
+import roboguice.inject.InjectView;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.roidlibrary.fragment.BaseChildFragment;
+import com.roidlibrary.fragment.BaseFragment;
+import com.roidlibrary.fragment.FragmentStack;
+import com.smartdline.watcher.R;
+import com.smartdline.watcher.activity.SplashActivity;
+
+public class GoodsListChildFragment extends BaseChildFragment implements OnClickListener {
+
+	/** 标题返回键 */
+	private ImageView title_back;
+	/** 标题 */
+	private TextView title_text;
+
+	private ViewPager mViewPager;
+	private GoodListFragmentAdapter mAdapter;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		initTitle(view);
+		initView(view);
+
+		return view;
+	}
+
+	
+
+	private void initView(View view) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onUpdateUI(int taskId, Object data) {
+		// TODO Auto-generated method stub
+		super.onUpdateUI(taskId, data);
+	}
+
+	@Override
+	public void onClick(View view) {
+		// TODO Auto-generated method stub
+		switch (view.getId()) {
+		case R.id.title_back:// 返回
+			FragmentStack.getInstance().backFragment();
+			break;
+		default:
+			break;
+		}
+	}
+
+	class GoodListFragmentAdapter extends FragmentPagerAdapter {
+
+		private int mCount = 2;
+
+		public GoodListFragmentAdapter(FragmentManager fm) {
+			super(fm);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			// TODO Auto-generated method stub
+			if (position == 0) {
+
+			} else {
+
+			}
+			return GuideFragment.newInsatnce(position);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return mCount;
+		}
+
+	}
+
+	private class GoodsPageChangeListener implements OnPageChangeListener {
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+		}
+
+		@Override
+		public void onPageSelected(int position) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+}

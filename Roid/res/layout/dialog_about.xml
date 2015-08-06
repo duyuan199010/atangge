@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:layout_gravity="center"
+	android:minWidth="400dip"
+	android:padding="4dip"
+	android:orientation="vertical" >
+	
+	<ScrollView 
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="top|center_horizontal">
+		
+		<LinearLayout 
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:gravity="center_horizontal"
+			android:orientation="vertical">
+			
+			<ImageView
+		    	android:id="@+id/action_about_company_icon"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:background="@android:color/transparent"
+				android:src="@drawable/ic_launcher"
+				android:layout_marginTop="30dip"
+				android:layout_marginBottom="0dip"
+				android:scaleType="center"
+				android:visibility="gone" />
+		    
+			<TextView android:id="@+id/action_about_content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				style="@style/basic_text_style_medium"
+				android:paddingTop="4dip"
+				android:paddingBottom="4dip"
+				android:text="@string/app_name"
+				android:visibility="gone" />
+			
+			<View 
+				android:layout_width="match_parent"
+				android:layout_height="10dip"
+				android:layout_marginLeft="4dip"
+				android:layout_marginRight="4dip"
+				android:background="@android:color/transparent"/>
+			
+			<LinearLayout 
+				android:layout_width="320dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:paddingTop="4dip"
+				android:paddingBottom="4dip"
+				android:orientation="horizontal">
+				
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.4"
+					android:layout_marginRight="8dip"
+					android:layout_gravity="center"
+					android:gravity="right|center_vertical"
+					android:paddingRight="8dip"
+					style="@style/basic_text_style_small"
+					android:text="@string/about_dialog_version" />
+		
+				<TextView android:id="@+id/action_about_version"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.6"
+					android:layout_gravity="center"
+					android:gravity="left|center_vertical"
+					style="@style/basic_text_style_small"
+					android:textStyle="italic" />
+				
+			</LinearLayout>
+			
+			<LinearLayout 
+				android:layout_width="320dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:paddingTop="4dip"
+				android:paddingBottom="4dip"
+				android:orientation="horizontal">
+				
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.4"
+					android:layout_marginRight="8dip"
+					android:layout_gravity="center"
+					android:gravity="right|center_vertical"
+					style="@style/basic_text_style_small"
+					android:paddingRight="8dip"
+					android:text="@string/about_dialog_date" />
+		
+				<TextView android:id="@+id/action_about_date"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.6"
+					android:layout_gravity="center"
+					android:gravity="left|center_vertical"
+					style="@style/basic_text_style_small"
+					android:textStyle="italic" />
+				
+			</LinearLayout>
+			
+			<LinearLayout 
+				android:id="@+id/action_about_copyright_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:paddingTop="4dip"
+				android:paddingBottom="4dip"
+				android:orientation="horizontal"
+				android:visibility="gone">
+				
+				<ImageView 
+					android:id="@+id/action_about_company_sub_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:paddingLeft="8dp"
+					android:paddingRight="8dp"
+					android:visibility="gone"/>
+				
+				<TextView
+					android:id="@+id/action_about_copyright"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:gravity="center"
+					style="@style/basic_text_style_small"
+					android:text="@string/about_dialog_copyright" />
+			</LinearLayout>
+			
+			<TextView
+				android:id="@+id/action_about_extend_info"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				style="@style/basic_text_style_small"
+				android:paddingTop="4dip"
+				android:paddingBottom="4dip"
+				android:maxLines="4"
+				android:text="@string/about_dialog_copyright"
+				android:visibility="gone" />
+		</LinearLayout>
+		
+	</ScrollView>
+	
+
+		
+</LinearLayout>
