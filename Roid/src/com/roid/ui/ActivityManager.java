@@ -60,4 +60,17 @@ public class ActivityManager {
 				 activity.finish();
 		 }
 	 }	
+	 
+	 public synchronized void popAllActivity() {
+		 if (mActivityStack == null)
+			 return;
+			 
+		 Activity activity;
+		 int actCount = mActivityStack.size();
+		 for (int i = 0; i < actCount; i++) {
+			 activity = mActivityStack.get(actCount-i-1);
+			 if (activity != null)
+				 activity.finish();
+		 }
+	 }	
 }

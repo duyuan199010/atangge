@@ -5,55 +5,58 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <RadioGroup 
+    <FrameLayout
+        android:id="@+id/main_center_fragment"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:layout_height="match_parent" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
         android:gravity="center"
-        android:background="#FFFFFF">
-        <RadioButton 
+        android:orientation="horizontal" >
+
+        <RadioButton
             style="@style/ContentFont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/all_news"
-            android:text="index"
             android:gravity="center"
-            />
-        <RadioButton 
+            android:text="index" />
+
+        <RadioButton
             style="@style/ContentFont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/message_icon"
-            android:text="message"
             android:gravity="center"
-            />
-        <RadioButton 
+            android:text="message" />
+
+        <RadioButton
             style="@style/ContentFont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/set_icon"
-            android:text="setting"
             android:gravity="center"
-           
-            />
-        <RadioButton 
+            android:text="setting" />
+
+        <RadioButton
             style="@style/ContentFont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/account_icon"
-            android:text="account"
             android:gravity="center"
-            />
-        
+            android:text="account" />
     </RadioGroup>
 
 </RelativeLayout>

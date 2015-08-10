@@ -14,12 +14,23 @@ import android.widget.Toast;
  */
 public class Toaster {
 
+	private static long lastTime = 0;
+	
 	public static void showToast(Context context, String text) {
-		Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastTime>3000){
+			Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+		}
+		lastTime = currentTime;
 	}
 
 	public static void showResIdToast(Context context, int resId) {
-		Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastTime>3000){
+			Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
+		}
+		lastTime = currentTime;
+		
 	}
 
 	/**
@@ -28,7 +39,7 @@ public class Toaster {
 	 * 显示字符串，默认短时间，居底。
 	 */
 	public static void showDefToast(Context context, String text) {
-		Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+		showToast(context,text);
 	}
 
 	/**
@@ -47,7 +58,7 @@ public class Toaster {
 	 * 显示字符串资源，默认短时间，居底。
 	 */
 	public static void showDefToast(Context context, int resId) {
-		Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
+		showResIdToast(context,resId);
 	}
 
 	/**

@@ -17,6 +17,7 @@
 	
 	<string name="new_order_result_success">成功</string>
 	<string name="new_order_result_failure">失敗</string>
+	<string name="error_network_connection">网络不给力!</string>
 	
 	<!-- ======================================== -->
 	<!-- Crash report -->

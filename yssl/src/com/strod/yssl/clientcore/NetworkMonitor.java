@@ -2,6 +2,8 @@ package com.strod.yssl.clientcore;
 
 
 import com.roid.AbsApplication;
+import com.roid.R;
+import com.roid.util.Toaster;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -34,13 +36,13 @@ public class NetworkMonitor {
 	 * @param context
 	 * @return
 	 */
-//	public static boolean hasNetWork(){
-//		if(isNetworkReady(AppMain.getApp())){
-//			return true;
-//		}
-//		ServerConnnectUtil.instance().connnectTimeOutToast(R.string.error_network_connection);
-//		return false;
-//	}
+	public static boolean hasNetWork(){
+		if(isNetworkReady(AbsApplication.getApplication())){
+			return true;
+		}
+		Toaster.showDefToast(AbsApplication.getApplication(), R.string.error_network_connection);
+		return false;
+	}
 	/**
 	 * 判断是否有网络，不提示toast
 	 * @return

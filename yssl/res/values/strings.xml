@@ -3,5 +3,8 @@
     <string name="app_name">阿汤哥</string>
     
     <string name="click_again">再按一次退出程序...</string>
+    
+    <!-- guide -->
+    <string name="start">立即进入</string>
 
 </resources>
