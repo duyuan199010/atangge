@@ -1,5 +1,45 @@
 <resources>
 
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="@android:style/Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="DayTheme" parent="AppTheme">
+        <item name="colorValue">@color/title</item>
+        <item name="floatValue">0.35</item>
+        <item name="integerValue">33</item>
+        <item name="booleanValue">true</item>
+        <item name="dimensionValue">16dp</item>
+        <!-- 如果string类型不是填的引用而是直接放一个字符串,在布局文件中使用正常,但代码里获取的就有问题 -->
+        <item name="stringValue">@string/action_settings</item>
+        <item name="referenceValue">@drawable/bg</item>
+        <item name="imageValue">@drawable/ic_launcher</item>
+    </style>
+
+    <style name="NightTheme" parent="AppBaseTheme">
+        <item name="colorValue">@color/night_title</item>
+        <item name="floatValue">1.44</item>
+        <item name="integerValue">55</item>
+        <item name="booleanValue">false</item>
+        <item name="dimensionValue">18sp</item>
+        <item name="stringValue">@string/action_settings</item>
+        <item name="referenceValue">@drawable/night_bg</item>
+        <item name="imageValue">@drawable/night_launcher_icon</item>
+    </style>
+
     <style name="MyDialog" parent="@android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -18,80 +58,80 @@
         <item name="android:textColor">@color/title_font_color</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="ContentFont">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/content_font_color</item>
     </style>
-    
+
     <style name="ContentFontBold">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/content_font_color</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="ContentFontLittle">
         <item name="android:textSize">@dimen/font_size_sixteen</item>
         <item name="android:textColor">@color/content_font_color</item>
     </style>
-    
-     <style name="ContentFontSmall">
+
+    <style name="ContentFontSmall">
         <item name="android:textSize">@dimen/font_size_fourteen</item>
         <item name="android:textColor">@color/content_font_color</item>
     </style>
-    
+
     <style name="ContentFontDeep">
         <item name="android:textSize">@dimen/font_size_sixteen</item>
         <item name="android:textColor">@color/content_font_color_deep</item>
     </style>
-    
+
     <style name="ContentFontDeepEighteen">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/content_font_color_deep</item>
     </style>
-    
+
     <style name="ContentFontDeepBold">
         <item name="android:textSize">@dimen/font_size_twenty</item>
         <item name="android:textColor">@color/content_font_color_deep</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="ContentFontDeeperSmall">
         <item name="android:textSize">@dimen/font_size_fourteen</item>
         <item name="android:textColor">@color/content_font_color_deeper</item>
     </style>
-    
+
     <style name="ContentFontBlue">
         <item name="android:textSize">@dimen/font_size_fourteen</item>
         <item name="android:textColor">@color/title_bg_color</item>
     </style>
-    
+
     <style name="ContentFontBlueEighteen">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/title_bg_color</item>
     </style>
-    
+
     <style name="ContentFontWhite">
         <item name="android:textSize">@dimen/font_size_fourteen</item>
         <item name="android:textColor">@color/title_font_color</item>
     </style>
-    
+
     <style name="ContentFontGray">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/gray</item>
     </style>
-    
+
     <style name="ContentFontGrayer">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/grayer</item>
     </style>
-    
-     <style name="DialogFont">
+
+    <style name="DialogFont">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
         <item name="android:textColor">@color/dialog_font_color</item>
     </style>
-    
-     <style name="LogoutDialog" parent="@android:style/Theme.Dialog">
+
+    <style name="LogoutDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@android:color/transparent</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -107,11 +147,10 @@
         <item name="android:gravity">center</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:text">Sample Item</item>
-    </style>    
-    
-    
+    </style>
+
     <!-- viewpagerindicator -->
-    
+
     <style name="StyledIndicators" parent="@android:style/Theme.Light">
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="vpiLinePageIndicatorStyle">@style/CustomLinePageIndicator</item>
@@ -170,5 +209,5 @@
         <item name="fadeLength">1000</item>
         <item name="fadeDelay">1000</item>
     </style>
-    
+
 </resources>
