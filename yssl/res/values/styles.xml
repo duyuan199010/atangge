@@ -61,7 +61,7 @@
 
     <style name="ContentFont">
         <item name="android:textSize">@dimen/font_size_eighteen</item>
-        <item name="android:textColor">@color/content_font_color</item>
+        <item name="android:textColor">@drawable/font_selector</item>
     </style>
 
     <style name="ContentFontBold">
@@ -72,7 +72,7 @@
 
     <style name="ContentFontLittle">
         <item name="android:textSize">@dimen/font_size_sixteen</item>
-        <item name="android:textColor">@color/content_font_color</item>
+        <item name="android:textColor">@drawable/font_selector</item>
     </style>
 
     <style name="ContentFontSmall">

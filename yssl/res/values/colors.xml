@@ -5,7 +5,7 @@
     <color name="night_title">#000000</color>
     
     <color name="title_bg_color">#36A803</color>
-    <color name="title_font_color">#ffffff</color>
+    <color name="title_font_color">#f8f8f8</color>
     <color name="bg_color">#ffffff</color>
     <color name="black_font">#333333</color>
     
@@ -14,7 +14,7 @@
     
     <color name="menu_pressed">#e5e5e5</color>
     
-    <color name="content_font_color">#333333</color>
+    <color name="content_font_color">#f8f8f8</color>
     <color name="content_font_color_deep">#ff5a3f01</color>
     <color name="content_font_color_deeper">#423413</color>
     <color name="setting_bg_color">#b08b18</color>
