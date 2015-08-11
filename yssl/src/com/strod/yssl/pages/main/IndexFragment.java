@@ -38,6 +38,9 @@ public class IndexFragment extends AbsFragment{
 			mItemList = new ArrayList<ItemType>();
 			mItemList.add(new ItemType(0, "最热"));
 			mItemList.add(new ItemType(1, "最新"));
+			mItemList.add(new ItemType(2, "美容"));
+			mItemList.add(new ItemType(3, "养生"));
+			mItemList.add(new ItemType(4, "去火"));
 		}
 		initView(rootView);
 		return rootView;

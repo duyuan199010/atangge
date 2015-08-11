@@ -41,6 +41,20 @@ public class ContentType implements Parcelable {
 		contentUrl = in.readString();
 	}
 
+	
+	
+	public ContentType(int id, String imgUrl, String title, String content, int collectNum, int praiseNum, long time, String contentUrl) {
+		super();
+		this.id = id;
+		this.imgUrl = imgUrl;
+		this.title = title;
+		this.content = content;
+		this.collectNum = collectNum;
+		this.praiseNum = praiseNum;
+		this.time = time;
+		this.contentUrl = contentUrl;
+	}
+
 	public int getId() {
 		return id;
 	}

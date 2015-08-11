@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.strod.yssl.R;
 import com.strod.yssl.pages.main.entity.ContentType;
+import com.strod.yssl.util.DateUtil;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,9 +52,23 @@ public class ContentListAdapter extends BaseAdapter{
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.item_content_list, null);
+			holder.mImage = (ImageView) convertView.findViewById(R.id.content_img);
+			holder.mTitle = (TextView) convertView.findViewById(R.id.content_title);
+			holder.mContent = (TextView) convertView.findViewById(R.id.content_detail);
+			holder.mCollect = (TextView) convertView.findViewById(R.id.content_collect);
+			holder.mPraise = (TextView) convertView.findViewById(R.id.content_praise);
+			holder.mTime = (TextView) convertView.findViewById(R.id.content_time);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
+		}
+		ContentType contentType= mContentList.get(position);
+		if(contentType!=null){
+			holder.mTitle.setText(contentType.getTitle());
+			holder.mContent.setText(contentType.getContent());
+			holder.mCollect.setText(contentType.getCollectNum()+"");
+			holder.mPraise.setText(contentType.getPraiseNum()+"");
+			holder.mTime.setText(DateUtil.formatDateToString(contentType.getTime()));
 		}
 		return convertView;
 	}

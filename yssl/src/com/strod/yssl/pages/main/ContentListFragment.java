@@ -3,7 +3,6 @@ package com.strod.yssl.pages.main;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import com.roid.ui.AbsFragment;
 import com.strod.yssl.R;
 import com.strod.yssl.pages.main.entity.ContentType;
 import com.strod.yssl.pages.main.entity.ItemType;
+import com.strod.yssl.util.DateUtil;
 
 public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener {
 	
@@ -56,6 +56,11 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		if (mContentList == null) {
 			mContentList = new ArrayList<ContentType>();
+			mContentList.add(new ContentType(0,"","haha","hehe",88,66,1439282000092L,""));
+			mContentList.add(new ContentType(1,"","adsf","heerqhe",88,66,1439282020092L,""));
+			mContentList.add(new ContentType(2,"","tyujytj","herehe",88,66,1439282003792L,""));
+			mContentList.add(new ContentType(3,"","tyeh","heaegehe",88,66,1439282020092L,""));
+			mContentList.add(new ContentType(4,"","rtwurtyrt","heaeghe",88,66,1439282023792L,""));
 		}
 
 		mPullRefreshListView = (PullToRefreshListView) rootView.findViewById(R.id.pull_refresh_list);
@@ -81,7 +86,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+		String label = DateUtil.formatDateToString(System.currentTimeMillis());
 
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
@@ -92,8 +97,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
+		String label = DateUtil.formatDateToString(System.currentTimeMillis());
+		
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 

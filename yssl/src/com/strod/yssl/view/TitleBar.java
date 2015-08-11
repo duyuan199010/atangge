@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 /**
@@ -23,7 +25,12 @@ import android.widget.RelativeLayout;
 public class TitleBar extends RelativeLayout implements OnClickListener{
 	
 	private View mContainer;
-	public Button mRightBtn; //右边按钮
+	/**左边按钮*/
+	public ImageButton mLefttBtn; 
+	/**中间标题*/
+	public TextView mMiddleTitle;
+	/**右边按钮*/
+	public Button mRightBtn; //
 	private OnRightBtnClickListener rListener;
 	private Context context;
 	
@@ -48,9 +55,10 @@ public class TitleBar extends RelativeLayout implements OnClickListener{
 	public void initView(Context act) {
 		View mView = LayoutInflater.from(act).inflate(R.layout.title_bar, this, true);
 		mContainer = mView.findViewById(R.id.title_bar);
+		mLefttBtn = (ImageButton) mView.findViewById(R.id.title_left_btn);
+		mMiddleTitle = (TextView) mView.findViewById(R.id.title_middle_text);
 		mRightBtn = (Button) mView.findViewById(R.id.title_right_btn);
 		mRightBtn.setOnClickListener(this);
-		
 	}
 
 	public void enable(boolean enable) {
@@ -62,8 +70,12 @@ public class TitleBar extends RelativeLayout implements OnClickListener{
 		v.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 	
-	public void setLeftButtonContext(){
-		
+	/**
+	 * 设置中间的标题文字
+	 * @param resId
+	 */
+	public void setMiddleText(int resId){
+		mMiddleTitle.setText(resId);
 	}
 	
 	/**
