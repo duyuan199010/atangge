@@ -1,0 +1,6 @@
+package com.strod.yssl.clientcore;
+
+public interface HttpRequestId {
+
+	public static final int content_list_refresh = 0x0001;
+}

@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.smartdline.watcher.fragment.SportStatisticsFragment"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.fragment.SleepStatisticsFragment"/>
-<fullyQualifiedTypeName name="com.roidlibrary.fragment.BaseFragment"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.MyApplication"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.bluetooth.ble.BluetoothLeService"/>
-<fullyQualifiedTypeName name="roboguice.inject.InjectResource"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.bean.watch.SweetTime"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.bean.watch.DistubTime"/>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-<fullyQualifiedTypeName name="com.roidlibrary.activity.BaseActivity"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.bean.watch.Remind"/>
-<fullyQualifiedTypeName name="com.smartdline.watcher.interfaces.IBluetoothSent"/>
-<fullyQualifiedTypeName name="roboguice.inject.InjectView"/>
 <fullyQualifiedTypeName name="com.smartdline.watcher.activity.PersonalSettingActivity"/>
 <fullyQualifiedTypeName name="com.smartdline.watcher.bluetooth.BluetoothHandlerListener"/>
 <fullyQualifiedTypeName name="com.smartdline.watcher.bean.watch.Fitting"/>
@@ -50,14 +37,27 @@
 <fullyQualifiedTypeName name="com.roidlibrary.util.DebugLog"/>
 <fullyQualifiedTypeName name="com.roid.config.AbsConfig"/>
 <fullyQualifiedTypeName name="android.support.v4.app.Fragment"/>
-<fullyQualifiedTypeName name="com.roid.util.Toaster"/>
 <fullyQualifiedTypeName name="com.roid.ui.ActivityManager"/>
 <fullyQualifiedTypeName name="com.roid.ui.FragmentControlActivity"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
-<fullyQualifiedTypeName name="com.roid.util.DebugLog"/>
 <fullyQualifiedTypeName name="com.roid.AbsApplication"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageInfo"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageManager.NameNotFoundException"/>
+<fullyQualifiedTypeName name="com.roid.net.http.OnHttpRespondLisenter"/>
+<fullyQualifiedTypeName name="com.roid.core.Manager"/>
+<fullyQualifiedTypeName name="com.strod.yssl.clientcore.HttpRequestId"/>
+<fullyQualifiedTypeName name="com.roid.net.http.Task"/>
+<fullyQualifiedTypeName name="com.strod.yssl.clientcore.HttpRequestURL"/>
+<fullyQualifiedTypeName name="com.strod.yssl.pages.main.entity.ContentType"/>
+<fullyQualifiedTypeName name="com.roid.util.JsonParser"/>
+<fullyQualifiedTypeName name="org.apache.http.entity.StringEntity"/>
+<fullyQualifiedTypeName name="org.apache.http.protocol.HTTP"/>
+<fullyQualifiedTypeName name="com.roid.util.Toaster"/>
+<fullyQualifiedTypeName name="com.strod.yssl.R.string"/>
+<fullyQualifiedTypeName name="com.roid.util.DebugLog"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="com.roid.net.http.AsyncHttpResponseHandler"/>
 </qualifiedTypeNameHistroy>
