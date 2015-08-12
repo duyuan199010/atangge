@@ -65,6 +65,7 @@ public class Manager {
 	private void dissmissDialog() {
 		if (loadingDialog != null) {
 			loadingDialog.dismiss();
+			loadingDialog=null;
 		}
 	}
 

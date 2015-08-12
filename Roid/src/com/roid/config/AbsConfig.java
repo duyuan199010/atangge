@@ -1,10 +1,10 @@
 package com.roid.config;
 
+import android.os.Environment;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.roid.AbsApplication;
-
-import android.os.Environment;
 
 public abstract class AbsConfig {
 	
