@@ -2,10 +2,6 @@ package com.strod.yssl.pages.main;
 
 import java.util.ArrayList;
 
-import com.strod.yssl.R;
-import com.strod.yssl.pages.main.entity.ContentType;
-import com.strod.yssl.util.DateUtil;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.strod.yssl.R;
+import com.strod.yssl.pages.main.entity.Article.ContentType;
+import com.strod.yssl.util.DateUtil;
 
 /**
  * listview adapter

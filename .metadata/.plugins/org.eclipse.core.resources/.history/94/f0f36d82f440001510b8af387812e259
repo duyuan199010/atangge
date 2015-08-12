@@ -1,0 +1,7 @@
+package com.strod.yssl.bean;
+
+public class Retsult {
+
+	protected int ret_code;
+	protected String ret_msg;
+}

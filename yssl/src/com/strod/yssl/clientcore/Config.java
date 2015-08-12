@@ -7,11 +7,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 
+import com.roid.AbsApplication;
 import com.roid.config.AbsConfig;
+import com.strod.yssl.MyApplication;
 import com.strod.yssl.clientcore.cache.DiskLruCache;
 
 public class Config extends AbsConfig {
@@ -19,6 +23,10 @@ public class Config extends AbsConfig {
 	/** config instance */
 	private static Config mInstance;
 
+	private static final String PREFERENCE_NAME = "atangge";
+	private SharedPreferences mSharedPreferences;
+	
+	private static final String GUIDE = "guide";
 	/**
 	 * get siglon instance
 	 * 
@@ -31,16 +39,44 @@ public class Config extends AbsConfig {
 		return mInstance;
 	}
 
-	/** image cache dir name */
+	/** content cache dir name */
 	// http://blog.csdn.net/guolin_blog/article/details/28863651
 	private static final String CONTENT_CACHE_DIR = "content";
 	private static final long CONTENT_CACHE_SIZE = 5 * 1024 * 1024;
 	private DiskLruCache mContentDiskLruCache = null;
 
+	/**
+	 * application start invoke init
+	 */
 	public void init() {
 		super.mAllowDebug = true;
+		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		getContentDiskCache(AbsApplication.getApplication());
+	}
+	
+	/**
+	 * set has start guide
+	 */
+	public void setGuide(){
+		Editor editor = mSharedPreferences.edit();
+		editor.putBoolean(GUIDE, true);
+		editor.commit();
+	}
+	
+	/**
+	 * get user guide
+	 * @return
+	 */
+	public boolean getGuide(){
+		return mSharedPreferences.getBoolean(GUIDE, false);
 	}
 
+	/**
+	 * get disk cache file
+	 * @param context
+	 * @param uniqueName
+	 * @return
+	 */
 	private File getDiskCacheDir(Context context, String uniqueName) {
 		String cachePath;
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {
@@ -51,6 +87,11 @@ public class Config extends AbsConfig {
 		return new File(cachePath + File.separator + uniqueName);
 	}
 
+	/**
+	 * get application version
+	 * @param context
+	 * @return
+	 */
 	public int getAppVersion(Context context) {
 		try {
 			PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -61,6 +102,11 @@ public class Config extends AbsConfig {
 		return 1;
 	}
 
+	/**
+	 * get content cache
+	 * @param context
+	 * @return
+	 */
 	public DiskLruCache getContentDiskCache(Context context) {
 		if (mContentDiskLruCache == null) {
 			try {

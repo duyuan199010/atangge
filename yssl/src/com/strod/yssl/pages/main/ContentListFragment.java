@@ -2,6 +2,8 @@ package com.strod.yssl.pages.main;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
 
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
@@ -28,9 +30,11 @@ import com.roid.util.DebugLog;
 import com.roid.util.JsonParser;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
+import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.clientcore.HttpRequestId;
 import com.strod.yssl.clientcore.HttpRequestURL;
-import com.strod.yssl.pages.main.entity.ContentType;
+import com.strod.yssl.pages.main.entity.Article;
+import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.pages.main.entity.ItemType;
 import com.strod.yssl.util.DateUtil;
 
@@ -60,6 +64,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	private ArrayList<ContentType> mContentList;
 	/**listview adapter*/
 	private ContentListAdapter mAdapter;
+	
+	private boolean needRequest = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,11 +82,20 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		if (mContentList == null) {
 			mContentList = new ArrayList<ContentType>();
-			mContentList.add(new ContentType(0,"","haha","hehe",88,66,1439282000092L,""));
-			mContentList.add(new ContentType(1,"","adsf","heerqhe",88,66,1439282020092L,""));
-			mContentList.add(new ContentType(2,"","tyujytj","herehe",88,66,1439282003792L,""));
-			mContentList.add(new ContentType(3,"","tyeh","heaegehe",88,66,1439282020092L,""));
-			mContentList.add(new ContentType(4,"","rtwurtyrt","heaeghe",88,66,1439282023792L,""));
+			//read cache from disk
+			String key = mItemType.getId()+mItemType.getName();
+			String json = Config.getInstance().readContentCache(key);
+			if(json==null || json.equals("")){
+				//no cache ,need request data
+				needRequest = true;
+			}else{
+				//have cache,paser json to display
+				needRequest = false;
+				JsonParser<Article> parser = new JsonParser<Article>();
+				Article article =parser.parseJson(json, Article.class);
+				mContentList.addAll(article.getData());
+			}
+			
 		}
 
 		mPullRefreshListView = (PullToRefreshListView) rootView.findViewById(R.id.pull_refresh_list);
@@ -91,7 +106,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 				
 		mPullRefreshListView.setOnRefreshListener(this);
 		mPullRefreshListView.setOnItemClickListener(this);
-//		mPullRefreshListView.setRefreshing(true);
+		if(needRequest){
+			mPullRefreshListView.setRefreshing(true);
+		}
 
 		return rootView;
 	}
@@ -146,7 +163,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+		Random random = new Random();
+		int n = random.nextInt(2);
+		if(n==0){
+			Toaster.showDefToast(getActivity(), "点你妹，别点了，这个功能还没做");
+		}else{
+			Toaster.showDefToast(getActivity(), "大鹏你个逗比^_^ O_O!!!");
+		}
 	}
 	
 	Handler mHandler = new Handler(){
@@ -176,7 +199,20 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
 		}else{
 			DebugLog.d(TAG, data.toString());
-			Toaster.showDefToast(getActivity(), data.toString());
+			JsonParser<Article> parser = new JsonParser<Article>();
+			Article article = parser.parseJson(data, Article.class);
+			mContentList.addAll(article.getData());
+			mAdapter.notifyDataSetChanged();
+			Config.getInstance().writeContentCache(mItemType.getId()+mItemType.getName(), data);
 		}
 	}
+
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		
+		super.onDestroyView();
+	}
+	
+	
 }

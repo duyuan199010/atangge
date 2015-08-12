@@ -1,0 +1,5 @@
+package com.strod.yssl.pages.main.entity;
+
+public class Article {
+
+}

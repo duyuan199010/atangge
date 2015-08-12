@@ -10,6 +10,8 @@ import android.os.Message;
 
 import com.roid.ui.FragmentControlActivity;
 import com.strod.yssl.R;
+import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.pages.main.MainActivity;
 
 /**
  * app first start activity
@@ -28,7 +30,11 @@ public class SplashActivity extends FragmentControlActivity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case START_ACTIVITY:
-				startActivity(new Intent(SplashActivity.this,GuideActivity.class));
+				if(Config.getInstance().getGuide()){
+					startActivity(new Intent(SplashActivity.this,MainActivity.class));
+				}else{
+					startActivity(new Intent(SplashActivity.this,GuideActivity.class));
+				}
 				SplashActivity.this.finish();
 				break;
 
