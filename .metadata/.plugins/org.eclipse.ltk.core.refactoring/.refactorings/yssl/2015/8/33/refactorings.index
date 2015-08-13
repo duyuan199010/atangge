@@ -2,3 +2,10 @@
 1439385498166	Rename type 'Retsult'
 1439385604632	Rename type 'Content'
 1439385781483	Delete element
+1439471790798	Extract method 'initView'
+1439471839223	Extract method 'readCache'
+1439478713493	Copy file
+1439479123301	Copy compilation unit
+1439479140772	Rename type 'ContentListAdapter'
+1439479166184	Copy compilation unit
+1439479178156	Rename type 'Article'

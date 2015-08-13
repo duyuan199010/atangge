@@ -1,7 +1,0 @@
-package com.roid.ui;
-
-import android.support.v4.app.Fragment;
-
-public class AbsFragment extends Fragment{
-
-}

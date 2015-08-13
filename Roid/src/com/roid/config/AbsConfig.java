@@ -10,7 +10,7 @@ public abstract class AbsConfig {
 	
 	/**allow debug log*/
 	public static boolean mAllowDebug = true;
-	public static boolean ENABLE_LOG_STACK_TRACE = false;
+	public static boolean ENABLE_LOG_STACK_TRACE = true;
 	public static ImageLoader imageLoader;
 	public static String DATABASE_NAME="atangge";
 	

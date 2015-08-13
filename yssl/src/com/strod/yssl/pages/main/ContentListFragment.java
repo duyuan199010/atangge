@@ -1,14 +1,11 @@
 package com.strod.yssl.pages.main;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
 
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +23,7 @@ import com.roid.core.Manager;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.net.http.Task;
 import com.roid.ui.AbsFragment;
+import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.JsonParser;
 import com.roid.util.Toaster;
@@ -33,6 +31,7 @@ import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.clientcore.HttpRequestId;
 import com.strod.yssl.clientcore.HttpRequestURL;
+import com.strod.yssl.pages.details.DetailsActivity;
 import com.strod.yssl.pages.main.entity.Article;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.pages.main.entity.ItemType;
@@ -44,6 +43,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	private static final String TAG = "ContentListFragment";
 	/**refresh complete tag*/
 	private static final int REFRESH_COMPLETE = 0;
+	/**save the most cache data size*/
+	private static final int CACHE_SIZE = 30;
 	
 	/**data key*/
 	private static final String KEY_CONTENT = "ContentListFragment:Content";
@@ -79,25 +80,42 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_content_list, container, false);
-
+		DebugLog.e(TAG, "[id:%d name:%s] onCreateView()",mItemType.getId(),mItemType.getName());
 		if (mContentList == null) {
 			mContentList = new ArrayList<ContentType>();
-			//read cache from disk
-			String key = mItemType.getId()+mItemType.getName();
-			String json = Config.getInstance().readContentCache(key);
-			if(json==null || json.equals("")){
-				//no cache ,need request data
-				needRequest = true;
-			}else{
-				//have cache,paser json to display
-				needRequest = false;
-				JsonParser<Article> parser = new JsonParser<Article>();
-				Article article =parser.parseJson(json, Article.class);
-				mContentList.addAll(article.getData());
-			}
-			
+			readCache();
 		}
 
+		initView(rootView);
+
+		return rootView;
+	}
+
+	/**
+	 * read disk cache
+	 */
+	private void readCache() {
+		//read cache from disk
+		String key = mItemType.getId()+mItemType.getName();
+		String json = Config.getInstance().readContentCache(key);
+		if(json==null || json.equals("")){
+			//no cache ,need request data
+			needRequest = true;
+		}else{
+			//have cache,paser json to display
+			needRequest = false;
+			JsonParser<Article> parser = new JsonParser<Article>();
+			Article article =parser.parseJson(json, Article.class);
+			mContentList.addAll(article.getData());
+			DebugLog.e(TAG, "[id:%d name:%s] read cache size:%d",mItemType.getId(),mItemType.getName(),mContentList.size());
+		}
+	}
+
+	/**
+	 * init view
+	 * @param rootView
+	 */
+	private void initView(View rootView) {
 		mPullRefreshListView = (PullToRefreshListView) rootView.findViewById(R.id.pull_refresh_list);
 //		ListView actualListView = mPullRefreshListView.getRefreshableView();
 		
@@ -106,11 +124,16 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 				
 		mPullRefreshListView.setOnRefreshListener(this);
 		mPullRefreshListView.setOnItemClickListener(this);
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		if(needRequest){
 			mPullRefreshListView.setRefreshing(true);
+			needRequest = false;
 		}
-
-		return rootView;
 	}
 
 	@Override
@@ -124,7 +147,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 		String label = DateUtil.formatDateToString(System.currentTimeMillis());
-
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
@@ -144,7 +166,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 		String label = DateUtil.formatDateToString(System.currentTimeMillis());
-		
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
@@ -163,13 +184,12 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Random random = new Random();
-		int n = random.nextInt(2);
-		if(n==0){
-			Toaster.showDefToast(getActivity(), "点你妹，别点了，这个功能还没做");
-		}else{
-			Toaster.showDefToast(getActivity(), "大鹏你个逗比^_^ O_O!!!");
-		}
+		if(CommonUtils.isFastDoubleClick())return;
+		if(mContentList==null)return;
+		
+		Intent intent = new Intent(getActivity(),DetailsActivity.class);
+		intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position));
+		startActivity(intent);
 	}
 	
 	Handler mHandler = new Handler(){
@@ -198,21 +218,48 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		if(data ==null || data.toString().equals("")){
 			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
 		}else{
-			DebugLog.d(TAG, data.toString());
+			DebugLog.d(TAG, "[id:%d name:%s] json:%s",mItemType.getId(),mItemType.getName(),data.toString());
 			JsonParser<Article> parser = new JsonParser<Article>();
 			Article article = parser.parseJson(data, Article.class);
-			mContentList.addAll(article.getData());
+			if(taskId == HttpRequestId.CONTENT_LIST_REFRESH){
+				//refresh add index 0
+				mContentList.addAll(0,article.getData());
+			}else if(taskId == HttpRequestId.CONTENT_LIST_LOADMORE){
+				//loadmore add index end
+				mContentList.addAll(article.getData());
+			}
 			mAdapter.notifyDataSetChanged();
-			Config.getInstance().writeContentCache(mItemType.getId()+mItemType.getName(), data);
+			saveDataCache();
 		}
 	}
 
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
-		
+		DebugLog.e(TAG, "[id:%d name:%s] onDestroyView()",mItemType.getId(),mItemType.getName());
 		super.onDestroyView();
 	}
 	
+	private void saveDataCache(){
+		if(mContentList==null || mContentList.size()==0){
+			//no data to save cache
+			return;
+		}
+		JsonParser<Article> parser = new JsonParser<Article>();
+		Article article = new Article();
+		article.setRet_code(0);
+		article.setRet_msg("success");
+		//cache CACHE_SIZE data most
+		if(mContentList.size()>CACHE_SIZE){
+			article.setData(mContentList.subList(0, CACHE_SIZE));
+		}else{
+			article.setData(mContentList);
+		}
+		DebugLog.e(TAG, "[id:%d name:%s] save cache size:%d",mItemType.getId(),mItemType.getName(),article.getData().size());
+		
+		String cacheJson = parser.toJson(article);
+		//save cache data
+		Config.getInstance().writeContentCache(mItemType.getId()+mItemType.getName(), cacheJson);
+	}
 	
 }

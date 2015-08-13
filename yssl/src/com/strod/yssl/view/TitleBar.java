@@ -15,25 +15,23 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 /**
  * 顶部title自定义控件
  * 
  * @author User
  *
  */
-public class TitleBar extends RelativeLayout implements OnClickListener{
-	
+public class TitleBar extends RelativeLayout {
+
 	private View mContainer;
-	/**左边按钮*/
-	public ImageButton mLefttBtn; 
-	/**中间标题*/
+	/** 左边按钮 */
+	public ImageButton mLefttBtn;
+	/** 中间标题 */
 	public TextView mMiddleTitle;
-	/**右边按钮*/
+	/** 右边按钮 */
 	public Button mRightBtn; //
-	private OnRightBtnClickListener rListener;
 	private Context context;
-	
+
 	public TitleBar(Context context) {
 		super(context);
 		this.context = context;
@@ -58,7 +56,6 @@ public class TitleBar extends RelativeLayout implements OnClickListener{
 		mLefttBtn = (ImageButton) mView.findViewById(R.id.title_left_btn);
 		mMiddleTitle = (TextView) mView.findViewById(R.id.title_middle_text);
 		mRightBtn = (Button) mView.findViewById(R.id.title_right_btn);
-		mRightBtn.setOnClickListener(this);
 	}
 
 	public void enable(boolean enable) {
@@ -66,57 +63,61 @@ public class TitleBar extends RelativeLayout implements OnClickListener{
 			mContainer.setVisibility(enable ? View.VISIBLE : View.GONE);
 	}
 
-	private void setViewVisibility(View v, boolean visible) {
-		v.setVisibility(visible ? View.VISIBLE : View.GONE);
+	public void setLeftImageBtnVisibility(int visibility) {
+		mLefttBtn.setVisibility(visibility);
+	}
+
+	public void setLeftImageBtnBackground(int resid) {
+		mLefttBtn.setBackgroundResource(resid);
 	}
 	
+	public void setLeftImageBtnClickListener(OnClickListener listener) {
+		mLefttBtn.setOnClickListener(listener);
+	}
+
 	/**
 	 * 设置中间的标题文字
+	 * 
 	 * @param resId
 	 */
-	public void setMiddleText(int resId){
+	public void setMiddleText(int resId) {
 		mMiddleTitle.setText(resId);
 	}
-	
+
 	/**
-	 * 设置右边按钮资源和显示状态
-	 * @param enable 是否显示
-	 * @param resId 图片资源id
+	 * 设置中间的标题文字
+	 * 
+	 * @param text
 	 */
-	public void setRightButton(boolean enable, int resId) {
-		if(resId > 0){
-			mRightBtn.setText(context.getString(resId));
-		}else{
-			mRightBtn.setText(context.getString(R.string.btn_back));
-		}
-		setViewVisibility(mRightBtn, enable);
+	public void setMiddleText(String text) {
+		mMiddleTitle.setText(text);
 	}
 	
-	
-	public void setRightBtnClickListener(OnRightBtnClickListener listener){
-		rListener = listener;
+	public void setRightBtnVisibility(int visibility) {
+		mRightBtn.setVisibility(visibility);
+	}
+
+	/**
+	 * 设置右边按钮资源
+	 * 
+	 * @param resId
+	 *            图片资源id
+	 */
+	public void setRightButtonBackground(int resId) {
+		mRightBtn.setBackgroundResource(resId);
 	}
 	
-	@Override
-	public void onClick(View v) {
-		if (CommonUtils.isFastDoubleClick())
-			return;
-		
-		switch (v.getId()) {
-		case R.id.title_right_btn:
-			if(null != rListener){
-				rListener.onClick(v.getId());
-				return;
-            }
-			// 未连上网络时,气泡提示
-//			if (!NetworkMonitor.hasNetWork()) {
-//				return;
-//			}
-			break;
-		}
+	public void setRightButtonText(int resId){
+		mRightBtn.setText(resId);
 	}
 	
-	public static interface OnRightBtnClickListener{
-		public void onClick(int viewID);
+	public void setRightButtonText(String text){
+		mRightBtn.setText(text);
 	}
+
+	public void setRightBtnClickListener(OnClickListener listener) {
+		mRightBtn.setOnClickListener(listener);
+	}
+
+
 }

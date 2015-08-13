@@ -1,0 +1,24 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+O_SRCS := 
+C_SRCS := 
+S_UPPER_SRCS := 
+OBJ_SRCS := 
+ASM_SRCS := 
+OBJS := 
+C_DEPS := 
+EXECUTABLES := 
+
+# Every subdirectory with source files must be described here
+SUBDIRS := \
+obj/local/x86_64/objs-debug/hello-jni \
+obj/local/x86/objs-debug/hello-jni \
+obj/local/mips64/objs-debug/hello-jni \
+obj/local/mips/objs-debug/hello-jni \
+obj/local/armeabi-v7a/objs-debug/hello-jni \
+obj/local/armeabi/objs-debug/hello-jni \
+obj/local/arm64-v8a/objs-debug/hello-jni \
+jni \
+

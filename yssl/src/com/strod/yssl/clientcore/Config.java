@@ -49,7 +49,7 @@ public class Config extends AbsConfig {
 	 * application start invoke init
 	 */
 	public void init() {
-		super.mAllowDebug = true;
+		super.mAllowDebug = false;
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		getContentDiskCache(AbsApplication.getApplication());
 	}

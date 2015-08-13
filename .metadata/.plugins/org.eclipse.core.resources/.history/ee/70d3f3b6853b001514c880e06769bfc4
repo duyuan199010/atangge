@@ -1,5 +1,0 @@
-package com.strod.yssl.clientcore;
-
-public final class DiskLruCache {
-
-}
