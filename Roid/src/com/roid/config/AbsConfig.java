@@ -44,15 +44,5 @@ public abstract class AbsConfig {
 		return mRootDirectory;
 	}
 	
-	public AbsConfig(){
-		initImageLoader();
-	}
 	
-	/**
-	 * init imageloader
-	 */
-	public void initImageLoader() {
-		imageLoader = ImageLoader.getInstance();
-		imageLoader.init(ImageLoaderConfiguration.createDefault(AbsApplication.getApplication()));
-	}
 }

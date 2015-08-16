@@ -2,6 +2,9 @@ package com.strod.yssl.pages.details;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +18,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.ui.FragmentControlActivity;
 import com.roid.util.CommonUtils;
+import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.pages.details.entity.Comment.CommentType;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
@@ -40,6 +44,12 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 	
 	private TitleBar mTitleBar;
 	private WebView mWebView;
+	
+	class JavaScriptInterface{
+		public void onImageClick(String imageUrl){
+			Toaster.showDefToast(getApplicationContext(), imageUrl);
+		}
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -83,18 +93,27 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 			}
 		});
 		
+		
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_list);
 		ListView actualListView = mPullRefreshListView.getRefreshableView();
 		
 		//add webview to listview head
 		mWebView = new WebView(this);
+		setWebView(mWebView);
 		actualListView.addHeaderView(mWebView);
-		mWebView.loadUrl(mContentType.getContentUrl());
 		
 		mAdapter = new CommentAdapter(this, mCommentList);
 		mPullRefreshListView.setAdapter(mAdapter);
 		
 		mPullRefreshListView.setOnRefreshListener(this);
+	}
+	
+	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled" })
+	private void setWebView(WebView mWebView){
+		mWebView.setBackgroundResource(R.color.white);
+		mWebView.getSettings().setJavaScriptEnabled(true);  
+	    mWebView.addJavascriptInterface(new JavaScriptInterface(), "js");  
+		mWebView.loadUrl(mContentType.getContentUrl());
 	}
 
 	@Override

@@ -1,7 +1,0 @@
-package com.strod.yssl.pages.details;
-
-import com.roid.ui.FragmentControlActivity;
-
-public class DetailsActivity extends FragmentControlActivity{
-
-}

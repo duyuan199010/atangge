@@ -13,9 +13,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.roid.AbsApplication;
 import com.roid.config.AbsConfig;
+import com.roid.util.DebugLog;
 import com.strod.yssl.MyApplication;
+import com.strod.yssl.R;
 import com.strod.yssl.clientcore.cache.DiskLruCache;
 
 public class Config extends AbsConfig {
@@ -27,6 +33,11 @@ public class Config extends AbsConfig {
 	private SharedPreferences mSharedPreferences;
 	
 	private static final String GUIDE = "guide";
+	private static final String NIGHT_MODE = "night_mode";
+	public boolean isNightMode = false;
+	
+	private DisplayImageOptions mOptions;
+	private DisplayImageOptions mRoundOptions;
 	/**
 	 * get siglon instance
 	 * 
@@ -49,9 +60,45 @@ public class Config extends AbsConfig {
 	 * application start invoke init
 	 */
 	public void init() {
-		super.mAllowDebug = false;
+		super.mAllowDebug = true;
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		initImageLoader();
 		getContentDiskCache(AbsApplication.getApplication());
+		
+		//
+		isNightMode = getNightMode();
+	}
+	
+	/**
+	 * init imageloader
+	 */
+	public void initImageLoader() {
+		imageLoader = ImageLoader.getInstance();
+		mOptions=new DisplayImageOptions.Builder()
+	        .showImageOnLoading(R.drawable.default_image)          // 设置图片下载期间显示的图片  
+	        .showImageForEmptyUri(R.drawable.default_image)  // 设置图片Uri为空或是错误的时候显示的图片  
+	        .showImageOnFail(R.drawable.default_image)       // 设置图片加载或解码过程中发生错误显示的图片      
+	        .cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中  
+	        .cacheOnDisk(true)                       // 设置下载的图片是否缓存在SD卡中  
+	        .displayer(new RoundedBitmapDisplayer(0))  // 设置成圆角图片  
+	        .build();
+		mRoundOptions=new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.default_round_image)          // 设置图片下载期间显示的图片  
+		.showImageForEmptyUri(R.drawable.default_round_image)  // 设置图片Uri为空或是错误的时候显示的图片  
+		.showImageOnFail(R.drawable.default_round_image)       // 设置图片加载或解码过程中发生错误显示的图片      
+		.cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中  
+		.cacheOnDisk(true)                       // 设置下载的图片是否缓存在SD卡中  
+		.displayer(new RoundedBitmapDisplayer(100))  // 设置成圆角图片  
+		.build();
+		imageLoader.init(ImageLoaderConfiguration.createDefault(MyApplication.getApplication()));
+	}
+	
+	public DisplayImageOptions getDisplayImageOptions(){
+		return mOptions;
+	}
+	
+	public DisplayImageOptions getDisplayImageOptionsRound(){
+		return mRoundOptions;
 	}
 	
 	/**
@@ -69,6 +116,24 @@ public class Config extends AbsConfig {
 	 */
 	public boolean getGuide(){
 		return mSharedPreferences.getBoolean(GUIDE, false);
+	}
+	
+	/**
+	 * set night mode
+	 */
+	public void setNightMode(boolean isNight){
+		Editor editor = mSharedPreferences.edit();
+		editor.putBoolean(NIGHT_MODE, isNight);
+		editor.commit();
+		isNightMode = isNight;
+	}
+	
+	/**
+	 * get night mode
+	 * @return true if night mode,otherwise false
+	 */
+	public boolean getNightMode(){
+		return mSharedPreferences.getBoolean(NIGHT_MODE, false);
 	}
 
 	/**
@@ -133,6 +198,20 @@ public class Config extends AbsConfig {
 		}
 		return cacheKey;
 	}
+	
+	public long getCacheLastModified(Context context,String uniqu){
+		File cacheDir = getDiskCacheDir(context, CONTENT_CACHE_DIR);
+		if (!cacheDir.exists()) {
+			return 0;
+		}
+		String key = hashKeyForDisk(uniqu);
+		File file = new File(cacheDir, key+".0");
+		DebugLog.i(TAG, uniqu+" path:"+file.getAbsolutePath());
+		if(!file.exists()){
+			return 0;
+		}
+		return file.lastModified();
+	}
 
 	private String bytesToHexString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
@@ -185,5 +264,6 @@ public class Config extends AbsConfig {
 			e.printStackTrace();
 		}
 		return json;
+		
 	}
 }

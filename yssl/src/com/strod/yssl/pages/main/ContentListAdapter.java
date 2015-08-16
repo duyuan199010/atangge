@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.strod.yssl.R;
+import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.util.DateUtil;
 
@@ -64,6 +66,7 @@ public class ContentListAdapter extends BaseAdapter{
 		}
 		ContentType contentType= mContentList.get(position);
 		if(contentType!=null){
+			ImageLoader.getInstance().displayImage(contentType.getImgUrl(), holder.mImage,Config.getInstance().getDisplayImageOptions());
 			holder.mTitle.setText(contentType.getTitle());
 			holder.mContent.setText(contentType.getContent());
 			holder.mCollect.setText(contentType.getCollectNum()+"");
