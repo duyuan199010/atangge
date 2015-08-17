@@ -142,7 +142,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		if (currentTime - time > 4 * 60 * 1000 && NetMonitor.isWifiState(getActivity())) {
 			needRequest = true;
 		} else if (currentTime - time > 24 * 60 * 1000 && (!NetMonitor.isWifiState(getActivity()))) {
-			// judge cache last mofified time,not in wifi state,if >24 hours,need request data
+			//// judge cache last mofified time,not in wifi state,if >24 hours,need request data
 			needRequest = true;
 		} else {
 			//other didn't need request
@@ -250,13 +250,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 				JsonParser<Article> parser = new JsonParser<Article>();
 				Article article = parser.parseJson(data, Article.class);
 				if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
+					// refresh add index 0
 					long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getId() + mItemType.getName());
 					long currentTime = System.currentTimeMillis();
 					// judge cache last mofified time,if > one day,clear cache data
 					if (currentTime - time > 24 * 60 * 60 * 1000) {
 						mContentList.clear();
 					}
-					// refresh add index 0
 					mContentList.addAll(0, article.getData());
 				} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
 					// loadmore add index end
