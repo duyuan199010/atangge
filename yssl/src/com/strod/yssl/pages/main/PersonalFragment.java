@@ -3,6 +3,7 @@ package com.strod.yssl.pages.main;
 /**
  * 页面
  */
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,10 @@ import com.strod.yssl.view.SwitchButton.OnSwitchChangeListener;
 
 public class PersonalFragment extends AbsFragment implements OnClickListener{
 	
-	private ScrollView mScrollView;
 	/**day night mode*/
-	private SwitchButton mSwitchButton;
+	private SwitchButton mNightModeSwitchButton;
+	/**translucent_status mode*/
+	private SwitchButton mTranslucentStatusSwitchButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,9 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 	}
 
 	private void initView(View rootView){
-		mScrollView = (ScrollView) rootView.findViewById(R.id.scroll_view);
-		mSwitchButton = (SwitchButton) rootView.findViewById(R.id.switch_button);
-		mSwitchButton.setChecked(Config.getInstance().isNightMode);
-		mSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
+		mNightModeSwitchButton = (SwitchButton) rootView.findViewById(R.id.night_mode_switch_button);
+		mNightModeSwitchButton.setChecked(Config.getInstance().isNightMode);
+		mNightModeSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
 			
 			@Override
 			public void onSwitchChanged(View view, boolean swtichState) {
@@ -52,6 +53,22 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 				}
 			}
 		});
+		
+//		mTranslucentStatusSwitchButton = (SwitchButton) rootView.findViewById(R.id.translucent_status_switch_button);
+//		mTranslucentStatusSwitchButton.setChecked(Config.mTranslucentStatus);
+//		mTranslucentStatusSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
+//			
+//			@Override
+//			public void onSwitchChanged(View view, boolean swtichState) {
+//				// TODO Auto-generated method stub
+//				Config.getInstance().setTranslucentStatus(swtichState);
+//				if(getActivity()!=null){
+////					((MainActivity)getActivity()).recreate();
+//					((MainActivity)getActivity()).restartActivity();
+//					
+//				}
+//			}
+//		});
 	}
 	
 	

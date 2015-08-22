@@ -1,5 +1,6 @@
 package com.strod.yssl.pages.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -191,6 +192,14 @@ public class MainActivity extends FragmentControlActivity implements OnCheckedCh
 
 		// update current fragment
 		mCurrentFragment = fragment;
+	}
+	
+	public void restartActivity(){
+		Intent intent = getIntent();
+		overridePendingTransition(0, 0);
+		finish();
+		overridePendingTransition(0, 0);
+		startActivity(intent);
 	}
 
 	@Override

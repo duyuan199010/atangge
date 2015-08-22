@@ -16,6 +16,9 @@ public abstract class AbsConfig {
 	
 	/**log tag*/
 	public static String TAG = "";
+	
+	/**application name*/
+	public static boolean mTranslucentStatus = true;
 
 	/**application name*/
 	protected String mAppName;
