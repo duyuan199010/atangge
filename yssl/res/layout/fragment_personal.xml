@@ -94,10 +94,11 @@
                 android:layout_centerVertical="true"
                 android:text="@string/night_mode" />
 
-            <com.strod.yssl.view.SwitchButton
+            <com.strod.yssl.view.SlipSwitch
                 android:id="@+id/night_mode_switch_button"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true" />
         </RelativeLayout>

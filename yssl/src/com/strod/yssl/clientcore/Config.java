@@ -70,8 +70,8 @@ public class Config extends AbsConfig {
 		//
 		isNightMode = getNightMode();
 		
-//		mTranslucentStatus = getTranslucentStatus();
-		mTranslucentStatus = false;
+		mTranslucentStatus = getTranslucentStatus();
+//		mTranslucentStatus = false;
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class Config extends AbsConfig {
 	 * @return true if night mode,otherwise false
 	 */
 	public boolean getTranslucentStatus(){
-		return mSharedPreferences.getBoolean(TRANSLUCENT_STATUS, false);
+		return mSharedPreferences.getBoolean(TRANSLUCENT_STATUS, true);
 	}
 
 	/**

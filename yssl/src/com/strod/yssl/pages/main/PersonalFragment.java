@@ -15,13 +15,16 @@ import com.roid.ui.AbsFragment;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.view.SlipSwitch;
+import com.strod.yssl.view.SlipSwitch.OnSwitchListener;
 import com.strod.yssl.view.SwitchButton;
 import com.strod.yssl.view.SwitchButton.OnSwitchChangeListener;
 
 public class PersonalFragment extends AbsFragment implements OnClickListener{
 	
 	/**day night mode*/
-	private SwitchButton mNightModeSwitchButton;
+//	private SwitchButton mNightModeSwitchButton;
+	private SlipSwitch mNightModeSwitchButton;
 	/**translucent_status mode*/
 	private SwitchButton mTranslucentStatusSwitchButton;
 	
@@ -40,35 +43,49 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 	}
 
 	private void initView(View rootView){
-		mNightModeSwitchButton = (SwitchButton) rootView.findViewById(R.id.night_mode_switch_button);
-		mNightModeSwitchButton.setChecked(Config.getInstance().isNightMode);
-		mNightModeSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
+//		mNightModeSwitchButton = (SwitchButton) rootView.findViewById(R.id.night_mode_switch_button);
+//		mNightModeSwitchButton.setChecked(Config.getInstance().isNightMode);
+//		mNightModeSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
+//			
+//			@Override
+//			public void onSwitchChanged(View view, boolean swtichState) {
+//				// TODO Auto-generated method stub
+//				Config.getInstance().setNightMode(swtichState);
+//				if(getActivity()!=null){
+//					((MainActivity)getActivity()).switchTheme();
+//				}
+//			}
+//		});
+		
+		mTranslucentStatusSwitchButton = (SwitchButton) rootView.findViewById(R.id.translucent_status_switch_button);
+		mTranslucentStatusSwitchButton.setChecked(Config.mTranslucentStatus);
+		mTranslucentStatusSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
 			
 			@Override
 			public void onSwitchChanged(View view, boolean swtichState) {
 				// TODO Auto-generated method stub
-				Config.getInstance().setNightMode(swtichState);
+				Config.getInstance().setTranslucentStatus(swtichState);
+				if(getActivity()!=null){
+//					((MainActivity)getActivity()).recreate();
+					((MainActivity)getActivity()).restartActivity();
+					
+				}
+			}
+		});
+		
+		mNightModeSwitchButton = (SlipSwitch) rootView.findViewById(R.id.night_mode_switch_button);
+		mNightModeSwitchButton.setSwitchState(Config.getInstance().isNightMode);
+		mNightModeSwitchButton.setOnSwitchListener(new OnSwitchListener() {
+			
+			@Override
+			public void onSwitched(boolean isSwitchOn) {
+				// TODO Auto-generated method stub
+				Config.getInstance().setNightMode(isSwitchOn);
 				if(getActivity()!=null){
 					((MainActivity)getActivity()).switchTheme();
 				}
 			}
 		});
-		
-//		mTranslucentStatusSwitchButton = (SwitchButton) rootView.findViewById(R.id.translucent_status_switch_button);
-//		mTranslucentStatusSwitchButton.setChecked(Config.mTranslucentStatus);
-//		mTranslucentStatusSwitchButton.SetOnSwitchChangeListener(new OnSwitchChangeListener() {
-//			
-//			@Override
-//			public void onSwitchChanged(View view, boolean swtichState) {
-//				// TODO Auto-generated method stub
-//				Config.getInstance().setTranslucentStatus(swtichState);
-//				if(getActivity()!=null){
-////					((MainActivity)getActivity()).recreate();
-//					((MainActivity)getActivity()).restartActivity();
-//					
-//				}
-//			}
-//		});
 	}
 	
 	
