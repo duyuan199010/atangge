@@ -34,6 +34,7 @@ public class Config extends AbsConfig {
 	
 	private static final String GUIDE = "guide";
 	private static final String NIGHT_MODE = "night_mode";
+	private static final String TRANSLUCENT_STATUS = "translucent_status";
 	public boolean isNightMode = false;
 	
 	private DisplayImageOptions mOptions;
@@ -61,12 +62,16 @@ public class Config extends AbsConfig {
 	 */
 	public void init() {
 		super.mAllowDebug = true;
+		
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		initImageLoader();
 		getContentDiskCache(AbsApplication.getApplication());
 		
 		//
 		isNightMode = getNightMode();
+		
+//		mTranslucentStatus = getTranslucentStatus();
+		mTranslucentStatus = false;
 	}
 	
 	/**
@@ -134,6 +139,24 @@ public class Config extends AbsConfig {
 	 */
 	public boolean getNightMode(){
 		return mSharedPreferences.getBoolean(NIGHT_MODE, false);
+	}
+	
+	/**
+	 * Set Translucent Status
+	 */
+	public void setTranslucentStatus(boolean isTranslucent){
+		Editor editor = mSharedPreferences.edit();
+		editor.putBoolean(TRANSLUCENT_STATUS, isTranslucent);
+		editor.commit();
+		mTranslucentStatus = isTranslucent;
+	}
+	
+	/**
+	 * Get Translucent Status
+	 * @return true if night mode,otherwise false
+	 */
+	public boolean getTranslucentStatus(){
+		return mSharedPreferences.getBoolean(TRANSLUCENT_STATUS, false);
 	}
 
 	/**

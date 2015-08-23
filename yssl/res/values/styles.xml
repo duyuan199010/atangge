@@ -41,6 +41,12 @@
         <item name="referenceValue">@drawable/ic_launcher</item>
         <item name="imageValue">@drawable/ic_launcher</item>
     </style>
+    
+    <style name="TranslucentStatus_Bar">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">@color/title_bg_color</item>
+    </style>
 
     <style name="MyDialog" parent="@android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
