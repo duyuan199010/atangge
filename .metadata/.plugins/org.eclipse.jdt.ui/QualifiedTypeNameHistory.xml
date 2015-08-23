@@ -33,7 +33,6 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="android.os.Debug"/>
-<fullyQualifiedTypeName name="com.roid.util.DebugLog"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.net.ConnectivityManager"/>
 <fullyQualifiedTypeName name="android.net.NetworkInfo"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="android.widget.FrameLayout"/>
 <fullyQualifiedTypeName name="com.strod.yssl.R.color"/>
 <fullyQualifiedTypeName name="com.strod.yssl.R.drawable"/>
+<fullyQualifiedTypeName name="com.roid.util.DebugLog"/>
 </qualifiedTypeNameHistroy>

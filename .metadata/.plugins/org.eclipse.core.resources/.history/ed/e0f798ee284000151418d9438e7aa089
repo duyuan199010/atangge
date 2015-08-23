@@ -1,9 +1,0 @@
-package com.strod.yssl.clientcore;
-
-public interface HttpRequestId {
-
-	/**内容列表刷新*/
-	public static final int CONTENT_LIST_REFRESH = 0x0001;
-	/**内容列表加载更多*/
-	public static final int CONTENT_LIST_LOADMORE = 0x0002;
-}

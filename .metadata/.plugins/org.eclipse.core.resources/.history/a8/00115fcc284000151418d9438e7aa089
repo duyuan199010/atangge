@@ -1,7 +1,0 @@
-package com.strod.yssl.clientcore;
-
-public interface HttpRequestURL {
-
-	public static final String Host = "";
-	public static final String CONTENT_TYPE = "";
-}

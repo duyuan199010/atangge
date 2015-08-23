@@ -266,4 +266,27 @@ public class Config extends AbsConfig {
 		return json;
 		
 	}
+	
+	public void clearContentCache(){
+			try {
+				mContentDiskLruCache.delete();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	public void getContentCache(){
+		mContentDiskLruCache.size();
+	}
+	
+	public void closeContentCache(){
+		DebugLog.i(TAG, "closeContentCache()...");
+		try {
+			mContentDiskLruCache.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

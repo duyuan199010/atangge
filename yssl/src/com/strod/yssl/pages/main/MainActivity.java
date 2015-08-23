@@ -208,6 +208,7 @@ public class MainActivity extends FragmentControlActivity implements OnCheckedCh
 				firstTime = secondTime;// 更新firstTime
 				return true;
 			} else {
+				Config.getInstance().closeContentCache();
 				ActivityManager.getInstance().popAllActivity();
 				android.os.Process.killProcess(android.os.Process.myPid());
 			}
