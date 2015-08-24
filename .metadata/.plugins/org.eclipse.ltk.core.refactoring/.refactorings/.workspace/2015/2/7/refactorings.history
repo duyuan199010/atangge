@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;AMap_Android_API_2DMap_Demo_V2.4.0_Location_API_V1.3.0&apos;" deleteContents="false" description="Delete resource &apos;AMap_Android_API_2DMap_Demo_V2.4.0_Location_API_V1.3.0&apos;" element1="/AMap_Android_API_2DMap_Demo_V2.4.0_Location_API_V1.3.0" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1423741941177"/>
-</session>
