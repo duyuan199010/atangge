@@ -1,7 +1,0 @@
-package com.strod.yssl.pages.main.entity;
-
-import com.strod.yssl.bean.Result;
-
-public class Article extends Result{
-
-}

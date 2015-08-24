@@ -1,5 +1,0 @@
-package com.strod.yssl.view;
-
-public class SwitchButton extends View implements OnTouchListener{
-
-}

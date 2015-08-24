@@ -32,7 +32,7 @@
 
     <style name="NightTheme" parent="Theme.PageIndicatorDefaults">
         <item name="bgColor">@color/night_bg_color</item>
-        <item name="bottomBgColor">@color/black</item>
+        <item name="bottomBgColor">@color/night_bottom_color</item>
         <item name="floatValue">1.44</item>
         <item name="integerValue">55</item>
         <item name="booleanValue">false</item>
