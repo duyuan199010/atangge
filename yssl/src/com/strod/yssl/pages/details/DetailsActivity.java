@@ -143,14 +143,20 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 	}
 	
 	@Override
-	public void onHttpResponse(int taskId, String data) {
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+
+	@Override
+	public void onHttpSuccess(int taskId, Object obj, String json) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onHttpFailure(int taskId, String message) {
 		// TODO Auto-generated method stub
-		super.onDestroy();
+		
 	}
 }

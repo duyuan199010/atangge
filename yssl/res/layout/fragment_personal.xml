@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,9 +14,8 @@
             android:id="@+id/personal_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:background="@drawable/item_background_selector"
-             >
+            android:clickable="true" >
 
             <ImageView
                 android:id="@+id/head_img"
@@ -46,8 +44,8 @@
             android:id="@+id/publish_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@drawable/item_background_selector" >
+            android:background="@drawable/item_background_selector"
+            android:clickable="true" >
 
             <ImageView
                 android:layout_width="50dp"
@@ -98,53 +96,27 @@
                 android:id="@+id/night_mode_switch_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider_color" />
-        
-        <RelativeLayout
-            android:id="@+id/translucent_status_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/translucent_status" />
-
-            <com.strod.yssl.view.SwitchButton
-                android:id="@+id/translucent_status_switch_button"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_marginRight="@dimen/activity_horizontal_margin" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
-        
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider_color" />
+
         <RelativeLayout
             android:id="@+id/feed_back_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@drawable/item_background_selector" >
+            android:background="@drawable/item_background_selector"
+            android:clickable="true" >
 
             <ImageView
                 android:layout_width="50dp"
@@ -172,12 +144,13 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
+
         <RelativeLayout
             android:id="@+id/about_our_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@drawable/item_background_selector" >
+            android:background="@drawable/item_background_selector"
+            android:clickable="true" >
 
             <ImageView
                 android:layout_width="50dp"
@@ -205,12 +178,13 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
+
         <RelativeLayout
             android:id="@+id/setting_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@drawable/item_background_selector" >
+            android:background="@drawable/item_background_selector"
+            android:clickable="true" >
 
             <ImageView
                 android:layout_width="50dp"
@@ -238,14 +212,14 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
-        
+
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/margin_ordinary"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/exit_account" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/margin_ordinary"
+            android:text="@string/exit_account" />
     </LinearLayout>
 
 </ScrollView>

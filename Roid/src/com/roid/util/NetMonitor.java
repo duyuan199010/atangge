@@ -1,4 +1,4 @@
-package com.strod.yssl.util;
+package com.roid.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

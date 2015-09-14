@@ -2,9 +2,6 @@ package com.strod.yssl.pages.main;
 
 import java.util.ArrayList;
 
-import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,11 +18,11 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.roid.core.Manager;
 import com.roid.net.http.OnHttpRespondLisenter;
-import com.roid.net.http.Task;
 import com.roid.ui.AbsFragment;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.JsonParser;
+import com.roid.util.NetMonitor;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
@@ -36,7 +33,6 @@ import com.strod.yssl.pages.main.entity.Article;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.pages.main.entity.ItemType;
 import com.strod.yssl.util.DateUtil;
-import com.strod.yssl.util.NetMonitor;
 
 public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener, OnHttpRespondLisenter {
 
@@ -175,17 +171,12 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
-		try {
-			JsonParser<ContentType> parser = new JsonParser<ContentType>();
-			ContentType contentType = new ContentType();
-			String json = parser.toJson(contentType);
-			StringEntity enity = new StringEntity(json, HTTP.UTF_8);
-			Task task = new Task(enity, HttpRequestURL.HOST, HttpRequestURL.CONTENT_LIST);
-			Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_TYPE, task, false);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JsonParser<ContentType> parser = new JsonParser<ContentType>();
+		ContentType contentType = new ContentType();
+		String json = parser.toJson(contentType);
+		Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
+				json, Article.class);
+		
 	}
 
 	@Override
@@ -194,17 +185,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
-		try {
-			JsonParser<ContentType> parser = new JsonParser<ContentType>();
-			ContentType contentType = new ContentType();
-			String json = parser.toJson(contentType);
-			StringEntity enity = new StringEntity(json, HTTP.UTF_8);
-			Task task = new Task(enity, HttpRequestURL.HOST, HttpRequestURL.CONTENT_LIST);
-			Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_TYPE, task, true);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JsonParser<ContentType> parser = new JsonParser<ContentType>();
+		ContentType contentType = new ContentType();
+		String json = parser.toJson(contentType);
+		Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 
+				json, Article.class);
+		
+		
 	}
 
 	@Override
@@ -237,48 +224,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	};
 
-	@Override
-	public void onHttpResponse(int taskId, String data) {
-		DebugLog.d(TAG, "onHttpResponse:" + taskId);
-		// Call onRefreshComplete when the list has been refreshed.
-		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
-		if (data == null || data.toString().equals("")) {
-			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
-		} else {
-			DebugLog.d(TAG,data.toString());
-			try {
-				JsonParser<Article> parser = new JsonParser<Article>();
-				Article article = parser.parseJson(data, Article.class);
-				if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
-					long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getId() + mItemType.getName());
-					long currentTime = System.currentTimeMillis();
-					// judge cache last mofified time,if > one day,clear cache data
-					if (currentTime - time > 24 * 60 * 60 * 1000) {
-						mContentList.clear();
-					}
-					// refresh add index 0
-					mContentList.addAll(0, article.getData());
-				} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
-					// loadmore add index end
-					mContentList.addAll(article.getData());
-				}
-				mAdapter.notifyDataSetChanged();
-				saveDataCache();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Toaster.showDefToast(getActivity(), R.string.net_data_error);
-			}
-		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		// TODO Auto-generated method stub
-		DebugLog.e(TAG, "[id:%d name:%s] onDestroyView()", mItemType.getId(), mItemType.getName());
-		super.onDestroyView();
-	}
-
 	/**
 	 * sava data to cache
 	 */
@@ -304,4 +249,48 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		Config.getInstance().writeContentCache(mItemType.getId() + mItemType.getName(), cacheJson);
 	}
 
+	@Override
+	public void onHttpSuccess(int taskId, Object response, String json) {
+		DebugLog.d(TAG, "onHttpResponse:" + taskId);
+		// Call onRefreshComplete when the list has been refreshed.
+		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
+		DebugLog.d(TAG,json);
+		try {
+			Article article = (Article) response;
+			if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
+				long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getId() + mItemType.getName());
+				long currentTime = System.currentTimeMillis();
+				// judge cache last mofified time,if > one day,clear cache data
+				if (currentTime - time > 24 * 60 * 60 * 1000) {
+					mContentList.clear();
+				}
+				// refresh add index 0
+				mContentList.addAll(0, article.getData());
+			} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
+				// loadmore add index end
+				mContentList.addAll(article.getData());
+			}
+			mAdapter.notifyDataSetChanged();
+			saveDataCache();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toaster.showDefToast(getActivity(), R.string.net_data_error);
+		}
+	}
+
+	@Override
+	public void onHttpFailure(int taskId, String message) {
+		DebugLog.d(TAG, "onHttpResponse:" + taskId);
+		// Call onRefreshComplete when the list has been refreshed.
+		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
+		Toaster.showDefToast(getActivity(), R.string.error_network_connection);
+	}
+
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		DebugLog.e(TAG, "[id:%d name:%s] onDestroyView()", mItemType.getId(), mItemType.getName());
+		super.onDestroyView();
+	}
 }

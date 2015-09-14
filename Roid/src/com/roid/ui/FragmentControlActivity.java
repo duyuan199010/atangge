@@ -16,9 +16,7 @@ public class FragmentControlActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if(AbsConfig.mTranslucentStatus){
-			setTranslucentStatus();
-		}
+		setTranslucentStatus();
 		super.onCreate(savedInstanceState);
 
 		/* Initialize pending actions */

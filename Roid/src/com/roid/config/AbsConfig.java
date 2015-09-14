@@ -13,13 +13,13 @@ public abstract class AbsConfig {
 	public static boolean ENABLE_LOG_STACK_TRACE = true;
 	public static ImageLoader imageLoader;
 	public static String DATABASE_NAME="atangge";
+	/**Host url*/
+	public static String HOST;
+	public static String CONTENT_TYPE="application/json";
 	
 	/**log tag*/
 	public static String TAG = "";
 	
-	/**application name*/
-	public static boolean mTranslucentStatus = true;
-
 	/**application name*/
 	protected String mAppName;
 	
@@ -46,6 +46,5 @@ public abstract class AbsConfig {
 	public static String getRootDirectory(){
 		return mRootDirectory;
 	}
-	
 	
 }
