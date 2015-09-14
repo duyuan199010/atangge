@@ -20,6 +20,7 @@ import com.roid.ui.FragmentControlActivity;
 import com.roid.util.CommonUtils;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
+import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.pages.details.entity.Comment.CommentType;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.view.TitleBar;
@@ -54,6 +55,11 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		if (Config.getInstance().isNightMode) {
+			setTheme(R.style.NightTheme);
+		} else {
+			setTheme(R.style.DayTheme);
+		}
 		setContentView(R.layout.activity_details);
 		if(getIntent()!=null){
 			mContentType = getIntent().getParcelableExtra(ARTICLE);
