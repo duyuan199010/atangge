@@ -41,6 +41,10 @@ public class IndexFragment extends AbsFragment{
 			mItemList.add(new ItemType(2, "美容"));
 			mItemList.add(new ItemType(3, "养生"));
 			mItemList.add(new ItemType(4, "去火"));
+			mItemList.add(new ItemType(5, "减肥"));
+			mItemList.add(new ItemType(6, "祛痘"));
+			mItemList.add(new ItemType(7, "清热"));
+			mItemList.add(new ItemType(8, "解毒"));
 		}
 		initView(rootView);
 		return rootView;

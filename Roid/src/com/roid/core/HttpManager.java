@@ -29,13 +29,13 @@ import com.roid.util.NetMonitor;
  * @author user
  *
  */
-public class Manager {
+public class HttpManager {
 
 	/**connection time out*/
 	public static final int TIME_OUT = 15*1000;
 	
 	/**singleton Manager instance*/
-	private static Manager mManager = null;
+	private static HttpManager mManager = null;
 	/**AsyncHttpClient instance*/
 	private AsyncHttpClient httpClient;
 
@@ -43,11 +43,11 @@ public class Manager {
 	 * get singleton instance
 	 * @return
 	 */
-	public static Manager getInstance() {
+	public static HttpManager getInstance() {
 		if (mManager == null) {
-			synchronized (Manager.class) {
+			synchronized (HttpManager.class) {
 				if (mManager == null) {
-					mManager = new Manager();
+					mManager = new HttpManager();
 				}
 			}
 		}
@@ -57,7 +57,7 @@ public class Manager {
 	/**
 	 * Initialize Manager
 	 */
-	public Manager() {
+	public HttpManager() {
 		httpClient = new AsyncHttpClient();
 		httpClient.setTimeout(TIME_OUT);
 	}
@@ -97,7 +97,7 @@ public class Manager {
 							call.onHttpFailure(taskId, "statusCode:"+statusCode);
 						}
 					}
-				} catch (JsonSyntaxException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					if(call!=null){
 						call.onHttpFailure(taskId, e.getMessage());
@@ -138,7 +138,7 @@ public class Manager {
 							call.onHttpFailure(taskId, "statusCode:"+statusCode);
 						}
 					}
-				} catch (JsonSyntaxException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					if(call!=null){
 						call.onHttpFailure(taskId, e.getMessage());
@@ -186,7 +186,7 @@ public class Manager {
 							call.onHttpFailure(taskId, "statusCode:"+statusCode);
 						}
 					}
-				} catch (JsonSyntaxException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					if(call!=null){
 						call.onHttpFailure(taskId, e.getMessage());
@@ -230,7 +230,7 @@ public class Manager {
 							call.onHttpFailure(taskId, "statusCode:"+statusCode);
 						}
 					}
-				} catch (JsonSyntaxException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					if(call!=null){
 						call.onHttpFailure(taskId, e.getMessage());
@@ -265,14 +265,22 @@ public class Manager {
 				public void onSuccess(int statusCode, String content) {
 					// TODO Auto-generated method stub
 					super.onSuccess(statusCode, content);
-					if (statusCode == 200) {
-						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
-							call.onHttpSuccess(taskId, respon, content);
+					try {
+						if (statusCode == 200) {
+							Object respon = new Gson().fromJson(content, type);
+							if(call!=null){
+								call.onHttpSuccess(taskId, respon, content);
+							}
+						} else {
+							if(call!=null){
+								call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							}
 						}
-					} else {
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							call.onHttpFailure(taskId, e1.getMessage());
 						}
 					}
 					
@@ -322,14 +330,22 @@ public class Manager {
 				public void onSuccess(int statusCode, String content) {
 					// TODO Auto-generated method stub
 					super.onSuccess(statusCode, content);
-					if (statusCode == 200) {
-						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
-							call.onHttpSuccess(taskId, respon, content);
+					try {
+						if (statusCode == 200) {
+							Object respon = new Gson().fromJson(content, type);
+							if(call!=null){
+								call.onHttpSuccess(taskId, respon, content);
+							}
+						} else {
+							if(call!=null){
+								call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							}
 						}
-					} else {
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							call.onHttpFailure(taskId, e1.getMessage());
 						}
 					}
 					
