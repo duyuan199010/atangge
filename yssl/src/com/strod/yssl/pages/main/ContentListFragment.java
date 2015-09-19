@@ -16,7 +16,7 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.roid.core.Manager;
+import com.roid.core.HttpManager;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.ui.AbsFragment;
 import com.roid.util.CommonUtils;
@@ -174,7 +174,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		JsonParser<ContentType> parser = new JsonParser<ContentType>();
 		ContentType contentType = new ContentType();
 		String json = parser.toJson(contentType);
-		Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
+		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
 				json, Article.class);
 		
 	}
@@ -188,7 +188,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		JsonParser<ContentType> parser = new JsonParser<ContentType>();
 		ContentType contentType = new ContentType();
 		String json = parser.toJson(contentType);
-		Manager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 
+		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 
 				json, Article.class);
 		
 		
