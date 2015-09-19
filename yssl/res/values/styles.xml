@@ -85,7 +85,7 @@
 
     <style name="ContentFontSmall">
         <item name="android:textSize">@dimen/font_size_fourteen</item>
-        <item name="android:textColor">@color/content_font_color</item>
+        <item name="android:textColor">@drawable/font_selector</item>
     </style>
 
     <style name="ContentFontDeep">

@@ -67,6 +67,7 @@ public class SplashActivity extends FragmentControlActivity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		timer.cancel();
 		super.onDestroy();
 	}
 

@@ -3,6 +3,7 @@ package com.strod.yssl.pages.main;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -33,8 +35,10 @@ import com.strod.yssl.pages.main.entity.Article;
 import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.pages.main.entity.ItemType;
 import com.strod.yssl.util.DateUtil;
+import com.strod.yssl.view.RippleView;
+import com.strod.yssl.view.RippleView.OnRippleCompleteListener;
 
-public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener, OnHttpRespondLisenter {
+public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener,OnItemLongClickListener, OnHttpRespondLisenter {
 
 	/** debug log tag */
 	private static final String TAG = "ContentListFragment";
@@ -62,8 +66,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	private ArrayList<ContentType> mContentList;
 	/** listview adapter */
 	private ContentListAdapter mAdapter;
-
-	private boolean needRequest = true;
+	
+	/** position click */
+	private int mPosition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -120,40 +125,40 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		mPullRefreshListView.setAdapter(mAdapter);
 
 		mPullRefreshListView.setOnRefreshListener(this);
-		actualListView.setSelector(R.drawable.item_background_selector);
+//		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
+		actualListView.setOnItemLongClickListener(this);
 	}
 	
 	/**
 	 * is need auto request
 	 */
-	private void isNeedRequest() {
+	private boolean isNeedRequest() {
+		boolean needRequest = false;
 		if(!NetMonitor.isNetworkConnected(getActivity())){
-			needRequest = false;
-			return;
+			return needRequest;
 		}
 		long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getId() + mItemType.getName());
 		long currentTime = System.currentTimeMillis();
 		// judge cache last mofified time,in wifi state,if >four hours,need request data
-		if (currentTime - time > 4 * 60 * 1000 && NetMonitor.isWifiState(getActivity())) {
+		if (currentTime - time > 4 * 60 *60 * 1000 && NetMonitor.isWifiState(getActivity())) {
 			needRequest = true;
-		} else if (currentTime - time > 24 * 60 * 1000 && (!NetMonitor.isWifiState(getActivity()))) {
+		} else if (currentTime - time > 24 * 60 * 60 * 1000 && (!NetMonitor.isWifiState(getActivity()))) {
 			// judge cache last mofified time,not in wifi state,if >24 hours,need request data
 			needRequest = true;
 		} else {
 			//other didn't need request
 			needRequest = false;
 		}
+		return needRequest;
 	}
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		isNeedRequest();
-		if (needRequest) {
+		if (isNeedRequest()) {
 			mPullRefreshListView.setRefreshing(true);
-			needRequest = false;
 		}
 	}
 
@@ -195,17 +200,33 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+		DebugLog.i(TAG, "onItemClick()");
 		if (CommonUtils.isFastDoubleClick())
 			return;
 		if (mContentList == null)
 			return;
 
-		Intent intent = new Intent(getActivity(), DetailsActivity.class);
-		intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
-		startActivity(intent);
+//		RippleView rippleView = (RippleView) view.findViewById(R.id.ripple_view);
+//		rippleView.setOnRippleCompleteListener(new OnRippleCompleteListener() {
+//			
+//			@Override
+//			public void onComplete(RippleView rippleView) {
+//				// TODO Auto-generated method stub
+//				Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
+//				startActivity(intent);
+//			}
+//		});
 	}
-
+	
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		DebugLog.i(TAG, "onItemLongClick()");
+		return true;
+	}
+	
 	Handler mHandler = new Handler() {
 
 		@Override
@@ -293,4 +314,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		DebugLog.e(TAG, "[id:%d name:%s] onDestroyView()", mItemType.getId(), mItemType.getName());
 		super.onDestroyView();
 	}
+
+	
 }

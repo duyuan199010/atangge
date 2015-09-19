@@ -26,7 +26,8 @@
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_height"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/bottomBgColor"
         android:showDividers="beginning"
@@ -35,7 +36,7 @@
 
         <RadioButton
             android:id="@+id/radio_index"
-            style="@style/ContentFontLittle"
+            style="@style/ContentFontSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,7 +48,7 @@
 
         <RadioButton
             android:id="@+id/radio_publish"
-            style="@style/ContentFontLittle"
+            style="@style/ContentFontSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -58,7 +59,7 @@
 
         <RadioButton
             android:id="@+id/radio_collect"
-            style="@style/ContentFontLittle"
+            style="@style/ContentFontSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -69,7 +70,7 @@
 
         <RadioButton
             android:id="@+id/radio_personal"
-            style="@style/ContentFontLittle"
+            style="@style/ContentFontSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
