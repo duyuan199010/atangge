@@ -13,4 +13,5 @@
     android:headerDividersEnabled="true"
     android:smoothScrollbar="true"
     app:ptrMode = "both"
+    app:ptrAnimationStyle = "flip"
      />
