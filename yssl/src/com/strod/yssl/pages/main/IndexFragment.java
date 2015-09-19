@@ -6,6 +6,7 @@ package com.strod.yssl.pages.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,8 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.roid.ui.AbsFragment;
+import com.roid.util.CommonUtils;
 import com.strod.yssl.R;
 import com.strod.yssl.pages.main.entity.ItemType;
 import com.viewpagerindicator.TabPageIndicator;
@@ -24,7 +27,10 @@ import com.viewpagerindicator.TabPageIndicator;
 public class IndexFragment extends AbsFragment{
 	
 	/**title item type list*/
-	private List<ItemType> mItemList;
+	private ArrayList<ItemType> mItemList;
+	
+	/**drog order view*/
+	private ImageView mDragOrder;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,21 @@ public class IndexFragment extends AbsFragment{
 	}
 
 	private void initView(View rootView){
+		
+		mDragOrder = (ImageView) rootView.findViewById(R.id.drag_order);
+		mDragOrder.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(CommonUtils.isFastDoubleClick())return;
+				
+				Intent intent = new Intent(getActivity(),DragOrderGridActivity.class);
+				intent.putParcelableArrayListExtra(DragOrderGridActivity.ITEM_LIST, mItemList);
+				startActivity(intent);
+			}
+		});
+		
 		FragmentPagerAdapter adapter = new IndexAdapter(getChildFragmentManager());
 
         ViewPager pager = (ViewPager)rootView.findViewById(R.id.pager);
