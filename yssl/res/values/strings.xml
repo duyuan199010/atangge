@@ -23,4 +23,8 @@
     <string name="about_our">关于我们</string>
     <string name="setting">设　　置</string>
     <string name="exit_account">退出账号</string>
+    
+    <!-- Collect -->
+    <string name="item_top">置顶</string>
+    <string name="item_delete">删除</string>
 </resources>
