@@ -8,8 +8,8 @@ import android.support.v4.view.ViewPager;
 import com.roid.ui.FragmentControlActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
-import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.PageIndicator;
+import com.strod.yssl.view.viewpagerindicator.CirclePageIndicator;
+import com.strod.yssl.view.viewpagerindicator.PageIndicator;
 
 /**
  * user guide activity

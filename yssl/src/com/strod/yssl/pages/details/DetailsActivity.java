@@ -1,47 +1,30 @@
 package com.strod.yssl.pages.details;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
-import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.ui.FragmentControlActivity;
 import com.roid.util.CommonUtils;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
+import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
-import com.strod.yssl.pages.details.entity.Comment.CommentType;
-import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.view.TitleBar;
 /**
  * article details activity
  * @author user
  *
  */
-public class DetailsActivity extends FragmentControlActivity implements OnRefreshListener2<ListView>,OnClickListener,OnHttpRespondLisenter{
+public class DetailsActivity extends FragmentControlActivity implements OnClickListener,OnHttpRespondLisenter{
 
 	/**tag*/
 	public static final String ARTICLE="article";
 	/**ContentType instance*/
 	private ContentType mContentType;
-	
-	/**UI listview*/
-	private PullToRefreshListView mPullRefreshListView;
-	/**listview datasource*/
-	private ArrayList<CommentType> mCommentList;
-	/**listview adapter*/
-	private CommentAdapter mAdapter;
 	
 	private TitleBar mTitleBar;
 	private WebView mWebView;
@@ -67,10 +50,6 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 		
 		if(mContentType==null){
 			return;
-		}
-		
-		if(mCommentList == null){
-			mCommentList = new ArrayList<CommentType>();
 		}
 		
 		initView();
@@ -100,18 +79,9 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 		});
 		
 		
-		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_list);
-		ListView actualListView = mPullRefreshListView.getRefreshableView();
 		
-		//add webview to listview head
-		mWebView = new WebView(this);
+		mWebView = (WebView) findViewById(R.id.webview);
 		setWebView(mWebView);
-		actualListView.addHeaderView(mWebView);
-		
-		mAdapter = new CommentAdapter(this, mCommentList);
-		mPullRefreshListView.setAdapter(mAdapter);
-		
-		mPullRefreshListView.setOnRefreshListener(this);
 	}
 	
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled" })
@@ -136,17 +106,6 @@ public class DetailsActivity extends FragmentControlActivity implements OnRefres
 //		}
 	}
 
-	@Override
-	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		// TODO Auto-generated method stub
-		//not use
-	}
-
-	@Override
-	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	protected void onDestroy() {

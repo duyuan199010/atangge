@@ -13,7 +13,7 @@
         android:weightSum="7"
          >
 
-        <com.viewpagerindicator.TabPageIndicator
+        <com.strod.yssl.view.viewpagerindicator.TabPageIndicator
             android:id="@+id/indicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

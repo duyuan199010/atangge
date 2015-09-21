@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.strod.yssl.R;
-import com.strod.yssl.pages.details.entity.Comment.CommentType;
-import com.strod.yssl.pages.main.entity.Article.ContentType;
+import com.strod.yssl.bean.details.Comment.CommentType;
+import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.util.DateUtil;
 
 /**

@@ -2,8 +2,6 @@ package com.strod.yssl.pages.main;
 
 import java.util.List;
 
-import org.askerov.dynamicgrid.DynamicGridView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +9,9 @@ import android.widget.AdapterView;
 import com.roid.ui.FragmentControlActivity;
 import com.roid.util.DebugLog;
 import com.strod.yssl.R;
+import com.strod.yssl.bean.main.ItemType;
 import com.strod.yssl.clientcore.Config;
-import com.strod.yssl.pages.main.entity.ItemType;
+import com.strod.yssl.view.dynamicgrid.DynamicGridView;
 
 public class DragOrderGridActivity extends FragmentControlActivity {
 

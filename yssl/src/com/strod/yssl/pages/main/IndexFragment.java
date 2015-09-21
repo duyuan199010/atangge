@@ -4,7 +4,6 @@ package com.strod.yssl.pages.main;
  * 首页面
  */
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +20,8 @@ import android.widget.ImageView;
 import com.roid.ui.AbsFragment;
 import com.roid.util.CommonUtils;
 import com.strod.yssl.R;
-import com.strod.yssl.pages.main.entity.ItemType;
-import com.viewpagerindicator.TabPageIndicator;
+import com.strod.yssl.bean.main.ItemType;
+import com.strod.yssl.view.viewpagerindicator.TabPageIndicator;
 
 public class IndexFragment extends AbsFragment{
 	

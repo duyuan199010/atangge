@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.strod.yssl.R;
+import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
-import com.strod.yssl.pages.main.entity.Article.ContentType;
 import com.strod.yssl.util.DateUtil;
 
 /**

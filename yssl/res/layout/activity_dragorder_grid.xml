@@ -12,7 +12,7 @@
         android:background="@color/title_bg_color"
         />
     
-    <org.askerov.dynamicgrid.DynamicGridView
+    <com.strod.yssl.view.dynamicgrid.DynamicGridView
         android:id="@+id/dynamic_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

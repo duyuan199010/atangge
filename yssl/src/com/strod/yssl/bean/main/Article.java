@@ -1,4 +1,4 @@
-package com.strod.yssl.pages.details.entity;
+package com.strod.yssl.bean.main;
 
 import java.util.List;
 
@@ -6,25 +6,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.strod.yssl.bean.Result;
-/**
- * comment
- * @author user
- *
- */
-public class Comment extends Result {
 
-	private List<CommentType> data;
+public class Article extends Result {
 
-	public Comment() {
+	private List<ContentType> data;
+
+	public Article() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<CommentType> getData() {
+	public List<ContentType> getData() {
 		return data;
 	}
 
-	public void setData(List<CommentType> data) {
+	public void setData(List<ContentType> data) {
 		this.data = data;
 	}
 
@@ -33,7 +29,7 @@ public class Comment extends Result {
 		return "Article [data=" + data + "]";
 	}
 
-	public Comment(int ret_code, String ret_msg) {
+	public Article(int ret_code, String ret_msg) {
 		super(ret_code, ret_msg);
 		// TODO Auto-generated constructor stub
 	}
@@ -43,7 +39,7 @@ public class Comment extends Result {
 	 * @author User
 	 *
 	 */
-	public static class CommentType implements Parcelable {
+	public static class ContentType implements Parcelable {
 
 		/** id */
 		private int id;
@@ -62,11 +58,11 @@ public class Comment extends Result {
 		/** content url */
 		private String contentUrl;
 
-		public CommentType() {
+		public ContentType() {
 			super();
 		}
 
-		public CommentType(Parcel in) {
+		public ContentType(Parcel in) {
 			id = in.readInt();
 			imgUrl = in.readString();
 			title = in.readString();
@@ -77,7 +73,7 @@ public class Comment extends Result {
 			contentUrl = in.readString();
 		}
 
-		public CommentType(int id, String imgUrl, String title, String content, int collectNum, int praiseNum, long time, String contentUrl) {
+		public ContentType(int id, String imgUrl, String title, String content, int collectNum, int praiseNum, long time, String contentUrl) {
 			super();
 			this.id = id;
 			this.imgUrl = imgUrl;
@@ -177,15 +173,15 @@ public class Comment extends Result {
 			dest.writeString(contentUrl);
 		}
 
-		public static final Parcelable.Creator<CommentType> CREATOR = new Creator<CommentType>() {
+		public static final Parcelable.Creator<ContentType> CREATOR = new Creator<ContentType>() {
 			@Override
-			public CommentType[] newArray(int size) {
-				return new CommentType[size];
+			public ContentType[] newArray(int size) {
+				return new ContentType[size];
 			}
 
 			@Override
-			public CommentType createFromParcel(Parcel in) {
-				return new CommentType(in);
+			public ContentType createFromParcel(Parcel in) {
+				return new ContentType(in);
 			}
 		};
 	}

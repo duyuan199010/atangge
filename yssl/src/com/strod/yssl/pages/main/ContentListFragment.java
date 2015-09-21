@@ -3,7 +3,6 @@ package com.strod.yssl.pages.main;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.roid.core.HttpManager;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.ui.AbsFragment;
@@ -27,16 +23,19 @@ import com.roid.util.JsonParser;
 import com.roid.util.NetMonitor;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
+import com.strod.yssl.bean.main.Article;
+import com.strod.yssl.bean.main.Article.ContentType;
+import com.strod.yssl.bean.main.ItemType;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.clientcore.HttpRequestId;
 import com.strod.yssl.clientcore.HttpRequestURL;
 import com.strod.yssl.pages.details.DetailsActivity;
-import com.strod.yssl.pages.main.entity.Article;
-import com.strod.yssl.pages.main.entity.Article.ContentType;
-import com.strod.yssl.pages.main.entity.ItemType;
 import com.strod.yssl.util.DateUtil;
 import com.strod.yssl.view.RippleView;
 import com.strod.yssl.view.RippleView.OnRippleCompleteListener;
+import com.strod.yssl.view.pulltorefresh.PullToRefreshBase;
+import com.strod.yssl.view.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
+import com.strod.yssl.view.pulltorefresh.PullToRefreshListView;
 
 public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener,OnItemLongClickListener, OnHttpRespondLisenter {
 
@@ -67,9 +66,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	/** listview adapter */
 	private ContentListAdapter mAdapter;
 	
-	/** position click */
-	private int mPosition;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,7 +123,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		mPullRefreshListView.setOnRefreshListener(this);
 //		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
-		actualListView.setOnItemLongClickListener(this);
+//		actualListView.setOnItemLongClickListener(this);
+		
 	}
 	
 	/**
@@ -207,24 +204,24 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		if (mContentList == null)
 			return;
 
-//		RippleView rippleView = (RippleView) view.findViewById(R.id.ripple_view);
-//		rippleView.setOnRippleCompleteListener(new OnRippleCompleteListener() {
-//			
-//			@Override
-//			public void onComplete(RippleView rippleView) {
-//				// TODO Auto-generated method stub
-//				Intent intent = new Intent(getActivity(), DetailsActivity.class);
-//				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
-//				startActivity(intent);
-//			}
-//		});
+		RippleView rippleView = (RippleView) view.findViewById(R.id.ripple_view);
+		rippleView.setOnRippleCompleteListener(new OnRippleCompleteListener() {
+			
+			@Override
+			public void onComplete(RippleView rippleView) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), DetailsActivity.class);
+				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
+				startActivity(intent);
+			}
+		});
 	}
 	
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
 		DebugLog.i(TAG, "onItemLongClick()");
-		return true;
+		return false;
 	}
 	
 	Handler mHandler = new Handler() {

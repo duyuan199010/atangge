@@ -1,4 +1,4 @@
-package com.strod.yssl.pages.main.entity;
+package com.strod.yssl.bean.main;
 
 import android.os.Parcel;
 import android.os.Parcelable;
