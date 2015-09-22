@@ -42,7 +42,7 @@ public class Article extends Result {
 	public static class ContentType implements Parcelable {
 
 		/** id */
-		private int id;
+		private int articleId;
 		/** img url */
 		private String imgUrl;
 		/** title */
@@ -63,7 +63,7 @@ public class Article extends Result {
 		}
 
 		public ContentType(Parcel in) {
-			id = in.readInt();
+			articleId = in.readInt();
 			imgUrl = in.readString();
 			title = in.readString();
 			content = in.readString();
@@ -73,9 +73,9 @@ public class Article extends Result {
 			contentUrl = in.readString();
 		}
 
-		public ContentType(int id, String imgUrl, String title, String content, int collectNum, int praiseNum, long time, String contentUrl) {
+		public ContentType(int articleId, String imgUrl, String title, String content, int collectNum, int praiseNum, long time, String contentUrl) {
 			super();
-			this.id = id;
+			this.articleId = articleId;
 			this.imgUrl = imgUrl;
 			this.title = title;
 			this.content = content;
@@ -85,12 +85,12 @@ public class Article extends Result {
 			this.contentUrl = contentUrl;
 		}
 
-		public int getId() {
-			return id;
+		public int getArticleId() {
+			return articleId;
 		}
 
-		public void setId(int id) {
-			this.id = id;
+		public void setArticleId(int articleId) {
+			this.articleId = articleId;
 		}
 
 		public String getImgUrl() {
@@ -151,7 +151,7 @@ public class Article extends Result {
 
 		@Override
 		public String toString() {
-			return "ContentType [id=" + id + ", imgUrl=" + imgUrl + ", title=" + title + ", content=" + content + ", collectNum=" + collectNum + ", praiseNum=" + praiseNum + ", time=" + time
+			return "ContentType [articleId=" + articleId + ", imgUrl=" + imgUrl + ", title=" + title + ", content=" + content + ", collectNum=" + collectNum + ", praiseNum=" + praiseNum + ", time=" + time
 					+ ", contentUrl=" + contentUrl + "]";
 		}
 
@@ -163,7 +163,7 @@ public class Article extends Result {
 
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeInt(id);
+			dest.writeInt(articleId);
 			dest.writeString(imgUrl);
 			dest.writeString(title);
 			dest.writeString(content);

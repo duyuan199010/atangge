@@ -28,6 +28,11 @@ public class Config extends AbsConfig {
 
 	/** config instance */
 	private static Config mInstance;
+	
+	/**default list pageSize*/
+	public static final int PAGE_SIZE = 15;
+	public static final int REFRESH = 0;
+	public static final int LOAD_MORE = 1;
 
 	private static final String PREFERENCE_NAME = "atangge";
 	private SharedPreferences mSharedPreferences;

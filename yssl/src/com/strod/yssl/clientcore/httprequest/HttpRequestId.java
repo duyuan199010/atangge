@@ -1,4 +1,4 @@
-package com.strod.yssl.clientcore;
+package com.strod.yssl.clientcore.httprequest;
 /**
  * http请求编号，用于客户端标识不同的请求
  * @author user

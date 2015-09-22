@@ -22,6 +22,7 @@ import com.roid.net.http.AsyncHttpResponseHandler;
 import com.roid.net.http.BinaryHttpResponseHandler;
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.net.http.RequestParams;
+import com.roid.util.DebugLog;
 import com.roid.util.NetMonitor;
 
 /**
@@ -31,6 +32,8 @@ import com.roid.util.NetMonitor;
  */
 public class HttpManager {
 
+	public static final String TAG = "HttpManager";
+	
 	/**connection time out*/
 	public static final int TIME_OUT = 15*1000;
 	
@@ -169,6 +172,7 @@ public class HttpManager {
 			}
 			return;
 		}
+		DebugLog.i(TAG, "request:"+params.toString());
 		httpClient.post(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler(){
 
 			@Override
@@ -258,6 +262,7 @@ public class HttpManager {
 			return;
 		}
 		try {
+			DebugLog.i(TAG, "requestJson:"+requestJson);
 			StringEntity entity = new StringEntity(requestJson, HTTP.UTF_8);
 			httpClient.post(context, AbsConfig.HOST+path, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler(){
 				

@@ -10,7 +10,7 @@ import android.os.Parcelable;
 public class ItemType implements Parcelable {
 
 
-	private int id;
+	private int itemId;
 	private String name;
 
 	public ItemType() {
@@ -21,22 +21,22 @@ public class ItemType implements Parcelable {
 	public ItemType(Parcel in) {
 		super();
 		// TODO Auto-generated constructor stub
-		id = in.readInt();
+		itemId = in.readInt();
 		name = in.readString();
 	}
 
-	public ItemType(int id, String name) {
+	public ItemType(int itemId, String name) {
 		super();
-		this.id = id;
+		this.itemId = itemId;
 		this.name = name;
 	}
 
-	public int getId() {
-		return id;
+	public int getItemId() {
+		return itemId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getName() {
@@ -49,7 +49,7 @@ public class ItemType implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "ItemType [id=" + id + ", name=" + name + "]";
+		return "ItemType [itemId=" + itemId + ", name=" + name + "]";
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ItemType implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(id);
+		dest.writeInt(itemId);
 		dest.writeString(name);
 	}
 

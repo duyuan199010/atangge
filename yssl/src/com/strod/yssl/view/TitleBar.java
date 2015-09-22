@@ -23,13 +23,13 @@ import android.widget.TextView;
  */
 public class TitleBar extends RelativeLayout {
 
-	private View mContainer;
+	protected View mContainer;
 	/** 左边按钮 */
-	public ImageButton mLefttBtn;
+	protected ImageButton mLefttBtn;
 	/** 中间标题 */
-	public TextView mMiddleTitle;
+	protected TextView mMiddleTitle;
 	/** 右边按钮 */
-	public Button mRightBtn; //
+	protected Button mRightBtn; //
 	private Context context;
 
 	public TitleBar(Context context) {

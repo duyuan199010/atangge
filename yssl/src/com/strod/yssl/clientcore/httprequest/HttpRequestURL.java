@@ -1,4 +1,4 @@
-package com.strod.yssl.clientcore;
+package com.strod.yssl.clientcore.httprequest;
 
 /**
  * http请求地址

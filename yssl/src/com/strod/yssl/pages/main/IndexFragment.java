@@ -41,15 +41,12 @@ public class IndexFragment extends AbsFragment{
 		View rootView = inflater.inflate(R.layout.fragment_index, container, false);
 		if(mItemList == null){
 			mItemList = new ArrayList<ItemType>();
-			mItemList.add(new ItemType(0, "最热"));
-			mItemList.add(new ItemType(1, "最新"));
-			mItemList.add(new ItemType(2, "美容"));
-			mItemList.add(new ItemType(3, "养生"));
-			mItemList.add(new ItemType(4, "去火"));
-			mItemList.add(new ItemType(5, "减肥"));
-			mItemList.add(new ItemType(6, "祛痘"));
-			mItemList.add(new ItemType(7, "清热"));
-			mItemList.add(new ItemType(8, "解毒"));
+			mItemList.add(new ItemType(41, "最热"));
+			mItemList.add(new ItemType(42, "最新"));
+			mItemList.add(new ItemType(43, "美容"));
+			mItemList.add(new ItemType(44, "养生"));
+			mItemList.add(new ItemType(45, "去火"));
+			mItemList.add(new ItemType(46, "减肥"));
 		}
 		initView(rootView);
 		return rootView;

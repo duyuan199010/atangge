@@ -26,4 +26,6 @@
     <dimen name="header_footer_top_bottom_padding">12dp</dimen>
     
     <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
+    
+    <dimen name="delete_action_len">120dip</dimen>
 </resources>

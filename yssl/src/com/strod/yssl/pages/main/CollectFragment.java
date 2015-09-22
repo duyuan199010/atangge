@@ -6,25 +6,32 @@ package com.strod.yssl.pages.main;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
 import com.roid.util.JsonParser;
+import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article;
 import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.view.swipelistview.ListViewonSingleTapUpListenner;
+import com.strod.yssl.view.swipelistview.OnDeleteListioner;
 import com.strod.yssl.view.swipelistview.SwipeListView;
 
-public class CollectFragment extends AbsFragment{
+public class CollectFragment extends AbsFragment implements OnDeleteListioner,OnItemClickListener{
 	
 	/**UI listview*/
 	private SwipeListView mSwipeListView;
@@ -72,9 +79,21 @@ public class CollectFragment extends AbsFragment{
 		mSwipeListView = (SwipeListView) rootView.findViewById(R.id.swipe_list_view);
 		mCollectAdapter = new CollectAdapter();
 		mSwipeListView.setAdapter(mCollectAdapter);
+		mSwipeListView.setDeleteListioner(this);
+		mSwipeListView.setOnItemClickListener(this);
 	}
 	
+	@Override
+	public boolean isCandelete(int position) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		Toaster.showDefToast(getActivity(), "position"+position);
+	}
 	
 	@Override
 	public void onDestroyView() {
@@ -111,8 +130,6 @@ public class CollectFragment extends AbsFragment{
 				holder = new ViewHolder();
 				convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_collect_list, null);
 				
-				holder.mFront = (RelativeLayout) convertView.findViewById(R.id.front);
-				
 				holder.mImage = (ImageView) convertView.findViewById(R.id.content_img);
 				holder.mTitle = (TextView) convertView.findViewById(R.id.content_title);
 				holder.mContent = (TextView) convertView.findViewById(R.id.content_detail);
@@ -124,12 +141,6 @@ public class CollectFragment extends AbsFragment{
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			if (Config.getInstance().isNightMode) {
-				holder.mFront.setBackgroundColor(getResources().getColor(R.color.night_bg_color));
-			} else {
-				holder.mFront.setBackgroundColor(getResources().getColor(R.color.bg_color));
-			}
-			((SwipeListView)parent).recycle(convertView, position);
 			
 			ContentType contentType= mContentList.get(position);
 			if(contentType!=null){
@@ -144,6 +155,7 @@ public class CollectFragment extends AbsFragment{
 						// TODO Auto-generated method stub
 						ContentType temp = mContentList.remove(position);
 						mContentList.add(0, temp);
+						mSwipeListView.resetItem();
 						notifyDataSetChanged();
 					}
 				});
@@ -154,6 +166,7 @@ public class CollectFragment extends AbsFragment{
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						mContentList.remove(position);
+						mSwipeListView.deleteItem();
 						notifyDataSetChanged();
 					}
 				});
@@ -162,8 +175,6 @@ public class CollectFragment extends AbsFragment{
 		}
 		
 		class ViewHolder{
-			RelativeLayout mFront;
-			
 			ImageView mImage;
 			TextView mTitle;
 			TextView mContent;
@@ -174,4 +185,5 @@ public class CollectFragment extends AbsFragment{
 			
 		}
 	}
+
 }
