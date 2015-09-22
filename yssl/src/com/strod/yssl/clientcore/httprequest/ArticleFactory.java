@@ -34,28 +34,18 @@ public class ArticleFactory implements Provider{
 		this.time = time;
 	}
 
-
-
 	@Override
 	public Parameters product() {
-		return new ArticleParams(itemId,pageSize,refreshType,time);
+		return new ArticleParams();
 	}
 	
-	public static class ArticleParams implements Parameters{
+	/**
+	 * inner class
+	 * @author user
+	 *
+	 */
+	class ArticleParams implements Parameters{
 		
-		private int itemId;
-		private int pageSize;
-		private int refreshType;
-		private long time;
-
-		public ArticleParams(int itemId, int pageSize, int refreshType, long time) {
-			super();
-			this.itemId = itemId;
-			this.pageSize = pageSize;
-			this.refreshType = refreshType;
-			this.time = time;
-		}
-
 		@Override
 		public RequestParams paramters() {
 			RequestParams requestParams = new RequestParams();
@@ -67,4 +57,5 @@ public class ArticleFactory implements Provider{
 		}
 
 	}
+	
 }
