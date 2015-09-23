@@ -172,6 +172,7 @@ public class HttpManager {
 			}
 			return;
 		}
+		DebugLog.i(TAG, "url:"+AbsConfig.HOST+path);
 		DebugLog.i(TAG, "request:"+params.toString());
 		httpClient.post(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler(){
 
@@ -194,6 +195,44 @@ public class HttpManager {
 					e.printStackTrace();
 					if(call!=null){
 						call.onHttpFailure(taskId, e.getMessage());
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable error, String content) {
+				super.onFailure(error, content);
+				if(call!=null){
+					call.onHttpFailure(taskId, error.getMessage());
+				}
+			}
+			
+		});
+		
+	}
+	
+	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,RequestParams params) {
+		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
+			if(call!=null){
+				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
+			}
+			return;
+		}
+		DebugLog.i(TAG, "url:"+AbsConfig.HOST+path);
+		DebugLog.i(TAG, "request:"+params.toString());
+		httpClient.post(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, content);
+				if (statusCode == 200) {
+					if(call!=null){
+						call.onHttpSuccess(taskId, null, content);
+					}
+				} else {
+					if(call!=null){
+						call.onHttpFailure(taskId, "statusCode:"+statusCode);
 					}
 				}
 			}

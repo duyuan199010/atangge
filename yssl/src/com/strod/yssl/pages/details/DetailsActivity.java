@@ -1,39 +1,49 @@
 package com.strod.yssl.pages.details;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.roid.net.http.OnHttpRespondLisenter;
 import com.roid.ui.FragmentControlActivity;
 import com.roid.util.CommonUtils;
+import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.TitleBar;
+
 /**
  * article details activity
+ * 
  * @author user
  *
  */
-public class DetailsActivity extends FragmentControlActivity implements OnClickListener,OnHttpRespondLisenter{
+public class DetailsActivity extends FragmentControlActivity implements OnClickListener, OnHttpRespondLisenter {
 
-	/**tag*/
-	public static final String ARTICLE="article";
-	/**ContentType instance*/
+	/** tag */
+	public static final String ARTICLE = "article";
+	/** ContentType instance */
 	private ContentType mContentType;
-	
+
 	private TitleBar mTitleBar;
 	private WebView mWebView;
-	
-	class JavaScriptInterface{
-		public void onImageClick(String imageUrl){
+
+	final class JavaScriptInterface {
+		public void onImageClick(String imageUrl) {
 			Toaster.showDefToast(getApplicationContext(), imageUrl);
 		}
+
+		public void showSource(String html) {
+			DebugLog.i("HTML", html);
+		}
 	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -44,14 +54,14 @@ public class DetailsActivity extends FragmentControlActivity implements OnClickL
 			setTheme(R.style.DayTheme);
 		}
 		setContentView(R.layout.activity_details);
-		if(getIntent()!=null){
+		if (getIntent() != null) {
 			mContentType = getIntent().getParcelableExtra(ARTICLE);
 		}
-		
-		if(mContentType==null){
+
+		if (mContentType == null) {
 			return;
 		}
-		
+
 		initView();
 	}
 
@@ -60,7 +70,7 @@ public class DetailsActivity extends FragmentControlActivity implements OnClickL
 		mTitleBar.setLeftImageBtnVisibility(View.VISIBLE);
 		mTitleBar.setLeftImageBtnBackground(R.drawable.back_selector);
 		mTitleBar.setLeftImageBtnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -70,58 +80,87 @@ public class DetailsActivity extends FragmentControlActivity implements OnClickL
 		mTitleBar.setMiddleText(mContentType.getTitle());
 		mTitleBar.setRightButtonText("点赞");
 		mTitleBar.setRightBtnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		
-		
+
 		mWebView = (WebView) findViewById(R.id.webview);
 		setWebView(mWebView);
 	}
-	
+
 	@SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled" })
-	private void setWebView(WebView mWebView){
+	private void setWebView(WebView mWebView) {
 		mWebView.setBackgroundResource(R.color.white);
-		mWebView.getSettings().setJavaScriptEnabled(true);  
-	    mWebView.addJavascriptInterface(new JavaScriptInterface(), "js");  
+		mWebView.getSettings().setJavaScriptEnabled(true);
+		mWebView.addJavascriptInterface(new JavaScriptInterface(), "js");
+		mWebView.setWebViewClient(new MyWebViewClient());
 		mWebView.loadUrl(mContentType.getContentUrl());
+	}
+
+	final class MyWebViewClient extends WebViewClient {
+
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
+
+		@Override
+		public void onPageStarted(WebView view, String url, Bitmap favicon) {
+			// TODO Auto-generated method stub
+			super.onPageStarted(view, url, favicon);
+		}
+
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			// TODO Auto-generated method stub
+			view.loadUrl("javascript:window.js.showSource('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+			super.onPageFinished(view, url);
+		}
+
+		@Override
+		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+			// TODO Auto-generated method stub
+			super.onReceivedError(view, errorCode, description, failingUrl);
+		}
+
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if(CommonUtils.isFastDoubleClick())return;
-//		switch (v.getId()) {
-//		case value:
-//			
-//			break;
-//
-//		default:
-//			break;
-//		}
+		if (CommonUtils.isFastDoubleClick())
+			return;
+		// switch (v.getId()) {
+		// case value:
+		//
+		// break;
+		//
+		// default:
+		// break;
+		// }
 	}
 
-	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		mWebView.destroy();
 		super.onDestroy();
 	}
 
 	@Override
 	public void onHttpSuccess(int taskId, Object obj, String json) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onHttpFailure(int taskId, String message) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
