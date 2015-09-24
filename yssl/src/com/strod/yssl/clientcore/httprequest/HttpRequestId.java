@@ -1,13 +1,13 @@
 package com.strod.yssl.clientcore.httprequest;
 /**
- * http请求编号，用于客户端标识不同的请求
+ * http request id,use by diff to client's request
  * @author user
  *
  */
 public interface HttpRequestId {
 
-	/**内容列表刷新*/
+	/**article list refresh*/
 	public static final int CONTENT_LIST_REFRESH = 0x0001;
-	/**内容列表加载更多*/
+	/**article list loadmore*/
 	public static final int CONTENT_LIST_LOADMORE = 0x0002;
 }

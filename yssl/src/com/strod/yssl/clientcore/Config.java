@@ -23,6 +23,7 @@ import com.roid.util.DebugLog;
 import com.strod.yssl.MyApplication;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.cache.DiskLruCache;
+import com.strod.yssl.clientcore.httprequest.HttpRequestURL;
 
 public class Config extends AbsConfig {
 
@@ -79,7 +80,7 @@ public class Config extends AbsConfig {
 	 */
 	public void init() {
 		super.mAllowDebug = true;
-		super.HOST = "http://www.09jike.com";
+		super.HOST = HttpRequestURL.HOST;
 		
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		initImageLoader();

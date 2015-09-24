@@ -1,13 +1,16 @@
 package com.strod.yssl.clientcore.httprequest;
 
 /**
- * http请求地址
+ * http request url
  * @author user
  *
  */
 public interface HttpRequestURL {
 
-	/**内容列表页请求*/
+	/**host*/
+	public static final String HOST = "http://www.09jike.com";
+	/**article list url*/
 	public static final String CONTENT_LIST = "/Android/Index/article";
+	/**update grade url*/
 	public static final String UPGRADE = "/Home/Upgrade/index";
 }
