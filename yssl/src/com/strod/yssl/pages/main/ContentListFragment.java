@@ -38,7 +38,9 @@ import com.strod.yssl.view.RippleView;
 import com.strod.yssl.view.RippleView.OnRippleCompleteListener;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshBase;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
+import com.strod.yssl.view.pulltorefresh.PullToRefreshBase.State;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshListView;
+import com.strod.yssl.view.pulltorefresh.extras.SoundPullEventListener;
 
 public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener, OnHttpRespondLisenter {
 
@@ -107,7 +109,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		JsonParser<Article> parser = new JsonParser<Article>();
 		Article article = parser.parseJson(json, Article.class);
 		mContentList.addAll(article.getData());
-		DebugLog.e(TAG, "[id:%d name:%s] read cache size:%d", mItemType.getItemId(), mItemType.getName(), mContentList.size());
+		DebugLog.i(TAG, "[id:%d name:%s] read cache size:%d", mItemType.getItemId(), mItemType.getName(), mContentList.size());
 	}
 
 
@@ -126,6 +128,16 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		mPullRefreshListView.setOnRefreshListener(this);
 //		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
+		
+		
+		//Add Sound Event Listener if refresh sound true,default is false
+		if(Config.getInstance().refreshSound){
+			SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(getActivity());
+			soundListener.addSoundEvent(State.PULL_TO_REFRESH, R.raw.pull_event);
+			soundListener.addSoundEvent(State.RESET, R.raw.reset_sound);
+			soundListener.addSoundEvent(State.REFRESHING, R.raw.refreshing_sound);
+			mPullRefreshListView.setOnPullEventListener(soundListener);
+		}
 		
 	}
 	
@@ -190,7 +202,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.LOAD_MORE,getLoadMoreTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 
 				articleFactory.product().paramters());
-		
 		
 	}
 	
@@ -267,13 +278,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		Article article = new Article();
 		article.setRet_code(0);
 		article.setRet_msg("success");
-		// cache CACHE_SIZE data most
+		// save CACHE_SIZE data most
 		if (mContentList.size() > CACHE_SIZE) {
 			article.setData(mContentList.subList(0, CACHE_SIZE));
 		} else {
 			article.setData(mContentList);
 		}
-		DebugLog.e(TAG, "[id:%d name:%s] save cache size:%d", mItemType.getItemId(), mItemType.getName(), article.getData().size());
+		DebugLog.i(TAG, "[id:%d name:%s] save cache size:%d", mItemType.getItemId(), mItemType.getName(), article.getData().size());
 
 		String cacheJson = parser.toJson(article);
 		// save cache data
@@ -286,7 +297,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		// Call onRefreshComplete when the list has been refreshed.
 		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
 		try {
-			DebugLog.d(TAG,json);
+			DebugLog.i(TAG,json);
 			Article article = new Gson().fromJson(json, Article.class);
 			if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
 				//if haven't refresh data,return

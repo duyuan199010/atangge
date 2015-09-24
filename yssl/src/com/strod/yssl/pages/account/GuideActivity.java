@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.roid.ui.FragmentControlActivity;
+import com.roid.ui.AbsFragmentActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.viewpagerindicator.CirclePageIndicator;
@@ -18,7 +18,7 @@ import com.strod.yssl.view.viewpagerindicator.PageIndicator;
  * @author user
  *
  */
-public class GuideActivity extends FragmentControlActivity {
+public class GuideActivity extends AbsFragmentActivity {
 	
 	ViewPager mPager;
 	PageIndicator mIndicator;

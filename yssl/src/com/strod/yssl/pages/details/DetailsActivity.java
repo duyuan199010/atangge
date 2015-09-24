@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.roid.net.http.OnHttpRespondLisenter;
-import com.roid.ui.FragmentControlActivity;
+import com.roid.ui.AbsFragmentActivity;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
@@ -24,7 +24,7 @@ import com.strod.yssl.view.TitleBar;
  * @author user
  *
  */
-public class DetailsActivity extends FragmentControlActivity implements OnClickListener, OnHttpRespondLisenter {
+public class DetailsActivity extends AbsFragmentActivity implements OnClickListener, OnHttpRespondLisenter {
 
 	/** tag */
 	public static final String ARTICLE = "article";

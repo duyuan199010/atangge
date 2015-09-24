@@ -8,17 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.roid.ui.AbsFragment;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
-import com.strod.yssl.view.SlipSwitch;
-import com.strod.yssl.view.SlipSwitch.OnSwitchListener;
+import com.strod.yssl.view.SwitchButton;
 
 public class PersonalFragment extends AbsFragment implements OnClickListener{
 	
 	/**day night mode*/
-	private SlipSwitch mNightModeSwitchButton;
+	private SwitchButton mNightModeSwitchButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,22 +36,21 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 	}
 
 	private void initView(View rootView){
-		mNightModeSwitchButton = (SlipSwitch) rootView.findViewById(R.id.night_mode_switch_button);
-		mNightModeSwitchButton.setSwitchState(Config.getInstance().isNightMode);
-		mNightModeSwitchButton.setOnSwitchListener(new OnSwitchListener() {
+		mNightModeSwitchButton = (SwitchButton) rootView.findViewById(R.id.night_mode_switch_button);
+		mNightModeSwitchButton.setChecked(Config.getInstance().isNightMode);
+		mNightModeSwitchButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
-			public void onSwitched(boolean isSwitchOn) {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				Config.getInstance().setNightMode(isSwitchOn);
+				Config.getInstance().setNightMode(isChecked);
 				if(getActivity()!=null){
 					((MainActivity)getActivity()).switchTheme();
 				}
 			}
 		});
+		
 	}
-	
-	
 	
 	@Override
 	public void onDestroyView() {

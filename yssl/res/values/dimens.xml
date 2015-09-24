@@ -27,5 +27,8 @@
     
     <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
     
-    <dimen name="delete_action_len">120dip</dimen>
+    <dimen name="delete_action_len">140dip</dimen>
+    
+    <dimen name="switch_button_width">50dp</dimen>
+    <dimen name="switch_button_height">30dp</dimen>
 </resources>

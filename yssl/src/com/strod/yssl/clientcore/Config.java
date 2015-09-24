@@ -29,18 +29,31 @@ public class Config extends AbsConfig {
 	/** config instance */
 	private static Config mInstance;
 	
-	/**default list pageSize*/
+	/**default list pageSize & refresh & loadmore*/
 	public static final int PAGE_SIZE = 15;
 	public static final int REFRESH = 0;
 	public static final int LOAD_MORE = 1;
 
+	/**shared preferences name*/
 	private static final String PREFERENCE_NAME = "atangge";
 	private SharedPreferences mSharedPreferences;
 	
+	/**guide*/
 	private static final String GUIDE = "guide";
+	
+	/**night mode*/
 	private static final String NIGHT_MODE = "night_mode";
 	public boolean isNightMode = false;
 	
+	/**unWifi download image*/
+	private static final String UNWIFI_DOWNLOAD = "unwifi_download";
+	public boolean unWifiDownload = true;
+	
+	/**refresh sound*/
+	private static final String REFRESH_SOUND = "refresh_sound";
+	public boolean refreshSound = false;
+	
+	/**image display options*/
 	private DisplayImageOptions mOptions;
 	private DisplayImageOptions mRoundOptions;
 	/**
@@ -72,9 +85,14 @@ public class Config extends AbsConfig {
 		initImageLoader();
 		getContentDiskCache(AbsApplication.getApplication());
 		
-		//
+		//init night mode
 		isNightMode = getNightMode();
 		
+		//init unWifi download image
+		unWifiDownload = getUnWifiDownload();
+		
+		//init refresh mode
+		refreshSound = getRefreshSound();
 	}
 	
 	/**
@@ -145,6 +163,42 @@ public class Config extends AbsConfig {
 	}
 	
 	/**
+	 * set unwifi download image
+	 */
+	public void setUnWifiDownload(boolean unWifiDownload){
+		Editor editor = mSharedPreferences.edit();
+		editor.putBoolean(UNWIFI_DOWNLOAD, unWifiDownload);
+		editor.commit();
+		this.unWifiDownload = unWifiDownload;
+	}
+	
+	/**
+	 * get unwifi download image
+	 * @return true if night unwifi download image,otherwise false
+	 */
+	public boolean getUnWifiDownload(){
+		return mSharedPreferences.getBoolean(UNWIFI_DOWNLOAD, true);
+	}
+	
+	/**
+	 * set refresh sound
+	 */
+	public void setRefreshSound(boolean haveSound){
+		Editor editor = mSharedPreferences.edit();
+		editor.putBoolean(REFRESH_SOUND, haveSound);
+		editor.commit();
+		this.refreshSound = haveSound;
+	}
+	
+	/**
+	 * get refresh sound
+	 * @return true if night unwifi download image,otherwise false
+	 */
+	public boolean getRefreshSound(){
+		return mSharedPreferences.getBoolean(REFRESH_SOUND, false);
+	}
+	
+	/**
 	 * get disk cache file
 	 * @param context
 	 * @param uniqueName
@@ -190,12 +244,13 @@ public class Config extends AbsConfig {
 				mContentDiskLruCache = DiskLruCache.open(cacheDir, getAppVersion(context), 1, CONTENT_CACHE_SIZE);
 			} catch (IOException e) {
 				e.printStackTrace();
+				DebugLog.e(TAG, "create ContentCache error");
 			}
 		}
 		return mContentDiskLruCache;
 	}
 
-	public String hashKeyForDisk(String key) {
+	private String hashKeyForDisk(String key) {
 		String cacheKey;
 		try {
 			final MessageDigest mDigest = MessageDigest.getInstance("MD5");
@@ -207,6 +262,12 @@ public class Config extends AbsConfig {
 		return cacheKey;
 	}
 	
+	/**
+	 * get cache last modified time
+	 * @param context
+	 * @param uniqu
+	 * @return
+	 */
 	public long getCacheLastModified(Context context,String uniqu){
 		File cacheDir = getDiskCacheDir(context, CONTENT_CACHE_DIR);
 		if (!cacheDir.exists()) {
@@ -234,7 +295,11 @@ public class Config extends AbsConfig {
 	}
 
 	
-
+	/**
+	 * write content cache
+	 * @param uniqu
+	 * @param json
+	 */
 	public void writeContentCache(final String uniqu, final String json) {
 		if(json==null||json.equals("")){
 			return;
@@ -255,11 +320,17 @@ public class Config extends AbsConfig {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					DebugLog.e(TAG, uniqu+" writeContentCache() error");
 				}
 			}
 		}).start();
 	}
 
+	/**
+	 * read content cache
+	 * @param uniqu
+	 * @return
+	 */
 	public String readContentCache(String uniqu) {
 		String json = null;
 		try {
@@ -270,31 +341,44 @@ public class Config extends AbsConfig {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			DebugLog.e(TAG, uniqu+" readContentCache() error");
 		}
 		return json;
 		
 	}
 	
+	/**
+	 * clear content chache
+	 */
 	public void clearContentCache(){
-			try {
-				mContentDiskLruCache.delete();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			mContentDiskLruCache.delete();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			DebugLog.e(TAG, "clearContentCache() error");
+		}
 	}
 	
-	public void getContentCache(){
-		mContentDiskLruCache.size();
+	/**
+	 * get contetn cache size
+	 */
+	public long getContentCacheSize(){
+		if(mContentDiskLruCache==null)return 0;
+		return mContentDiskLruCache.size();
 	}
 	
+	/**
+	 * close content cache
+	 */
 	public void closeContentCache(){
-		DebugLog.i(TAG, "closeContentCache()...");
 		try {
 			mContentDiskLruCache.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			DebugLog.e(TAG, "closeContentCache() error");
 		}
+		DebugLog.i(TAG, "closeContentCache()...");
 	}
 }

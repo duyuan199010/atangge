@@ -10,8 +10,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.roid.ui.AbsFragment;
+import com.roid.ui.AbsFragmentActivity;
 import com.roid.ui.ActivityManager;
-import com.roid.ui.FragmentControlActivity;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
@@ -19,7 +19,7 @@ import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.TitleBar;
 
-public class MainActivity extends FragmentControlActivity implements OnCheckedChangeListener {
+public class MainActivity extends AbsFragmentActivity implements OnCheckedChangeListener {
 
 	// Debugging
 	private static final String TAG = "MainActivity";

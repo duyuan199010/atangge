@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class FragmentControlActivity extends FragmentActivity {
+public class AbsFragmentActivity extends FragmentActivity {
 	private List<Runnable> mPendingActions = null;
 	private boolean mFragActResumed = false;
 

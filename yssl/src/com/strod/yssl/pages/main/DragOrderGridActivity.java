@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.roid.ui.FragmentControlActivity;
+import com.roid.ui.AbsFragmentActivity;
 import com.roid.util.DebugLog;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.ItemType;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.dynamicgrid.DynamicGridView;
 
-public class DragOrderGridActivity extends FragmentControlActivity {
+public class DragOrderGridActivity extends AbsFragmentActivity {
 
     private static final String TAG = DragOrderGridActivity.class.getName();
     

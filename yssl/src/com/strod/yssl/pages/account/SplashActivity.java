@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.roid.ui.FragmentControlActivity;
+import com.roid.ui.AbsFragmentActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.pages.main.MainActivity;
@@ -19,7 +19,7 @@ import com.strod.yssl.pages.main.MainActivity;
  * @author user
  *
  */
-public class SplashActivity extends FragmentControlActivity {
+public class SplashActivity extends AbsFragmentActivity {
 	
 	/**the timer task delay*/
 	public static final long DELAY = 1500;

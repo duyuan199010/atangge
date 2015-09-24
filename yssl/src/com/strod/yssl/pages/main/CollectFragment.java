@@ -5,6 +5,7 @@ package com.strod.yssl.pages.main;
  */
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,11 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
 import com.roid.util.JsonParser;
-import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article;
 import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.pages.details.DetailsActivity;
 import com.strod.yssl.view.swipelistview.OnDeleteListioner;
 import com.strod.yssl.view.swipelistview.SwipeListView;
 
@@ -88,7 +89,9 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
-		Toaster.showDefToast(getActivity(), "position"+position);
+		Intent intent = new Intent(getActivity(), DetailsActivity.class);
+		intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position));
+		startActivity(intent);
 	}
 	
 	@Override

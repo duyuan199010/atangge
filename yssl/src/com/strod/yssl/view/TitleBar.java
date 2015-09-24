@@ -1,19 +1,15 @@
 package com.strod.yssl.view;
 
-import com.roid.util.CommonUtils;
-import com.strod.yssl.R;
-import com.strod.yssl.clientcore.NetworkMonitor;
-
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.strod.yssl.R;
 
 /**
  * 顶部title自定义控件

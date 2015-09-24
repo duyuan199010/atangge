@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.roid.R;
-import com.roid.ui.FragmentControlActivity;
+import com.roid.ui.AbsFragmentActivity;
 import com.roid.util.AnimationStyle;
 import com.roid.util.DebugLog;
 
@@ -898,12 +898,12 @@ public class ActionDialog extends DialogFragment {
 				return;
 			}
 			
-			if (act instanceof FragmentControlActivity)
+			if (act instanceof AbsFragmentActivity)
 			{
 				final FragmentManager fmanager = manager;
 				final int fid = id;
 				final String fsid = sid;
-				FragmentControlActivity sctrlAct = (FragmentControlActivity)act;
+				AbsFragmentActivity sctrlAct = (AbsFragmentActivity)act;
 				if (!sctrlAct.isFragmentActivityResumed())
 				{
 					DebugLog.d("ActionDialog", "Dialog cannot show due to activity paused\n");
@@ -945,9 +945,9 @@ public class ActionDialog extends DialogFragment {
 		/* Validate where the activity is ready */
 		if (act != null)
 		{
-			if (act instanceof FragmentControlActivity)
+			if (act instanceof AbsFragmentActivity)
 			{
-				FragmentControlActivity sctrlAct = (FragmentControlActivity)act;
+				AbsFragmentActivity sctrlAct = (AbsFragmentActivity)act;
 				if (!sctrlAct.isFragmentActivityResumed())
 				{
 					DebugLog.d("ActionDialog", "Dialog cannot dismiss due to activity paused\n");
