@@ -285,13 +285,14 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		DebugLog.d(TAG, "onHttpSuccess:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
 		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
-		DebugLog.d(TAG,json);
 		try {
+			DebugLog.d(TAG,json);
 			Article article = new Gson().fromJson(json, Article.class);
 			if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
 				//if haven't refresh data,return
 				if(article.getData().size()==0){
-					Toaster.showDefToast(getActivity(), R.string.data_newest);
+					if(isVisible())
+						Toaster.showDefToast(getActivity(), R.string.data_newest);
 					return;
 				}
 				long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getItemId() + mItemType.getName());
@@ -307,7 +308,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
 				//if haven't no more data,return
 				if(article.getData().size()==0){
-					Toaster.showDefToast(getActivity(), R.string.data_no_more);
+					if(isVisible())
+						Toaster.showDefToast(getActivity(), R.string.data_no_more);
 					return;
 				}
 				
@@ -319,7 +321,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toaster.showDefToast(getActivity(), R.string.net_data_error);
+			if(isVisible())
+				Toaster.showDefToast(getActivity(), R.string.net_data_error);
 		}
 	}
 
@@ -328,7 +331,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		DebugLog.d(TAG, "onHttpFailure:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
 		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
-		Toaster.showDefToast(getActivity(), R.string.error_network_connection);
+		if(isVisible())
+			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
 	}
 
 	@Override
