@@ -3,6 +3,7 @@ package com.strod.yssl.pages.main;
 /**
  * 页面
  */
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.roid.ui.AbsFragment;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.pages.personal.SettingActivity;
 import com.strod.yssl.view.SwitchButton;
 
 public class PersonalFragment extends AbsFragment implements OnClickListener{
@@ -50,6 +52,7 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 			}
 		});
 		
+		rootView.findViewById(R.id.setting_layout).setOnClickListener(this);
 	}
 	
 	@Override
@@ -61,7 +64,14 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+		switch (v.getId()) {
+		case R.id.setting_layout:
+			startActivity(new Intent(getActivity(), SettingActivity.class));
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

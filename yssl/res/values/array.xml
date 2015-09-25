@@ -1,53 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string-array name="good_list">
+    <string-array name="setting">
         <item>物品列表</item>
         <item>免打扰时段</item>
     </string-array>
     
-    <string-array name="import_date">
-        <item>纪念日</item>
-        <item>生日</item>
-        <item>提醒事项</item>
-    </string-array>
     
-    <string-array name="memorial_day">
-        <item>恋爱纪念日</item>
-        <item>结婚纪念日</item>
-    </string-array>
-    <string-array name="birthday">
-        <item>我的生日</item>
-        <item>配偶生日</item>
-        <item>父亲生日</item>
-        <item>母亲生日</item>
-        <item>小孩生日</item>
-        <item>情人生日</item>
-    </string-array>
-    <string-array name="reminders">
-        <item>约会</item>
-        <item>会议</item>
-        <item>日程</item>
-    </string-array>
-    <string-array name="health_manager">
-        <item>体温</item>
-        <item>记步</item>
-        <item>睡眠</item>
-        <item>统计</item>
-    </string-array>
-    
-    <string-array name="statistics">
-        <item>运动统计</item>
-        <item>睡眠统计</item>
-    </string-array>
-    
-    <string-array name="week">
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-        <item>星期六</item>
-        <item>星期日</item>
-    </string-array>
 </resources>

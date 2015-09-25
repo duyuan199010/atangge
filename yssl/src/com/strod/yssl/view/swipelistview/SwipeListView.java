@@ -209,7 +209,6 @@ public class SwipeListView extends ListView implements
 					mOnDeleteListioner.onBack();
 					return false;
 				}*/
-				mScrollLinerLayout.setSingleTapUp(false);
 			}
 			return mDetector.onTouchEvent(event);
 		}

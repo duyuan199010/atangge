@@ -129,16 +129,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 //		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
 		
-		
-		//Add Sound Event Listener if refresh sound true,default is false
-		if(Config.getInstance().refreshSound){
-			SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(getActivity());
-			soundListener.addSoundEvent(State.PULL_TO_REFRESH, R.raw.pull_event);
-			soundListener.addSoundEvent(State.RESET, R.raw.reset_sound);
-			soundListener.addSoundEvent(State.REFRESHING, R.raw.refreshing_sound);
-			mPullRefreshListView.setOnPullEventListener(soundListener);
-		}
-		
 	}
 	
 	/**

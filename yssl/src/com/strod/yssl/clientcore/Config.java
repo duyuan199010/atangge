@@ -50,10 +50,6 @@ public class Config extends AbsConfig {
 	private static final String UNWIFI_DOWNLOAD = "unwifi_download";
 	public boolean unWifiDownload = true;
 	
-	/**refresh sound*/
-	private static final String REFRESH_SOUND = "refresh_sound";
-	public boolean refreshSound = false;
-	
 	/**image display options*/
 	private DisplayImageOptions mOptions;
 	private DisplayImageOptions mRoundOptions;
@@ -81,6 +77,8 @@ public class Config extends AbsConfig {
 	public void init() {
 		super.mAllowDebug = true;
 		super.HOST = HttpRequestURL.HOST;
+		super.mVersionName = getAppVersionName(AbsApplication.getApplication());
+		super.mVersionCode = getAppVersion(AbsApplication.getApplication());
 		
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 		initImageLoader();
@@ -92,8 +90,6 @@ public class Config extends AbsConfig {
 		//init unWifi download image
 		unWifiDownload = getUnWifiDownload();
 		
-		//init refresh mode
-		refreshSound = getRefreshSound();
 	}
 	
 	/**
@@ -181,23 +177,6 @@ public class Config extends AbsConfig {
 		return mSharedPreferences.getBoolean(UNWIFI_DOWNLOAD, true);
 	}
 	
-	/**
-	 * set refresh sound
-	 */
-	public void setRefreshSound(boolean haveSound){
-		Editor editor = mSharedPreferences.edit();
-		editor.putBoolean(REFRESH_SOUND, haveSound);
-		editor.commit();
-		this.refreshSound = haveSound;
-	}
-	
-	/**
-	 * get refresh sound
-	 * @return true if night unwifi download image,otherwise false
-	 */
-	public boolean getRefreshSound(){
-		return mSharedPreferences.getBoolean(REFRESH_SOUND, false);
-	}
 	
 	/**
 	 * get disk cache file
@@ -228,6 +207,21 @@ public class Config extends AbsConfig {
 			e.printStackTrace();
 		}
 		return 1;
+	}
+	
+	/**
+	 * get application versionName
+	 * @param context
+	 * @return
+	 */
+	public String getAppVersionName(Context context) {
+		try {
+			PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+			return info.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return "1.0.0";
 	}
 
 	/**
