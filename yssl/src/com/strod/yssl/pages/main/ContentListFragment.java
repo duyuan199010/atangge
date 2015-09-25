@@ -98,6 +98,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	 * read disk cache
 	 */
 	private void readCache() {
+		long start = System.currentTimeMillis();
 		// read cache from disk
 		String key = mItemType.getItemId() + mItemType.getName();
 		String json = Config.getInstance().readContentCache(key);
@@ -109,7 +110,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		JsonParser<Article> parser = new JsonParser<Article>();
 		Article article = parser.parseJson(json, Article.class);
 		mContentList.addAll(article.getData());
-		DebugLog.i(TAG, "[id:%d name:%s] read cache size:%d", mItemType.getItemId(), mItemType.getName(), mContentList.size());
+		long end = System.currentTimeMillis();
+		DebugLog.i(TAG, "[id:%d name:%s] read cache size:%d used:%dms", mItemType.getItemId(), mItemType.getName(), mContentList.size(),end-start);
 	}
 
 

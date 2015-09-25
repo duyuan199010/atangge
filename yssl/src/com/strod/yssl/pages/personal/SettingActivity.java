@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragmentActivity;
+import com.roid.util.DebugLog;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.personal.SettingType;
 import com.strod.yssl.clientcore.Config;
@@ -28,6 +30,8 @@ import com.strod.yssl.view.TitleBar;
  *
  */
 public class SettingActivity extends AbsFragmentActivity{
+	
+	private static final String TAG = "SettingActivity";
 
 	/**title bar*/
 	private TitleBar mTitleBar;
@@ -48,18 +52,51 @@ public class SettingActivity extends AbsFragmentActivity{
 		}
 		setContentView(R.layout.activity_setting);
 		
+		
+//		if(mSettingTypeList==null){
+//			mSettingTypeList = new ArrayList<SettingType>();
+//			mSettingTypeList.add(new SettingType(R.string.unwifi_download, true, null));
+//			mSettingTypeList.add(new SettingType(R.string.clear_cache, false, ""));
+//			mSettingTypeList.add(new SettingType(R.string.check_update, false, "V"+Config.getInstance().getAppVersionName(SettingActivity.this)));
+//			mSettingTypeList.add(new SettingType(R.string.score_atangge, false, ""));
+//		}
+//		
+//		initView();
+//		new CaluCache().execute(1);
+		
+		
 		if(mSettingTypeList==null){
 			mSettingTypeList = new ArrayList<SettingType>();
 			mSettingTypeList.add(new SettingType(R.string.unwifi_download, true, null));
 			mSettingTypeList.add(new SettingType(R.string.clear_cache, false, getCacheSize()));
-			mSettingTypeList.add(new SettingType(R.string.check_update, false, "V"+Config.getInstance().getAppVersionName(this)));
+			mSettingTypeList.add(new SettingType(R.string.check_update, false, "V"+Config.getInstance().getAppVersionName(SettingActivity.this)));
 			mSettingTypeList.add(new SettingType(R.string.score_atangge, false, ""));
 		}
-		
 		initView();
 	}
 	
+	class CaluCache extends AsyncTask<Integer,Integer,Integer>{
+
+		@Override
+		protected Integer doInBackground(Integer... params) {
+			// TODO Auto-generated method stub
+			SettingType clearCacheType = mSettingTypeList.get(1);
+			clearCacheType.setRightText(getCacheSize());
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			mAdapter.notifyDataSetChanged();
+		}
+		
+	}
+	
+	@SuppressWarnings("deprecation")
 	private String getCacheSize(){
+		long start = System.currentTimeMillis();
 		String cacheSize = "";
 		long contentCache = Config.getInstance().getContentCacheSize();
 		File file = ImageLoader.getInstance().getDiskCache().getDirectory();
@@ -74,11 +111,12 @@ public class SettingActivity extends AbsFragmentActivity{
 		}
 		long size = contentCache+imageCache;
 		if(size>1024*1024){//M
-			cacheSize = String.format("%.2fM", size/(1024*1024.0));
+			cacheSize = String.format("%.1fM", size/(1024*1024.0));
 		}else{
-			cacheSize = String.format("%.2fKB", size/1024.0);
+			cacheSize = String.format("%.1fKB", size/1024.0);
 		}
-		
+		long end = System.currentTimeMillis();
+		DebugLog.i(TAG, "getCacheSize used:"+(end-start)+" ms");
 		return cacheSize;
 	}
 
@@ -113,7 +151,7 @@ public class SettingActivity extends AbsFragmentActivity{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return mSettingTypeList.size();
+			return mSettingTypeList==null?0:mSettingTypeList.size();
 		}
 
 		@Override
