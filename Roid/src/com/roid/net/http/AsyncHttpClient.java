@@ -553,6 +553,8 @@ public class AsyncHttpClient {
     protected void sendRequest(DefaultHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType, AsyncHttpResponseHandler responseHandler, Context context) {
         if(contentType != null) {
             uriRequest.addHeader("Content-Type", contentType);
+        }else{
+        	uriRequest.addHeader("Content-Type", "application/json");
         }
 
         Future<?> request = threadPool.submit(new AsyncHttpRequest(client, httpContext, uriRequest, responseHandler));

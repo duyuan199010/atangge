@@ -33,6 +33,8 @@
     <!-- setting -->
     <string name="unwifi_download">非Wi-Fi网络不下载图片</string>
     <string name="clear_cache">手动清理缓存</string>
+    <string name="has_clear_cache">已经清理过缓存啦!</string>
     <string name="check_update">检查更新</string>
     <string name="score_atangge">为阿汤哥评分</string>
+    <string name="score_error">您的设备没有安装app下载渠道</string>
 </resources>

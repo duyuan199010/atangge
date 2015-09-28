@@ -1,6 +1,5 @@
 package com.strod.yssl.clientcore.httprequest;
 
-import com.roid.net.http.RequestParams;
 
 /**
  * Same RequestParams Type
@@ -9,5 +8,5 @@ import com.roid.net.http.RequestParams;
  */
 public interface Parameters {
 
-	public RequestParams paramters();
+	public String parameters();
 }

@@ -27,23 +27,25 @@ import com.roid.util.NetMonitor;
 
 /**
  * http request manager
+ * 
  * @author user
  *
  */
 public class HttpManager {
 
 	public static final String TAG = "HttpManager";
-	
-	/**connection time out*/
-	public static final int TIME_OUT = 15*1000;
-	
-	/**singleton Manager instance*/
+
+	/** connection time out */
+	public static final int TIME_OUT = 15 * 1000;
+
+	/** singleton Manager instance */
 	private static HttpManager mManager = null;
-	/**AsyncHttpClient instance*/
+	/** AsyncHttpClient instance */
 	private AsyncHttpClient httpClient;
 
 	/**
 	 * get singleton instance
+	 * 
 	 * @return
 	 */
 	public static HttpManager getInstance() {
@@ -73,18 +75,18 @@ public class HttpManager {
 	 * @param path
 	 * @param type
 	 */
-	public void get(final OnHttpRespondLisenter call, final int taskId,RequestParams params,String path,final Type type) {
+	public void get(final OnHttpRespondLisenter call, final int taskId, RequestParams params, String path, final Type type) {
 		get(null, call, taskId, params, path, type);
 	}
 
-	public void get(Context context,final OnHttpRespondLisenter call, final int taskId,RequestParams params,String path,final Type type) {
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void get(Context context, final OnHttpRespondLisenter call, final int taskId, RequestParams params, String path, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		httpClient.get(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler() {
+		httpClient.get(context, AbsConfig.HOST + path, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
@@ -92,17 +94,17 @@ public class HttpManager {
 				try {
 					if (statusCode == 200) {
 						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
+						if (call != null) {
 							call.onHttpSuccess(taskId, respon, content);
 						}
 					} else {
-						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+						if (call != null) {
+							call.onHttpFailure(taskId, "statusCode:" + statusCode);
 						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, e.getMessage());
 					}
 				}
@@ -115,17 +117,17 @@ public class HttpManager {
 			}
 
 		});
-		
+
 	}
 
-	public void get(Context context,final OnHttpRespondLisenter call, final int taskId,Header[] headers,RequestParams params,String path,final Type type) {
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void get(Context context, final OnHttpRespondLisenter call, final int taskId, Header[] headers, RequestParams params, String path, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		httpClient.get(context,AbsConfig.HOST+path, headers,params, new AsyncHttpResponseHandler() {
+		httpClient.get(context, AbsConfig.HOST + path, headers, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
@@ -133,17 +135,17 @@ public class HttpManager {
 				try {
 					if (statusCode == 200) {
 						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
+						if (call != null) {
 							call.onHttpSuccess(taskId, respon, content);
 						}
 					} else {
-						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+						if (call != null) {
+							call.onHttpFailure(taskId, "statusCode:" + statusCode);
 						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, e.getMessage());
 					}
 				}
@@ -152,7 +154,7 @@ public class HttpManager {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
@@ -160,21 +162,21 @@ public class HttpManager {
 		});
 
 	}
-	
-	public void post(final OnHttpRespondLisenter call, final int taskId, String path,RequestParams params,final Type type) {
+
+	public void post(final OnHttpRespondLisenter call, final int taskId, String path, RequestParams params, final Type type) {
 		post(null, call, taskId, path, params, type);
 	}
-	
-	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,RequestParams params,final Type type) {
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, RequestParams params, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		DebugLog.i(TAG, "url:"+AbsConfig.HOST+path);
-		DebugLog.i(TAG, "request:"+params.toString());
-		httpClient.post(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler(){
+		DebugLog.i(TAG, "url:" + AbsConfig.HOST + path);
+		DebugLog.i(TAG, "request:" + params.toString());
+		httpClient.post(context, AbsConfig.HOST + path, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
@@ -183,17 +185,17 @@ public class HttpManager {
 				try {
 					if (statusCode == 200) {
 						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
+						if (call != null) {
 							call.onHttpSuccess(taskId, respon, content);
 						}
 					} else {
-						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+						if (call != null) {
+							call.onHttpFailure(taskId, "statusCode:" + statusCode);
 						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, e.getMessage());
 					}
 				}
@@ -202,37 +204,37 @@ public class HttpManager {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
-			
+
 		});
-		
+
 	}
-	
-	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,RequestParams params) {
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, RequestParams params) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		DebugLog.i(TAG, "url:"+AbsConfig.HOST+path);
-		DebugLog.i(TAG, "request:"+params.toString());
-		httpClient.post(context,AbsConfig.HOST+path, params, new AsyncHttpResponseHandler(){
+		DebugLog.i(TAG, "url:" + AbsConfig.HOST + path);
+		DebugLog.i(TAG, "request:" + params.toString());
+		httpClient.post(context, AbsConfig.HOST + path, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
 				if (statusCode == 200) {
-					if(call!=null){
+					if (call != null) {
 						call.onHttpSuccess(taskId, null, content);
 					}
 				} else {
-					if(call!=null){
-						call.onHttpFailure(taskId, "statusCode:"+statusCode);
+					if (call != null) {
+						call.onHttpFailure(taskId, "statusCode:" + statusCode);
 					}
 				}
 			}
@@ -240,24 +242,24 @@ public class HttpManager {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
-			
+
 		});
-		
+
 	}
 
-	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,Header[] headers,RequestParams params,final Type type) {
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, Header[] headers, RequestParams params, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		httpClient.post(context,AbsConfig.HOST+path,headers, params,AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler(){
-			
+		httpClient.post(context, AbsConfig.HOST + path, headers, params, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler() {
+
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
@@ -265,17 +267,17 @@ public class HttpManager {
 				try {
 					if (statusCode == 200) {
 						Object respon = new Gson().fromJson(content, type);
-						if(call!=null){
+						if (call != null) {
 							call.onHttpSuccess(taskId, respon, content);
 						}
 					} else {
-						if(call!=null){
-							call.onHttpFailure(taskId, "statusCode:"+statusCode);
+						if (call != null) {
+							call.onHttpFailure(taskId, "statusCode:" + statusCode);
 						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, e.getMessage());
 					}
 				}
@@ -284,27 +286,27 @@ public class HttpManager {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
-			
+
 		});
-		
+
 	}
-	
-	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,String requestJson,final Type type){
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, String requestJson, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
 		try {
-			DebugLog.i(TAG, "requestJson:"+requestJson);
+			DebugLog.i(TAG, "requestJson:" + requestJson);
 			StringEntity entity = new StringEntity(requestJson, HTTP.UTF_8);
-			httpClient.post(context, AbsConfig.HOST+path, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler(){
-				
+			httpClient.post(context, AbsConfig.HOST + path, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler() {
+
 				@Override
 				public void onSuccess(int statusCode, String content) {
 					// TODO Auto-generated method stub
@@ -312,64 +314,120 @@ public class HttpManager {
 					try {
 						if (statusCode == 200) {
 							Object respon = new Gson().fromJson(content, type);
-							if(call!=null){
+							if (call != null) {
 								call.onHttpSuccess(taskId, respon, content);
 							}
 						} else {
-							if(call!=null){
-								call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							if (call != null) {
+								call.onHttpFailure(taskId, "statusCode:" + statusCode);
 							}
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-						if(call!=null){
+						if (call != null) {
 							call.onHttpFailure(taskId, e1.getMessage());
 						}
 					}
-					
+
 				}
 
 				@Override
 				public void onFailure(Throwable error, String content) {
 					super.onFailure(error, content);
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, error.getMessage());
 					}
 				}
-				
+
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			if(call!=null){
+			if (call != null) {
 				call.onHttpFailure(taskId, e.getMessage());
 			}
 		}
-		
+
 	}
-	
+
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, String requestJson) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
+				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
+			}
+			return;
+		}
+		try {
+			DebugLog.i(TAG, "url:" + AbsConfig.HOST + path);
+			DebugLog.i(TAG, "requestJson:" + requestJson);
+			StringEntity entity = new StringEntity(requestJson, HTTP.UTF_8);
+			httpClient.post(context, AbsConfig.HOST + path, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler() {
+
+				@Override
+				public void onSuccess(int statusCode, String content) {
+					// TODO Auto-generated method stub
+					super.onSuccess(statusCode, content);
+
+					if (statusCode == 200) {
+						if (call != null) {
+							call.onHttpSuccess(taskId, null, content);
+						}
+					} else {
+						if (call != null) {
+							call.onHttpFailure(taskId, "statusCode:" + statusCode);
+						}
+					}
+
+				}
+
+				@Override
+				public void onFailure(Throwable error, String content) {
+					super.onFailure(error, content);
+					if (call != null) {
+						call.onHttpFailure(taskId, error.getMessage());
+					}
+				}
+
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (call != null) {
+				call.onHttpFailure(taskId, e.getMessage());
+			}
+		}
+
+	}
+
 	/**
 	 * Http post reqeust
+	 * 
 	 * @param context
-	 * @param call:callback
-	 * @param taskId:Request Number
-	 * @param path:Request path->no host em:"/test"
-	 * @param headers:reqeust headers
-	 * @param requestJson:request params json
-	 * @param type:json to bean
+	 * @param call
+	 *            :callback
+	 * @param taskId
+	 *            :Request Number
+	 * @param path
+	 *            :Request path->no host em:"/test"
+	 * @param headers
+	 *            :reqeust headers
+	 * @param requestJson
+	 *            :request params json
+	 * @param type
+	 *            :json to bean
 	 */
-	public void post(Context context,final OnHttpRespondLisenter call, final int taskId, String path,Header[] headers,String requestJson,final Type type){
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void post(Context context, final OnHttpRespondLisenter call, final int taskId, String path, Header[] headers, String requestJson, final Type type) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
 		try {
 			StringEntity entity = new StringEntity(requestJson, HTTP.UTF_8);
-			httpClient.post(context, AbsConfig.HOST+path,headers, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler(){
-				
+			httpClient.post(context, AbsConfig.HOST + path, headers, entity, AbsConfig.CONTENT_TYPE, new AsyncHttpResponseHandler() {
+
 				@Override
 				public void onSuccess(int statusCode, String content) {
 					// TODO Auto-generated method stub
@@ -377,123 +435,133 @@ public class HttpManager {
 					try {
 						if (statusCode == 200) {
 							Object respon = new Gson().fromJson(content, type);
-							if(call!=null){
+							if (call != null) {
 								call.onHttpSuccess(taskId, respon, content);
 							}
 						} else {
-							if(call!=null){
-								call.onHttpFailure(taskId, "statusCode:"+statusCode);
+							if (call != null) {
+								call.onHttpFailure(taskId, "statusCode:" + statusCode);
 							}
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-						if(call!=null){
+						if (call != null) {
 							call.onHttpFailure(taskId, e1.getMessage());
 						}
 					}
-					
+
 				}
 
 				@Override
 				public void onFailure(Throwable error, String content) {
 					super.onFailure(error, content);
-					if(call!=null){
+					if (call != null) {
 						call.onHttpFailure(taskId, error.getMessage());
 					}
 				}
-				
+
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			if(call!=null){
+			if (call != null) {
 				call.onHttpFailure(taskId, e.getMessage());
 			}
 		}
 	}
-	
+
 	/**
 	 * download
-	 * @param call: callback
-	 * @param taskId:request Number
-	 * @param url:reqeust url
-	 * @param filePath:save file path
+	 * 
+	 * @param call
+	 *            : callback
+	 * @param taskId
+	 *            :request Number
+	 * @param url
+	 *            :reqeust url
+	 * @param filePath
+	 *            :save file path
 	 */
-	public void download(final OnHttpRespondLisenter call, final int taskId,String url,final String filePath){
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void download(final OnHttpRespondLisenter call, final int taskId, String url, final String filePath) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
-		httpClient.get(url, new BinaryHttpResponseHandler(){
+		httpClient.get(url, new BinaryHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, byte[] binaryData) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, binaryData);
 				File file = null;
-				FileOutputStream oStream=null;
-                try {
-                	file = new File(filePath);
-                    oStream = new FileOutputStream(file);
-                    oStream.write(binaryData);
+				FileOutputStream oStream = null;
+				try {
+					file = new File(filePath);
+					oStream = new FileOutputStream(file);
+					oStream.write(binaryData);
 
-                    oStream.flush();
-                    if(call!=null){
+					oStream.flush();
+					if (call != null) {
 						call.onHttpSuccess(taskId, null, null);
 					}
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    if(call!=null){
-    					call.onHttpFailure(taskId, e.getMessage());
-    				}
-                }finally{
-                	if(oStream!=null){
-                		try {
+				} catch (Exception e) {
+					e.printStackTrace();
+					if (call != null) {
+						call.onHttpFailure(taskId, e.getMessage());
+					}
+				} finally {
+					if (oStream != null) {
+						try {
 							oStream.close();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							if(call!=null){
-		    					call.onHttpFailure(taskId, e.getMessage());
-		    				}
+							if (call != null) {
+								call.onHttpFailure(taskId, e.getMessage());
+							}
 						}
-                	}
-                }
+					}
+				}
 			}
 
 			@Override
 			public void onFailure(Throwable error, byte[] binaryData) {
 				// TODO Auto-generated method stub
 				super.onFailure(error, binaryData);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
-			
+
 		});
-		
+
 	}
-	
+
 	/**
 	 * upload file
-	 * @param call: callback
-	 * @param taskId:request Number
-	 * @param url:reqeust url
-	 * @param filePath:upload file path
+	 * 
+	 * @param call
+	 *            : callback
+	 * @param taskId
+	 *            :request Number
+	 * @param url
+	 *            :reqeust url
+	 * @param filePath
+	 *            :upload file path
 	 */
-	public void upload(final OnHttpRespondLisenter call, final int taskId,String url,String filePath){
-		if(!NetMonitor.isNetworkConnected(AbsApplication.getApplication())){
-			if(call!=null){
+	public void upload(final OnHttpRespondLisenter call, final int taskId, String url, String filePath) {
+		if (!NetMonitor.isNetworkConnected(AbsApplication.getApplication())) {
+			if (call != null) {
 				call.onHttpFailure(taskId, AbsApplication.getApplication().getString(R.string.error_network_connection));
 			}
 			return;
 		}
 		File file = new File(filePath);
-    	RequestParams params = new RequestParams();
-    	try {
+		RequestParams params = new RequestParams();
+		try {
 			params.put("file", file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -501,14 +569,14 @@ public class HttpManager {
 			call.onHttpFailure(taskId, e.getMessage());
 			return;
 		}
-    	
-		httpClient.post(url, params, new AsyncHttpResponseHandler(){
+
+		httpClient.post(url, params, new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpSuccess(taskId, null, null);
 				}
 			}
@@ -517,15 +585,15 @@ public class HttpManager {
 			public void onFailure(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onFailure(error, content);
-				if(call!=null){
+				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
 				}
 			}
-			
+
 		});
 	}
-	
-	public void cancelRequest(Context context,boolean mayInterruptIfRunning){
+
+	public void cancelRequest(Context context, boolean mayInterruptIfRunning) {
 		httpClient.cancelRequests(context, mayInterruptIfRunning);
 	}
 }

@@ -11,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.roid.core.HttpManager;
 import com.roid.net.http.OnHttpRespondLisenter;
-import com.roid.net.http.RequestParams;
 import com.roid.ui.AbsFragment;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
@@ -38,9 +36,7 @@ import com.strod.yssl.view.RippleView;
 import com.strod.yssl.view.RippleView.OnRippleCompleteListener;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshBase;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
-import com.strod.yssl.view.pulltorefresh.PullToRefreshBase.State;
 import com.strod.yssl.view.pulltorefresh.PullToRefreshListView;
-import com.strod.yssl.view.pulltorefresh.extras.SoundPullEventListener;
 
 public final class ContentListFragment extends AbsFragment implements OnRefreshListener2<ListView>, OnItemClickListener, OnHttpRespondLisenter {
 
@@ -181,7 +177,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.REFRESH,getRefreshTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
-				articleFactory.product().paramters());
+				articleFactory.product().parameters());
 		
 	}
 
@@ -193,7 +189,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.LOAD_MORE,getLoadMoreTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 
-				articleFactory.product().paramters());
+				articleFactory.product().parameters());
 		
 	}
 	
@@ -323,6 +319,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			saveDataCache();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			DebugLog.i(TAG,json);
 			e.printStackTrace();
 			if(isVisible())
 				Toaster.showDefToast(getActivity(), R.string.net_data_error);

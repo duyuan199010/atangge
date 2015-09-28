@@ -1,5 +1,9 @@
 package com.strod.yssl.clientcore.httprequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.JsonObject;
 import com.roid.net.http.RequestParams;
 import com.strod.yssl.clientcore.Config;
 
@@ -47,13 +51,18 @@ public class ArticleFactory implements Provider{
 	class ArticleParams implements Parameters{
 		
 		@Override
-		public RequestParams paramters() {
-			RequestParams requestParams = new RequestParams();
-			requestParams.put("itemId", String.valueOf(itemId));
-			requestParams.put("pageSize", String.valueOf(pageSize));
-			requestParams.put("refreshType", String.valueOf(refreshType));
-			requestParams.put("time", String.valueOf(time));
-			return requestParams;
+		public String parameters() {
+			JSONObject requestParams = new JSONObject();
+			try {
+				requestParams.put("itemId", itemId);
+				requestParams.put("pageSize", pageSize);
+				requestParams.put("refreshType", refreshType);
+				requestParams.put("time", time);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return requestParams.toString();
 		}
 
 	}

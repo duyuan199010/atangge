@@ -81,7 +81,7 @@ public class Config extends AbsConfig {
 		super.mVersionCode = getAppVersion(AbsApplication.getApplication());
 		
 		mSharedPreferences = MyApplication.getApplication().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-		initImageLoader();
+		
 		getContentDiskCache(AbsApplication.getApplication());
 		
 		//init night mode
@@ -90,7 +90,9 @@ public class Config extends AbsConfig {
 		//init unWifi download image
 		unWifiDownload = getUnWifiDownload();
 		
+		initImageLoader();
 	}
+	
 	
 	/**
 	 * init imageloader
@@ -114,6 +116,7 @@ public class Config extends AbsConfig {
 		.displayer(new RoundedBitmapDisplayer(100))  // 设置成圆角图片  
 		.build();
 		imageLoader.init(ImageLoaderConfiguration.createDefault(MyApplication.getApplication()));
+		
 	}
 	
 	public DisplayImageOptions getDisplayImageOptions(){
@@ -312,7 +315,7 @@ public class Config extends AbsConfig {
 						editor.commit();
 					}
 					mContentDiskLruCache.flush();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					DebugLog.e(TAG, uniqu+" writeContentCache() error");
@@ -348,7 +351,9 @@ public class Config extends AbsConfig {
 	public void clearContentCache(){
 		try {
 			mContentDiskLruCache.delete();
-		} catch (IOException e) {
+			mContentDiskLruCache = null;
+			getContentDiskCache(AbsApplication.getApplication());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			DebugLog.e(TAG, "clearContentCache() error");
