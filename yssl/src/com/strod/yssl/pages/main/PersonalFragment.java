@@ -44,7 +44,6 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
 				Config.getInstance().setNightMode(isChecked);
 				if(getActivity()!=null){
 					((MainActivity)getActivity()).switchTheme();
@@ -57,13 +56,11 @@ public class PersonalFragment extends AbsFragment implements OnClickListener{
 	
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.setting_layout:
 			startActivity(new Intent(getActivity(), SettingActivity.class));

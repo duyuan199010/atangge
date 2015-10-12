@@ -59,7 +59,6 @@ public class IndexFragment extends AbsFragment{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(CommonUtils.isFastDoubleClick())return;
 				
 				Intent intent = new Intent(getActivity(),DragOrderGridActivity.class);
@@ -100,7 +99,6 @@ public class IndexFragment extends AbsFragment{
 
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 	}
 

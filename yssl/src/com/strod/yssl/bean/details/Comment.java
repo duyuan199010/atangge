@@ -17,7 +17,6 @@ public class Comment extends Result {
 
 	public Comment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<CommentType> getData() {
@@ -35,7 +34,6 @@ public class Comment extends Result {
 
 	public Comment(int ret_code, String ret_msg) {
 		super(ret_code, ret_msg);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -161,7 +159,6 @@ public class Comment extends Result {
 
 		@Override
 		public int describeContents() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 

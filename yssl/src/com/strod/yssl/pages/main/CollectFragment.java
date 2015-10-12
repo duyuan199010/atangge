@@ -82,13 +82,11 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	
 	@Override
 	public boolean isCandelete(int position) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent(getActivity(), DetailsActivity.class);
 		intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position));
 		startActivity(intent);
@@ -96,7 +94,6 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 	}
 
@@ -151,7 +148,6 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						ContentType temp = mContentList.remove(position);
 						mContentList.add(0, temp);
 						mSwipeListView.resetItem();
@@ -163,7 +159,6 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						mContentList.remove(position);
 						mSwipeListView.deleteItem();
 						notifyDataSetChanged();

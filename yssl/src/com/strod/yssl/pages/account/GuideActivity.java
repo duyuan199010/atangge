@@ -28,7 +28,6 @@ public class GuideActivity extends AbsFragmentActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
 		

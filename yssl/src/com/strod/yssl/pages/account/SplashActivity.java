@@ -46,7 +46,6 @@ public class SplashActivity extends AbsFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 		timer.schedule(task, DELAY);
@@ -66,7 +65,6 @@ public class SplashActivity extends AbsFragmentActivity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		timer.cancel();
 		super.onDestroy();
 	}

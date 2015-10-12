@@ -12,7 +12,6 @@ public class Result {
 
 	public Result() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Result(int ret_code, String ret_msg) {

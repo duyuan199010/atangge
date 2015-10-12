@@ -25,7 +25,6 @@ public class NetworkReceiver extends BroadcastReceiver{
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			final boolean networkReady = NetMonitor.isNetworkConnected(context);
 			if (!networkReady) {
 				DebugLog.e(TAG,"断开连接。。。");

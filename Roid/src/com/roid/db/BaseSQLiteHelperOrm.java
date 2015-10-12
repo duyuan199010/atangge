@@ -13,13 +13,11 @@ public abstract class BaseSQLiteHelperOrm extends OrmLiteSqliteOpenHelper {
 	public ConnectionSource connectionSource;
 	
 	public BaseSQLiteHelperOrm() {
-		// TODO Auto-generated constructor stub
 		super(AbsApplication.getApplication(), AbsConfig.DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	@Override
 	public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
-		// TODO Auto-generated method stub
 		this.connectionSource = connectionSource;
 		createTable();
 	}
@@ -29,7 +27,6 @@ public abstract class BaseSQLiteHelperOrm extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int arg2,
 			int arg3) {
-		// TODO Auto-generated method stub
 		this.connectionSource = connectionSource;
 		dropTable();
 		onCreate(db, connectionSource);

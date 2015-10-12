@@ -154,7 +154,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		if (isNeedRequest()) {
 			mPullRefreshListView.setRefreshing(true);
@@ -228,7 +227,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			
 			@Override
 			public void onComplete(RippleView rippleView) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), DetailsActivity.class);
 				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
 				startActivity(intent);
@@ -240,7 +238,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case REFRESH_COMPLETE:
@@ -318,7 +315,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			mAdapter.notifyDataSetChanged();
 			saveDataCache();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			DebugLog.i(TAG,json);
 			e.printStackTrace();
 			if(isVisible())
@@ -337,7 +333,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		DebugLog.e(TAG, "[id:%d name:%s] onDestroyView()", mItemType.getItemId(), mItemType.getName());
 		super.onDestroyView();
 	}

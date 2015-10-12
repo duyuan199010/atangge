@@ -204,7 +204,6 @@ public class MainActivity extends AbsFragmentActivity implements OnCheckedChange
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 

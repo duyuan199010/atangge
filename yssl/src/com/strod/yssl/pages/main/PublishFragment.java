@@ -33,7 +33,6 @@ public class PublishFragment extends AbsFragment{
 	
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 	}
 

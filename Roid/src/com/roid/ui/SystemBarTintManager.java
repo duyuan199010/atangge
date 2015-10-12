@@ -484,7 +484,7 @@ public class SystemBarTintManager {
 				activity.getWindowManager().getDefaultDisplay()
 						.getRealMetrics(metrics);
 			} else {
-				// TODO this is not correct, but we don't really care pre-kitkat
+				// this is not correct, but we don't really care pre-kitkat
 				activity.getWindowManager().getDefaultDisplay()
 						.getMetrics(metrics);
 			}

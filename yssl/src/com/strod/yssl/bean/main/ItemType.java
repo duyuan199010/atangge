@@ -15,12 +15,10 @@ public class ItemType implements Parcelable {
 
 	public ItemType() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ItemType(Parcel in) {
 		super();
-		// TODO Auto-generated constructor stub
 		itemId = in.readInt();
 		name = in.readString();
 	}
@@ -54,7 +52,6 @@ public class ItemType implements Parcelable {
 
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -7,7 +7,6 @@ public class SettingType {
 	private String rightText;
 	public SettingType() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public SettingType(int leftText, boolean showRightBtn, String rightText) {
 		super();

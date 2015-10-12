@@ -316,7 +316,6 @@ public class Config extends AbsConfig {
 					}
 					mContentDiskLruCache.flush();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					DebugLog.e(TAG, uniqu+" writeContentCache() error");
 				}
@@ -354,7 +353,6 @@ public class Config extends AbsConfig {
 			mContentDiskLruCache = null;
 			getContentDiskCache(AbsApplication.getApplication());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			DebugLog.e(TAG, "clearContentCache() error");
 		}
@@ -375,7 +373,6 @@ public class Config extends AbsConfig {
 		try {
 			mContentDiskLruCache.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			DebugLog.e(TAG, "closeContentCache() error");
 		}

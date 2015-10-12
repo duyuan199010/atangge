@@ -13,7 +13,6 @@ public class Article extends Result {
 
 	public Article() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<ContentType> getData() {
@@ -31,7 +30,6 @@ public class Article extends Result {
 
 	public Article(int ret_code, String ret_msg) {
 		super(ret_code, ret_msg);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -157,7 +155,6 @@ public class Article extends Result {
 
 		@Override
 		public int describeContents() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 

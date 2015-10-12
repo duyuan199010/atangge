@@ -54,7 +54,6 @@ public class GragOrderDynamicAdapter extends BaseDynamicGridAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				((DragOrderGridActivity) getContext()).deleteItem(position);
 			}
 		});

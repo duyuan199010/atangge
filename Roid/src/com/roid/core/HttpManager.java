@@ -180,7 +180,6 @@ public class HttpManager {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
 				try {
 					if (statusCode == 200) {
@@ -226,7 +225,6 @@ public class HttpManager {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
 				if (statusCode == 200) {
 					if (call != null) {
@@ -262,7 +260,6 @@ public class HttpManager {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
 				try {
 					if (statusCode == 200) {
@@ -309,7 +306,6 @@ public class HttpManager {
 
 				@Override
 				public void onSuccess(int statusCode, String content) {
-					// TODO Auto-generated method stub
 					super.onSuccess(statusCode, content);
 					try {
 						if (statusCode == 200) {
@@ -323,7 +319,6 @@ public class HttpManager {
 							}
 						}
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 						if (call != null) {
 							call.onHttpFailure(taskId, e1.getMessage());
@@ -342,7 +337,6 @@ public class HttpManager {
 
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			if (call != null) {
 				call.onHttpFailure(taskId, e.getMessage());
@@ -366,7 +360,6 @@ public class HttpManager {
 
 				@Override
 				public void onSuccess(int statusCode, String content) {
-					// TODO Auto-generated method stub
 					super.onSuccess(statusCode, content);
 
 					if (statusCode == 200) {
@@ -391,7 +384,6 @@ public class HttpManager {
 
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			if (call != null) {
 				call.onHttpFailure(taskId, e.getMessage());
@@ -430,7 +422,6 @@ public class HttpManager {
 
 				@Override
 				public void onSuccess(int statusCode, String content) {
-					// TODO Auto-generated method stub
 					super.onSuccess(statusCode, content);
 					try {
 						if (statusCode == 200) {
@@ -444,7 +435,6 @@ public class HttpManager {
 							}
 						}
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 						if (call != null) {
 							call.onHttpFailure(taskId, e1.getMessage());
@@ -463,7 +453,6 @@ public class HttpManager {
 
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			if (call != null) {
 				call.onHttpFailure(taskId, e.getMessage());
@@ -494,7 +483,6 @@ public class HttpManager {
 
 			@Override
 			public void onSuccess(int statusCode, byte[] binaryData) {
-				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, binaryData);
 				File file = null;
 				FileOutputStream oStream = null;
@@ -517,7 +505,6 @@ public class HttpManager {
 						try {
 							oStream.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							if (call != null) {
 								call.onHttpFailure(taskId, e.getMessage());
@@ -529,7 +516,6 @@ public class HttpManager {
 
 			@Override
 			public void onFailure(Throwable error, byte[] binaryData) {
-				// TODO Auto-generated method stub
 				super.onFailure(error, binaryData);
 				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());
@@ -564,7 +550,6 @@ public class HttpManager {
 		try {
 			params.put("file", file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			call.onHttpFailure(taskId, e.getMessage());
 			return;
@@ -574,7 +559,6 @@ public class HttpManager {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
 				if (call != null) {
 					call.onHttpSuccess(taskId, null, null);
@@ -583,7 +567,6 @@ public class HttpManager {
 
 			@Override
 			public void onFailure(Throwable error, String content) {
-				// TODO Auto-generated method stub
 				super.onFailure(error, content);
 				if (call != null) {
 					call.onHttpFailure(taskId, error.getMessage());

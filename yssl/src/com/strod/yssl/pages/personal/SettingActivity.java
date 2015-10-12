@@ -55,7 +55,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		if (Config.getInstance().isNightMode) {
 			setTheme(R.style.NightTheme);
@@ -93,7 +92,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 		@Override
 		protected Integer doInBackground(Integer... params) {
-			// TODO Auto-generated method stub
 			SettingType clearCacheType = mSettingTypeList.get(1);
 			clearCacheType.setRightText(getCacheSize());
 			return null;
@@ -101,7 +99,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 		@Override
 		protected void onPostExecute(Integer result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			mAdapter.notifyDataSetChanged();
 		}
@@ -141,7 +138,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				finish();
 			}
 		});
@@ -156,7 +152,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
 		if(CommonUtils.isFastDoubleClick())return;
 		switch (position) {
 		case CLEAR_CACHE:
@@ -204,7 +199,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 
@@ -212,25 +206,21 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return mSettingTypeList == null ? 0 : mSettingTypeList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return mSettingTypeList.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder holder = null;
 			if (convertView == null) {
 				holder = new ViewHolder();
@@ -260,7 +250,6 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							// TODO Auto-generated method stub
 							Config.getInstance().setUnWifiDownload(isChecked);
 						}
 					});

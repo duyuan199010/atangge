@@ -59,7 +59,6 @@ public class ArticleFactory implements Provider{
 				requestParams.put("refreshType", refreshType);
 				requestParams.put("time", time);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return requestParams.toString();

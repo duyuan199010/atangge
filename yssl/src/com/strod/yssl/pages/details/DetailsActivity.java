@@ -46,7 +46,6 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		if (Config.getInstance().isNightMode) {
 			setTheme(R.style.NightTheme);
@@ -73,7 +72,6 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				finish();
 			}
 		});
@@ -83,7 +81,6 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -111,20 +108,17 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			// TODO Auto-generated method stub
 			super.onPageStarted(view, url, favicon);
 		}
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			// TODO Auto-generated method stub
 			view.loadUrl("javascript:window.js.showSource('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
 			super.onPageFinished(view, url);
 		}
 
 		@Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-			// TODO Auto-generated method stub
 			super.onReceivedError(view, errorCode, description, failingUrl);
 		}
 
@@ -132,7 +126,6 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if (CommonUtils.isFastDoubleClick())
 			return;
 		// switch (v.getId()) {
@@ -147,20 +140,17 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		mWebView.destroy();
 		super.onDestroy();
 	}
 
 	@Override
 	public void onHttpSuccess(int taskId, Object obj, String json) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onHttpFailure(int taskId, String message) {
-		// TODO Auto-generated method stub
 
 	}
 }
