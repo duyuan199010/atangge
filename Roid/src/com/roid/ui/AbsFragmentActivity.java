@@ -2,7 +2,10 @@ package com.roid.ui;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import com.roid.config.AbsConfig;
+import com.roid.util.DebugLog;
+
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,7 +102,15 @@ public class AbsFragmentActivity extends FragmentActivity {
 	protected void onDestroy() {
 		/* Pop Activity off stack */
 		ActivityManager.getInstance().popActivity(this);
+		DebugLog.i(AbsFragmentActivity.class.getSimpleName(), "onDestroy()...");
 		super.onDestroy();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 
 }
