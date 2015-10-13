@@ -105,12 +105,5 @@ public class AbsFragmentActivity extends FragmentActivity {
 		DebugLog.i(AbsFragmentActivity.class.getSimpleName(), "onDestroy()...");
 		super.onDestroy();
 	}
-	
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-		finish();
-	}
 
 }
