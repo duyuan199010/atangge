@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,7 +171,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		String label = DateUtil.formatDateToString(System.currentTimeMillis());
+//		String label = DateUtil.formatDateToString(System.currentTimeMillis());
+		String label = DateUtils.formatDateTime(getActivity().getApplicationContext(), System.currentTimeMillis(),
+				DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
@@ -182,7 +185,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		String label = DateUtil.formatDateToString(System.currentTimeMillis());
+//		String label = DateUtil.formatDateToString(System.currentTimeMillis());
+		String label = DateUtils.formatDateTime(getActivity().getApplicationContext(), System.currentTimeMillis(),
+				DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 		// Update the LastUpdatedLabel
 		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 

@@ -21,6 +21,7 @@ import com.roid.ui.AbsFragment;
 import com.roid.util.CommonUtils;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.ItemType;
+import com.strod.yssl.view.viewpagerindicator.PagerSlidingTabStrip;
 import com.strod.yssl.view.viewpagerindicator.TabPageIndicator;
 
 public class IndexFragment extends AbsFragment{
@@ -54,25 +55,26 @@ public class IndexFragment extends AbsFragment{
 
 	private void initView(View rootView){
 		
-		mDragOrder = (ImageView) rootView.findViewById(R.id.drag_order);
-		mDragOrder.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(CommonUtils.isFastDoubleClick())return;
-				
-				Intent intent = new Intent(getActivity(),DragOrderGridActivity.class);
-				intent.putParcelableArrayListExtra(DragOrderGridActivity.ITEM_LIST, mItemList);
-				startActivity(intent);
-			}
-		});
+//		mDragOrder = (ImageView) rootView.findViewById(R.id.drag_order);
+//		mDragOrder.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if(CommonUtils.isFastDoubleClick())return;
+//
+//				Intent intent = new Intent(getActivity(),DragOrderGridActivity.class);
+//				intent.putParcelableArrayListExtra(DragOrderGridActivity.ITEM_LIST, mItemList);
+//				startActivity(intent);
+//			}
+//		});
 		
 		FragmentPagerAdapter adapter = new IndexAdapter(getChildFragmentManager());
 
         ViewPager pager = (ViewPager)rootView.findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        TabPageIndicator indicator = (TabPageIndicator)rootView.findViewById(R.id.indicator);
+//        TabPageIndicator indicator = (TabPageIndicator)rootView.findViewById(R.id.indicator);
+        PagerSlidingTabStrip indicator = (PagerSlidingTabStrip)rootView.findViewById(R.id.indicator);
         indicator.setViewPager(pager);
 	}
 	
