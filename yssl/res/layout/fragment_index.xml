@@ -40,7 +40,8 @@
         app:pstsUnderlineColor = "#00000000"
         app:pstsUnderlineHeight="0dp"
         app:pstsTabPaddingLeftRight="22dip"
-        app:pstsSelectedTabTextSize="12sp"
+        app:pstsTabTextSize="12sp"
+        app:pstsSelectedTabTextSize="14sp"
         app:pstsSelectedTabTextColor="@color/title_bg_color"
         />
 
