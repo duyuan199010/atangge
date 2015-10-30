@@ -4,6 +4,7 @@ package com.strod.yssl.pages.main;
  * 页面
  */
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +20,11 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
-import com.roid.util.JsonParser;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article;
-import com.strod.yssl.bean.main.Article.ContentType;
+import com.strod.yssl.bean.main.Collect;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.database.DatabaseHelper;
 import com.strod.yssl.pages.details.DetailsActivity;
 import com.strod.yssl.view.swipelistview.OnDeleteListioner;
 import com.strod.yssl.view.swipelistview.SwipeListView;
@@ -33,10 +34,13 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	/**UI listview*/
 	private SwipeListView mSwipeListView;
 	/** listview datasource */
-	private ArrayList<ContentType> mContentList;
+	private List<Collect> mCollectList;
 	/**listview adapter*/
 	private CollectAdapter mCollectAdapter;
-	
+
+	/**database*/
+	private DatabaseHelper mDatabaseHelper;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,32 +49,20 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_collect, container, false);
-		if (mContentList == null) {
-			mContentList = new ArrayList<ContentType>();
-			readCache();
-		}
-		
+
+		initData();
 		initView(rootView);
 		
 		return rootView;
 	}
-	
-	/**
-	 * read disk cache
-	 */
-	private void readCache() {
-		// read cache from disk
-		String key = "41"+"最热";
-		String json = Config.getInstance().readContentCache(key);
-		if (json == null || json.equals("")) {
-			// no cache
-			return;
-		}
-		// have cache
-		JsonParser<Article> parser = new JsonParser<Article>();
-		Article article = parser.parseJson(json, Article.class);
-		mContentList.addAll(article.getData());
+
+	private void initData(){
+		if (mDatabaseHelper==null)
+			mDatabaseHelper= new DatabaseHelper<Collect>();
+
+		mCollectList = mDatabaseHelper.queryForAll(Collect.class);
 	}
+
 
 	private void initView(View rootView){
 		mSwipeListView = (SwipeListView) rootView.findViewById(R.id.swipe_list_view);
@@ -87,13 +79,33 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+		Collect collect = mCollectList.get(position);
+
+		Article.ContentType contentType = new Article.ContentType();
+		contentType.setTitle(collect.getTitle());
+		contentType.setArticleId(collect.getArticleId());
+		contentType.setImgUrl(collect.getImgUrl());
+		contentType.setContent(collect.getContent());
+		contentType.setContentUrl(collect.getContentUrl());
+		contentType.setTime(collect.getTime());
+
 		Intent intent = new Intent(getActivity(), DetailsActivity.class);
-		intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position));
+		intent.putExtra(DetailsActivity.ARTICLE, contentType);
 		startActivity(intent);
 	}
-	
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (mDatabaseHelper!=null){
+			//save data to database
+		}
+	}
+
 	@Override
 	public void onDestroyView() {
+		mDatabaseHelper=null;
 		super.onDestroyView();
 	}
 
@@ -106,12 +118,12 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 		
 		@Override
 		public int getCount() {
-			return mContentList.size();
+			return mCollectList==null?0:mCollectList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return mContentList.get(position);
+			return mCollectList.get(position);
 		}
 
 		@Override
@@ -138,7 +150,7 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
-			ContentType contentType= mContentList.get(position);
+			Collect contentType= mCollectList.get(position);
 			if(contentType!=null){
 				ImageLoader.getInstance().displayImage(contentType.getImgUrl(), holder.mImage,Config.getInstance().getDisplayImageOptions());
 				holder.mTitle.setText(contentType.getTitle());
@@ -148,8 +160,8 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					
 					@Override
 					public void onClick(View v) {
-						ContentType temp = mContentList.remove(position);
-						mContentList.add(0, temp);
+						Collect temp = mCollectList.remove(position);
+						mCollectList.add(0, temp);
 						mSwipeListView.resetItem();
 						notifyDataSetChanged();
 					}
@@ -159,7 +171,7 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					
 					@Override
 					public void onClick(View v) {
-						mContentList.remove(position);
+						mCollectList.remove(position);
 						mSwipeListView.deleteItem();
 						notifyDataSetChanged();
 					}

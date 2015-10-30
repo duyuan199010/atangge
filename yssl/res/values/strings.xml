@@ -37,4 +37,9 @@
     <string name="check_update">检查更新</string>
     <string name="score_atangge">为阿汤哥评分</string>
     <string name="score_error">您的设备没有安装app下载渠道</string>
+
+    <!-- detail -->
+    <string name="details_collect">收藏</string>
+    <string name="details_praise">点赞</string>
+    <string name="details_share">分享</string>
 </resources>
