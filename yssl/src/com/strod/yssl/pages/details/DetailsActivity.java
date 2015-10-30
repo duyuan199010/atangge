@@ -17,6 +17,7 @@ import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.TitleBar;
+import com.strod.yssl.view.WebViewProgress;
 
 /**
  * article details activity
@@ -32,7 +33,7 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 	private ContentType mContentType;
 
 	private TitleBar mTitleBar;
-	private WebView mWebView;
+	private WebViewProgress mWebView;
 
 	final class JavaScriptInterface {
 		public void onImageClick(String imageUrl) {
@@ -85,7 +86,7 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 			}
 		});
 
-		mWebView = (WebView) findViewById(R.id.webview);
+		mWebView = (WebViewProgress) findViewById(R.id.webview);
 		setWebView(mWebView);
 	}
 
@@ -98,6 +99,8 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 		mWebView.loadUrl(mContentType.getContentUrl());
 	}
 
+
+
 	final class MyWebViewClient extends WebViewClient {
 
 		@Override
@@ -109,17 +112,20 @@ public class DetailsActivity extends AbsFragmentActivity implements OnClickListe
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 			super.onPageStarted(view, url, favicon);
+
 		}
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			view.loadUrl("javascript:window.js.showSource('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
 			super.onPageFinished(view, url);
+
 		}
 
 		@Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			super.onReceivedError(view, errorCode, description, failingUrl);
+
 		}
 
 	}
