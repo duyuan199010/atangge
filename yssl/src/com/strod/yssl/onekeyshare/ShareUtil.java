@@ -29,7 +29,7 @@ public class ShareUtil {
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(title);
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl(imgUrl);
+		oks.setTitleUrl(contentUrl);
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(content);
 		oks.setImageUrl(imgUrl);

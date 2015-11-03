@@ -96,9 +96,9 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 		PlatformListFakeActivity platformListFakeActivity;
 		try {
 			if(OnekeyShareTheme.SKYBLUE == theme){
-				platformListFakeActivity = (PlatformListFakeActivity) Class.forName("cn.sharesdk.onekeyshare.theme.skyblue.PlatformListPage").newInstance();
+				platformListFakeActivity = (PlatformListFakeActivity) Class.forName("com.strod.yssl.onekeyshare.theme.skyblue.PlatformListPage").newInstance();
 			}else{
-				platformListFakeActivity = (PlatformListFakeActivity) Class.forName("cn.sharesdk.onekeyshare.theme.classic.PlatformListPage").newInstance();
+				platformListFakeActivity = (PlatformListFakeActivity) Class.forName("com.strod.yssl.onekeyshare.theme.classic.PlatformListPage").newInstance();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
