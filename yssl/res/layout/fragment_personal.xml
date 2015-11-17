@@ -5,62 +5,73 @@
     android:cacheColorHint="#00000000"
     android:dividerHeight="1px"
     android:fadingEdge="none"
-    android:fastScrollEnabled="false" >
+    android:fastScrollEnabled="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <RelativeLayout
+
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/personal_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_background_selector"
-            android:clickable="true" >
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
             <ImageView
                 android:id="@+id/head_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/default_round_image" />
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                 />
 
             <TextView
                 android:id="@+id/user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/head_img"
                 android:singleLine="true"
                 android:text="atangge" />
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow_right" />
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <RelativeLayout
+
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/publish_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_background_selector"
-            android:clickable="true" >
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/account_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center"
                 android:text="@string/mine_publish" />
 
             <ImageView
@@ -68,31 +79,32 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_little"
                 android:background="@drawable/arrow_right" />
-        </RelativeLayout>
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <RelativeLayout
+
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/night_mode_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/account_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center"
                 android:text="@string/night_mode" />
 
             <com.strod.yssl.view.SwitchButton
@@ -102,36 +114,32 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin" />
-        </RelativeLayout>
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider_color" />
 
-        <RelativeLayout
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/feed_back_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_background_selector"
-            android:clickable="true" >
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/account_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center"
                 android:text="@string/feed_back" />
 
             <ImageView
@@ -139,33 +147,33 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_little"
                 android:background="@drawable/arrow_right" />
-        </RelativeLayout>
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <RelativeLayout
+
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/about_our_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_background_selector"
-            android:clickable="true" >
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/account_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center"
                 android:text="@string/about_our" />
 
             <ImageView
@@ -173,33 +181,32 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_little"
                 android:background="@drawable/arrow_right" />
-        </RelativeLayout>
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <RelativeLayout
+
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/setting_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_background_selector"
-            android:clickable="true" >
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin_little"
-                android:background="@drawable/default_round_image" />
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/account_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center"
                 android:text="@string/setting" />
 
             <ImageView
@@ -207,22 +214,31 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_little"
                 android:background="@drawable/arrow_right" />
-        </RelativeLayout>
+        </com.strod.yssl.view.RippleView>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/divider_color" />
 
-        <TextView
+        <com.strod.yssl.view.RippleView xmlns:ripple="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/exit_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="@dimen/margin_ordinary"
-            android:text="@string/exit_account" />
+            android:padding="8dp"
+            ripple:rv_color="#88888888"
+            ripple:rv_rippleDuration="400"
+            ripple:rv_type="rectangle">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/margin_ordinary"
+                android:text="@string/exit_account" />
+        </com.strod.yssl.view.RippleView>
     </LinearLayout>
 
 </ScrollView>

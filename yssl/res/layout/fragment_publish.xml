@@ -2,13 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:padding="16dp"
     android:orientation="vertical" >
 
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="publish"
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/edit_background"
+       android:padding="8dp"
+       android:hint="@string/publish_title_hint"
+       android:textSize="12sp"
+       android:singleLine="true"
+       android:maxLength="40"
+       />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_background"
+        android:hint="@string/publish_content_hint"
+        android:gravity="left"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:maxLength="40"
         />
 
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:gravity="center" >
+    </GridView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/publish_image_hint"
+        android:textSize="12sp"
+        android:gravity="left" />
 </LinearLayout>

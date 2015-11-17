@@ -20,7 +20,7 @@ import com.strod.yssl.pages.main.MainActivity;
  *
  */
 public class SplashActivity extends AbsFragmentActivity {
-	
+
 	/**the timer task delay*/
 	public static final long DELAY = 1500;
 	public static final int START_ACTIVITY = 0;

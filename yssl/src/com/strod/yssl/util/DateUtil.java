@@ -8,7 +8,7 @@ public class DateUtil {
 	public static String formatDateToString(long time) {
 		String interval = "";
 		//当前时间和time时间的间隔
-		long millis = System.currentTimeMillis() - time;
+		long millis = System.currentTimeMillis() - time*1000;
 		if (millis / 1000 < 10 && millis / 1000 >= 0) {
 			// 如果时间间隔小于10秒则显示“刚刚”millis/10得出的时间间隔的单位是秒
 			interval = "刚刚";
@@ -31,11 +31,11 @@ public class DateUtil {
 		} else if (isTimeInThisYear(time)){
 			// 大于24小时，在今年内，则显示正常的时间，但是不显示秒
 			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
-			interval = sdf.format(new Date(time));
+			interval = sdf.format(new Date(time*1000));
 		}else{
 			// 不在今年内，则显示正常的时间，但是不显示秒
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			interval = sdf.format(new Date(time));
+			interval = sdf.format(new Date(time*1000));
 		}
 		return interval;
 	}

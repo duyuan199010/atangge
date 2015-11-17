@@ -51,7 +51,7 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 	private boolean disableSSO;
 	private HashMap<String, String> hiddenPlatforms;
 	private View bgView;
-	private OnekeyShareTheme theme;
+	private OnekeyShareTheme theme = OnekeyShareTheme.SKYBLUE;
 
 	private Context context;
 	private PlatformListFakeActivity.OnShareButtonClickListener onShareButtonClickListener;

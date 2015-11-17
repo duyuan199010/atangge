@@ -40,7 +40,7 @@ public abstract class AbsConfig {
 		
 	/**database name*/
 	protected String mDatabaseName;
-	
+
 	private static String mRootDirectory = Environment.getExternalStorageDirectory() + "/Atangge";
 
 	public static String getRootDirectory(){

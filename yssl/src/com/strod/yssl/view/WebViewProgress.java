@@ -10,13 +10,13 @@ import android.widget.ProgressBar;
  * Created by Administrator on 2015/10/30.
  */
 public class WebViewProgress extends WebView{
-    private ProgressBar progressbar;
+    private ProgressBar mProgressBar;
 
     public WebViewProgress(Context context, AttributeSet attrs) {
         super(context, attrs);
-        progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
-        progressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
-        addView(progressbar);
+        mProgressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        mProgressBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 5, 0, 0));
+        addView(mProgressBar);
         setWebChromeClient(new MyWebChromeClient());
     }
 
@@ -24,11 +24,11 @@ public class WebViewProgress extends WebView{
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             if (newProgress == 100) {
-                progressbar.setVisibility(GONE);
+                mProgressBar.setVisibility(GONE);
             } else {
-                if (progressbar.getVisibility() == GONE)
-                    progressbar.setVisibility(VISIBLE);
-                progressbar.setProgress(newProgress);
+                if (mProgressBar.getVisibility() == GONE)
+                    mProgressBar.setVisibility(VISIBLE);
+                mProgressBar.setProgress(newProgress);
             }
             super.onProgressChanged(view, newProgress);
         }
@@ -37,10 +37,10 @@ public class WebViewProgress extends WebView{
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        LayoutParams lp = (LayoutParams) progressbar.getLayoutParams();
+        LayoutParams lp = (LayoutParams) mProgressBar.getLayoutParams();
         lp.x = l;
         lp.y = t;
-        progressbar.setLayoutParams(lp);
+        mProgressBar.setLayoutParams(lp);
         super.onScrollChanged(l, t, oldl, oldt);
     }
 }

@@ -85,7 +85,39 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			mContentList = new ArrayList<ContentType>();
 			readCache();
 		}
-		
+
+//		mContentList = new ArrayList<ContentType>();
+//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//
+//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,""));
+//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//
+//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//
+//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//
+//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
+
+
 		initView(rootView);
 
 		return rootView;

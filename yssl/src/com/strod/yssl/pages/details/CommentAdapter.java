@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.strod.yssl.R;
 import com.strod.yssl.bean.details.Comment.CommentType;
-import com.strod.yssl.bean.main.Article.ContentType;
 import com.strod.yssl.util.DateUtil;
 
 /**
@@ -52,7 +51,7 @@ public class CommentAdapter extends BaseAdapter{
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.item_content_list, null);
+			convertView = mInflater.inflate(R.layout.item_content_list_left, null);
 			holder.mImage = (ImageView) convertView.findViewById(R.id.content_img);
 			holder.mTitle = (TextView) convertView.findViewById(R.id.content_title);
 			holder.mContent = (TextView) convertView.findViewById(R.id.content_detail);

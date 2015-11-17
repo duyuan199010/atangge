@@ -11,12 +11,14 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
 import android.os.Environment;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.roid.AbsApplication;
 import com.roid.config.AbsConfig;
 import com.roid.util.DebugLog;
@@ -52,7 +54,7 @@ public class Config extends AbsConfig {
 	
 	/**image display options*/
 	private DisplayImageOptions mOptions;
-	private DisplayImageOptions mRoundOptions;
+	private DisplayImageOptions mCircleOptions;
 	/**
 	 * get siglon instance
 	 * 
@@ -105,15 +107,17 @@ public class Config extends AbsConfig {
 	        .showImageOnFail(R.drawable.default_image)       // 设置图片加载或解码过程中发生错误显示的图片      
 	        .cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中  
 	        .cacheOnDisk(true)                       // 设置下载的图片是否缓存在SD卡中  
-	        .displayer(new RoundedBitmapDisplayer(0))  // 设置成圆角图片  
+	        .displayer(new SimpleBitmapDisplayer())  // 设置成图片
 	        .build();
-		mRoundOptions=new DisplayImageOptions.Builder()
-		.showImageOnLoading(R.drawable.default_round_image)          // 设置图片下载期间显示的图片  
-		.showImageForEmptyUri(R.drawable.default_round_image)  // 设置图片Uri为空或是错误的时候显示的图片  
+
+		mCircleOptions=new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.default_image)          // 设置图片下载期间显示的图片
+		.showImageForEmptyUri(R.drawable.default_image)  // 设置图片Uri为空或是错误的时候显示的图片
 		.showImageOnFail(R.drawable.default_round_image)       // 设置图片加载或解码过程中发生错误显示的图片      
 		.cacheInMemory(true)                        // 设置下载的图片是否缓存在内存中  
-		.cacheOnDisk(true)                       // 设置下载的图片是否缓存在SD卡中  
-		.displayer(new RoundedBitmapDisplayer(100))  // 设置成圆角图片  
+		.cacheOnDisk(true)                       // 设置下载的图片是否缓存在SD卡中
+		.considerExifParams(true)
+		.displayer(new CircleBitmapDisplayer(Color.WHITE,5))  // 设置成圆型图片
 		.build();
 		imageLoader.init(ImageLoaderConfiguration.createDefault(MyApplication.getApplication()));
 		
@@ -123,8 +127,8 @@ public class Config extends AbsConfig {
 		return mOptions;
 	}
 	
-	public DisplayImageOptions getDisplayImageOptionsRound(){
-		return mRoundOptions;
+	public DisplayImageOptions getDisplayImageOptionsCircle(){
+		return mCircleOptions;
 	}
 	
 	/**

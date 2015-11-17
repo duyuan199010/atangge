@@ -121,7 +121,12 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 		}
 		long size = contentCache + imageCache;
 		if (size > 1024 * 1024) {// M
-			cacheSize = String.format("%.1fM", size / (1024 * 1024.0));
+			if(size < 50*1024*1024){
+				cacheSize = String.format("%.1fM", size / (1024 * 1024.0));
+			}else {
+				cacheSize = "大于50M";
+			}
+
 		} else {
 			cacheSize = String.format("%.1fKB", size / 1024.0);
 		}

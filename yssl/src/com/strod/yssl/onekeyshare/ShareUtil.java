@@ -23,6 +23,8 @@ public class ShareUtil {
 		// 关闭sso授权
 		oks.disableSSOWhenAuthorize();
 
+		oks.setDialogMode();
+
 		// 分享时Notification的图标和文字 2.5.9以后的版本不调用此方法
 		// oks.setNotification(R.drawable.ic_launcher,
 		// getString(R.string.app_name));

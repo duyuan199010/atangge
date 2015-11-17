@@ -19,19 +19,22 @@
     <!-- Personal -->
     <string name="mine_publish">我的发表</string>
     <string name="night_mode">夜间模式</string>
-    <string name="translucent_status_tips">只支持4.4以上系统</string>
-    <string name="translucent_status">透明状态栏</string>
-    <string name="feed_back">意见反馈</string>
+    <string name="feed_back">我要吐槽</string>
     <string name="about_our">关于我们</string>
     <string name="setting">设　　置</string>
     <string name="exit_account">退出账号</string>
-    
+
+    <!-- publish -->
+    <string name="publish_title_hint">请输入汤的标题</string>
+    <string name="publish_content_hint">您的汤的做法以及功效等,我们审核后才能发布哦!</string>
+    <string name="publish_image_hint">(只支持最多三张图片,长按图片可以删除已添加图片)</string>
+
     <!-- Collect -->
     <string name="item_top">置顶</string>
     <string name="item_delete">删除</string>
     
     <!-- setting -->
-    <string name="unwifi_download">非Wi-Fi网络不下载图片</string>
+    <string name="unwifi_download">仅Wi-Fi网络下载图片</string>
     <string name="clear_cache">手动清理缓存</string>
     <string name="has_clear_cache">已经清理过缓存啦!</string>
     <string name="check_update">检查更新</string>
@@ -42,4 +45,17 @@
     <string name="details_collect">收藏</string>
     <string name="details_praise">点赞</string>
     <string name="details_share">分享</string>
+
+    <!-- login -->
+    <string name="login">登录</string>
+    <!-- about us -->
+    <string name="version_name">版本号:%s</string>
+    <string name="wechat_number">微信公众号:药膳食疗研究院</string>
+    
+    <!-- feed back -->
+    <string name="feed_back_hint">请输入您的意见，我们将不断改进</string>
+    <string name="contact_hint">(选填)您的联系方式:邮箱或电话</string>
+    <string name="submit">提  交</string>
+    <string name="feed_back_empty">请输入您的意见</string>
+
 </resources>
