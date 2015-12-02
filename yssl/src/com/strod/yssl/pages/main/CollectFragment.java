@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
+import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article;
 import com.strod.yssl.bean.main.Collect;
@@ -28,11 +31,16 @@ import com.strod.yssl.database.DatabaseHelper;
 import com.strod.yssl.pages.details.DetailsActivity;
 import com.strod.yssl.view.swipelistview.OnDeleteListioner;
 import com.strod.yssl.view.swipelistview.SwipeListView;
+import com.strod.yssl.view.swipemenulistview.SwipeMenu;
+import com.strod.yssl.view.swipemenulistview.SwipeMenuCreator;
+import com.strod.yssl.view.swipemenulistview.SwipeMenuItem;
+import com.strod.yssl.view.swipemenulistview.SwipeMenuListView;
 
 public class CollectFragment extends AbsFragment implements OnDeleteListioner,OnItemClickListener{
 	
 	/**UI listview*/
-	private SwipeListView mSwipeListView;
+//	private SwipeListView mSwipeListView;
+	private SwipeMenuListView mSwipeListView;
 	/** listview datasource */
 	private List<Collect> mCollectList;
 	/**listview adapter*/
@@ -65,11 +73,43 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 
 
 	private void initView(View rootView){
-		mSwipeListView = (SwipeListView) rootView.findViewById(R.id.swipe_list_view);
+//		mSwipeListView = (SwipeListView) rootView.findViewById(R.id.swipe_list_view);
+		mSwipeListView = (SwipeMenuListView) rootView.findViewById(R.id.swipe_list_view);
 		mCollectAdapter = new CollectAdapter();
 		mSwipeListView.setAdapter(mCollectAdapter);
-		mSwipeListView.setDeleteListioner(this);
+//		mSwipeListView.setDeleteListioner(this);
 		mSwipeListView.setOnItemClickListener(this);
+
+		SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity().getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(80);
+                deleteItem.setTitle("删除");
+                deleteItem.setTitleSize(18);
+                deleteItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        // set creator
+		mSwipeListView.setMenuCreator(creator);
+		mSwipeListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+				switch (index) {
+					case 0:
+						Toaster.showDefToast(getActivity(),"delete:"+position);
+						break;
+				}
+				// false : close the menu; true : not close the menu
+				return false;
+			}
+		});
 	}
 	
 	@Override
@@ -162,7 +202,7 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					public void onClick(View v) {
 						Collect temp = mCollectList.remove(position);
 						mCollectList.add(0, temp);
-						mSwipeListView.resetItem();
+//						mSwipeListView.resetItem();
 						notifyDataSetChanged();
 					}
 				});
@@ -172,7 +212,7 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 					@Override
 					public void onClick(View v) {
 						mCollectList.remove(position);
-						mSwipeListView.deleteItem();
+//						mSwipeListView.deleteItem();
 						notifyDataSetChanged();
 					}
 				});
