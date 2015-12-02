@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/TranslucentStatus_Bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <com.strod.yssl.view.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg_color"
+        />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title_bar"
+            android:background="?attr/bgColor"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/feed_back"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:background="@drawable/edit_background"
+                android:maxLength="150"
+                android:textSize="12sp"
+                android:gravity="left"
+                android:hint="@string/feed_back_hint"
+                />
+            <EditText
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="12sp"
+                android:background="@drawable/edit_background"
+                android:maxLength="20"
+                android:gravity="left|center_vertical"
+                android:hint="@string/contact_hint"
+                />
+
+            <com.strod.yssl.view.RippleView
+                xmlns:ripple="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ripple_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                ripple:rv_type="rectangle"
+                ripple:rv_color ="#88888888"
+                ripple:rv_rippleDuration="400"
+                >
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/btn_shape_background"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:text="@string/submit"/>
+            </com.strod.yssl.view.RippleView>
+        </LinearLayout>
+
+</RelativeLayout>

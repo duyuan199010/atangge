@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.strod.yssl.view.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ripple_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    ripple:rv_type="rectangle"
+    ripple:rv_color ="#88888888"
+    ripple:rv_rippleDuration="400"
+    >
+                
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+     >
+
+    <ImageView
+        android:id="@+id/content_img"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/content_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/content_img" />
+    
+    <TextView
+        android:id="@+id/content_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="2"
+        android:layout_below="@+id/content_title"
+        android:layout_toRightOf="@+id/content_img" />
+    
+    <TextView
+        android:id="@+id/content_collect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="50dp"
+        android:maxWidth="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/content_detail"
+        android:layout_toRightOf="@+id/content_img"
+        android:text="collect" />
+    
+    <TextView
+        android:id="@+id/content_praise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="50dp"
+        android:maxWidth="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/content_detail"
+        android:layout_toRightOf="@+id/content_collect"
+        android:text="praise" />
+
+    <TextView
+        android:id="@+id/content_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:minWidth="50dp"
+        android:maxWidth="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/content_detail"
+        android:layout_toRightOf="@+id/content_praise"
+        android:layout_alignParentRight="true"
+        android:text="source" />
+
+
+    </RelativeLayout>
+</com.strod.yssl.view.RippleView>
