@@ -183,7 +183,26 @@ public class Config extends AbsConfig {
 	public boolean getUnWifiDownload(){
 		return mSharedPreferences.getBoolean(UNWIFI_DOWNLOAD, true);
 	}
-	
+
+
+	/**
+	 * set last refresh time
+	 */
+	public void setLastRefreshTime(String key,long time){
+		Editor editor = mSharedPreferences.edit();
+		String hashKey = hashKeyForDisk(key);
+		editor.putLong(hashKey, time);
+		editor.commit();
+	}
+
+	/**
+	 * get last refresh time
+	 * @return
+	 */
+	public long getLastRefreshTime(String key){
+		String hashKey = hashKeyForDisk(key);
+		return mSharedPreferences.getLong(hashKey, 0);
+	}
 	
 	/**
 	 * get disk cache file
