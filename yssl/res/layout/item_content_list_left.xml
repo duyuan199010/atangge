@@ -4,79 +4,89 @@
     android:id="@+id/ripple_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    ripple:rv_type="rectangle"
-    ripple:rv_color ="#88888888"
+    ripple:rv_color="#88888888"
     ripple:rv_rippleDuration="400"
-    >
-                
-<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-     >
+    ripple:rv_type="rectangle">
 
-    <ImageView
-        android:id="@+id/content_img"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:scaleType="fitXY"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/content_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/content_img" />
-    
-    <TextView
-        android:id="@+id/content_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:maxLines="2"
-        android:layout_below="@+id/content_title"
-        android:layout_toRightOf="@+id/content_img" />
-    
-    <TextView
-        android:id="@+id/content_collect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="50dp"
-        android:maxWidth="100dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/content_detail"
-        android:layout_toRightOf="@+id/content_img"
-        android:text="collect" />
-    
-    <TextView
-        android:id="@+id/content_praise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="50dp"
-        android:maxWidth="100dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/content_detail"
-        android:layout_toRightOf="@+id/content_collect"
-        android:text="praise" />
+        <ImageView
+            android:id="@+id/content_img"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY" />
 
-    <TextView
-        android:id="@+id/content_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:minWidth="50dp"
-        android:maxWidth="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/content_detail"
-        android:layout_toRightOf="@+id/content_praise"
-        android:layout_alignParentRight="true"
-        android:text="source" />
+        <TextView
+            android:id="@+id/content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/content_img"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="?attr/fontTitleColor"
+            android:textSize="@dimen/font_size_fourteen" />
+
+        <TextView
+            android:id="@+id/content_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_title"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/content_img"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_twelve" />
+
+        <TextView
+            android:id="@+id/content_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_detail"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/content_img"
+            android:maxWidth="100dp"
+            android:minWidth="50dp"
+            android:text="collect"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
+
+        <TextView
+            android:id="@+id/content_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_detail"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/content_collect"
+            android:maxWidth="100dp"
+            android:minWidth="50dp"
+            android:text="praise"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
+
+        <TextView
+            android:id="@+id/content_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/content_detail"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/content_praise"
+            android:gravity="right"
+            android:maxWidth="100dp"
+            android:minWidth="50dp"
+            android:text="source"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
 
 
     </RelativeLayout>

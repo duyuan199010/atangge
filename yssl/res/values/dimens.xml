@@ -11,6 +11,8 @@
     <dimen name="font_size_twenty">20sp</dimen>
     <dimen name="font_size_sixteen">16sp</dimen>
     <dimen name="font_size_fourteen">14sp</dimen>
+    <dimen name="font_size_twelve">12sp</dimen>
+    <dimen name="font_size_ten">10sp</dimen>
     <dimen name="item_size_left">18sp</dimen>
     <dimen name="item_size_time">14sp</dimen>
     <dimen name="detail_size_type">18dp</dimen>

@@ -17,39 +17,41 @@
             android:id="@+id/content_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true" />
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="?attr/fontTitleColor"
+            android:textSize="@dimen/font_size_fourteen" />
 
         <LinearLayout
             android:id="@+id/img_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/content_title"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:layout_below="@+id/content_title">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/content_img"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:scaleType="fitXY"
                 android:layout_weight="1"
-                />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/content_second_img"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="8dp"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/content_third_img"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="8dp"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <TextView
@@ -60,7 +62,9 @@
             android:layout_marginTop="8dp"
             android:maxWidth="100dp"
             android:minWidth="50dp"
-            android:text="collect" />
+            android:text="collect"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
 
         <TextView
             android:id="@+id/content_praise"
@@ -72,7 +76,9 @@
             android:layout_toRightOf="@+id/content_collect"
             android:maxWidth="100dp"
             android:minWidth="50dp"
-            android:text="praise" />
+            android:text="praise"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
 
         <TextView
             android:id="@+id/content_source"
@@ -84,7 +90,9 @@
             android:layout_toRightOf="@+id/content_praise"
             android:maxWidth="100dp"
             android:minWidth="50dp"
-            android:text="source" />
+            android:text="source"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
 
         <TextView
             android:id="@+id/content_time"
@@ -95,6 +103,8 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/content_source"
             android:gravity="right"
-            android:text="time" />
+            android:text="time"
+            android:textColor="?attr/fontContentColor"
+            android:textSize="@dimen/font_size_ten" />
     </RelativeLayout>
 </com.strod.yssl.view.RippleView>

@@ -33,9 +33,10 @@
                 android:padding="8dp"
                 android:background="@drawable/edit_background"
                 android:maxLength="150"
-                android:textSize="12sp"
                 android:gravity="left"
                 android:hint="@string/feed_back_hint"
+                android:textSize="@dimen/font_size_twelve"
+                android:textColor="?attr/fontContentColor"
                 />
             <EditText
                 android:id="@+id/contact"
@@ -43,11 +44,12 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_marginTop="16dp"
-                android:textSize="12sp"
                 android:background="@drawable/edit_background"
                 android:maxLength="20"
                 android:gravity="left|center_vertical"
                 android:hint="@string/contact_hint"
+                android:textSize="@dimen/font_size_twelve"
+                android:textColor="?attr/fontContentColor"
                 />
 
             <com.strod.yssl.view.RippleView

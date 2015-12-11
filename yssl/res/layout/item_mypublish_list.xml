@@ -27,6 +27,8 @@
             android:id="@+id/content_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_fourteen"
+            android:textColor="?attr/fontTitleColor"
             android:singleLine="true"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/content_img" />
@@ -35,6 +37,8 @@
             android:id="@+id/content_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_twelve"
+            android:textColor="?attr/fontContentColor"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:maxLines="2"

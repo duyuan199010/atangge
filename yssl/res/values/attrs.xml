@@ -3,8 +3,9 @@
 
     <attr name="bgColor" format="color" />  
     <attr name="bottomBgColor" format="color" />  
-    <attr name="fontColor" format="color" />  
-    <attr name="floatValue" format="float" />  
+    <attr name="fontTitleColor" format="color" />
+    <attr name="fontContentColor" format="color" />
+    <attr name="floatValue" format="float" />
     <attr name="integerValue" format="integer" />  
     <attr name="booleanValue" format="boolean" />  
     <attr name="dimensionValue" format="dimension" />  
