@@ -68,7 +68,7 @@ public class CommentAdapter extends BaseAdapter{
 			holder.mContent.setText(contentType.getContent());
 			holder.mCollect.setText(contentType.getCollectNum()+"");
 			holder.mPraise.setText(contentType.getPraiseNum()+"");
-			holder.mTime.setText(DateUtil.formatDateToString(contentType.getTime()));
+			holder.mTime.setText(DateUtil.formatDateToString(contentType.getTime()*1000));
 		}
 		return convertView;
 	}

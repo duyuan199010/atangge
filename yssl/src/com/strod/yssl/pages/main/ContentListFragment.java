@@ -157,6 +157,36 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		mPullRefreshListView.setAdapter(mAdapter);
 
 		mPullRefreshListView.setOnRefreshListener(this);
+		mPullRefreshListView.setOnPullEventListener(new PullToRefreshBase.OnPullEventListener<ListView>() {
+			@Override
+			public void onPullEvent(PullToRefreshBase<ListView> refreshView, PullToRefreshBase.State state, PullToRefreshBase.Mode direction) {
+				if (state.equals(PullToRefreshBase.State.PULL_TO_REFRESH)) {
+
+					if (direction == PullToRefreshBase.Mode.PULL_FROM_START){
+						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_pull_label));
+						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_release_label));
+						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_refreshing_label));
+
+						String key = mItemType.getItemId() + mItemType.getName();
+						long lastRefreshTime = Config.getInstance().getLastRefreshTime(key);
+
+						//have last refresh time,update label
+						if (lastRefreshTime != 0) {
+							String label = DateUtil.formatDateToString(lastRefreshTime);
+							// Update the LastUpdatedLabel
+							refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
+						}
+					}else if (direction == PullToRefreshBase.Mode.PULL_FROM_END){
+						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_from_bottom_pull_label));
+						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_from_bottom_release_label));
+						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_from_bottom_refreshing_label));
+
+						refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("");
+					}
+
+				}
+			}
+		});
 //		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
 		
@@ -203,11 +233,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-//		String label = DateUtil.formatDateToString(System.currentTimeMillis());
-		String label = DateUtils.formatDateTime(getActivity().getApplicationContext(), System.currentTimeMillis(),
-				DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-		// Update the LastUpdatedLabel
-		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+		//save refresh time
+		String key = mItemType.getItemId() + mItemType.getName();
+		Config.getInstance().setLastRefreshTime(key,System.currentTimeMillis());
 
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.REFRESH,getRefreshTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
@@ -217,11 +245,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-//		String label = DateUtil.formatDateToString(System.currentTimeMillis());
-		String label = DateUtils.formatDateTime(getActivity().getApplicationContext(), System.currentTimeMillis(),
-				DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-		// Update the LastUpdatedLabel
-		refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.LOAD_MORE,getLoadMoreTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_LOADMORE, HttpRequestURL.CONTENT_LIST, 

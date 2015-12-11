@@ -97,7 +97,7 @@ public class ContentListAdapter extends BaseAdapter{
 					holderBig.mCollect.setText("收藏:"+contentType.getCollectNum());
 					holderBig.mPraise.setText("点赞:"+contentType.getPraiseNum()+"");
 					holderBig.mSource.setText("来源:"+contentType.getSource());
-					holderBig.mTime.setText(DateUtil.formatDateToString(contentType.getTime()));
+					holderBig.mTime.setText(DateUtil.formatDateToString(contentType.getTime()*1000));
 				}
 				break;
 			case LEFT_IMG:
@@ -149,7 +149,7 @@ public class ContentListAdapter extends BaseAdapter{
 					holderThird.mCollect.setText("收藏:"+contentType.getCollectNum());
 					holderThird.mPraise.setText("点赞:"+contentType.getPraiseNum());
 					holderThird.mSource.setText("来源:"+contentType.getSource());
-					holderThird.mTime.setText(DateUtil.formatDateToString(contentType.getTime()));
+					holderThird.mTime.setText(DateUtil.formatDateToString(contentType.getTime()*1000));
 				}
 				break;
 			default:
