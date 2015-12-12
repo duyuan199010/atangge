@@ -163,9 +163,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 				if (state.equals(PullToRefreshBase.State.PULL_TO_REFRESH)) {
 
 					if (direction == PullToRefreshBase.Mode.PULL_FROM_START){
-						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_pull_label));
-						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_release_label));
-						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_refreshing_label));
+//						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_pull_label));
+//						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_release_label));
+//						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_refreshing_label));
 
 						String key = mItemType.getItemId() + mItemType.getName();
 						long lastRefreshTime = Config.getInstance().getLastRefreshTime(key);
@@ -177,9 +177,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 							refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
 						}
 					}else if (direction == PullToRefreshBase.Mode.PULL_FROM_END){
-						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_from_bottom_pull_label));
-						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_from_bottom_release_label));
-						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_from_bottom_refreshing_label));
+//						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_from_bottom_pull_label));
+//						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_from_bottom_release_label));
+//						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_from_bottom_refreshing_label));
 
 						refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("");
 					}
