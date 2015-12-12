@@ -58,6 +58,14 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 		super(context, mode, style);
 	}
 
+	public ILoadingLayout getHeaderLoadingLayout() {
+		return mHeaderLoadingView;
+	}
+
+	public ILoadingLayout getFooterLoadingLayout() {
+		return mFooterLoadingView;
+	}
+
 	@Override
 	public final Orientation getPullToRefreshScrollDirection() {
 		return Orientation.VERTICAL;
