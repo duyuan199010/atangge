@@ -175,6 +175,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 							String label = DateUtil.formatDateToString(lastRefreshTime);
 							// Update the LastUpdatedLabel
 							refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
+							mPullRefreshListView.getHeaderLoadingLayout().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
 						}
 					}else if (direction == PullToRefreshBase.Mode.PULL_FROM_END){
 //						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_from_bottom_pull_label));
@@ -182,6 +183,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 //						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_from_bottom_refreshing_label));
 
 						refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("");
+						mPullRefreshListView.getFooterLoadingLayout().setLastUpdatedLabel("");
 					}
 
 				}

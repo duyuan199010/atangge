@@ -244,9 +244,19 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 			refreshingImpl();
 		}
 
+		//listview refresh display lastUpdateTime
+//		if (null != mSubHeaderText) {
+//			mSubHeaderText.setVisibility(View.GONE);
+//		}
+
 		if (null != mSubHeaderText) {
-			mSubHeaderText.setVisibility(View.GONE);
+			if (TextUtils.isEmpty(mSubHeaderText.getText())) {
+				mSubHeaderText.setVisibility(View.GONE);
+			} else {
+				mSubHeaderText.setVisibility(View.VISIBLE);
+			}
 		}
+
 	}
 
 	public final void releaseToRefresh() {
