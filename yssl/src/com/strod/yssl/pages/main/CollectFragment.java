@@ -3,7 +3,6 @@ package com.strod.yssl.pages.main;
 /**
  * 页面
  */
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -22,6 +21,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
+import com.roid.util.ScreenUtils;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.bean.main.Article;
@@ -29,17 +29,14 @@ import com.strod.yssl.bean.main.Collect;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.database.DatabaseHelper;
 import com.strod.yssl.pages.details.DetailsActivity;
-import com.strod.yssl.view.swipelistview.OnDeleteListioner;
-import com.strod.yssl.view.swipelistview.SwipeListView;
 import com.strod.yssl.view.swipemenulistview.SwipeMenu;
 import com.strod.yssl.view.swipemenulistview.SwipeMenuCreator;
 import com.strod.yssl.view.swipemenulistview.SwipeMenuItem;
 import com.strod.yssl.view.swipemenulistview.SwipeMenuListView;
 
-public class CollectFragment extends AbsFragment implements OnDeleteListioner,OnItemClickListener{
+public class CollectFragment extends AbsFragment implements OnItemClickListener{
 	
 	/**UI listview*/
-//	private SwipeListView mSwipeListView;
 	private SwipeMenuListView mSwipeListView;
 	/** listview datasource */
 	private List<Collect> mCollectList;
@@ -73,27 +70,37 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 
 
 	private void initView(View rootView){
-//		mSwipeListView = (SwipeListView) rootView.findViewById(R.id.swipe_list_view);
 		mSwipeListView = (SwipeMenuListView) rootView.findViewById(R.id.swipe_list_view);
 		mCollectAdapter = new CollectAdapter();
 		mSwipeListView.setAdapter(mCollectAdapter);
-//		mSwipeListView.setDeleteListioner(this);
 		mSwipeListView.setOnItemClickListener(this);
 
 		SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity().getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
-                // set item width
-                deleteItem.setWidth(80);
-                deleteItem.setTitle("删除");
-                deleteItem.setTitleSize(18);
-                deleteItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(deleteItem);
+				// create "top" item
+				SwipeMenuItem topItem = new SwipeMenuItem(getActivity().getApplicationContext());
+				// set item background
+				topItem.setBackground(new ColorDrawable(Color.rgb(0xFF, 0xD7, 0x00)));
+				// set item width
+				topItem.setWidth(ScreenUtils.dip2px(getActivity(),90));
+				topItem.setTitle(getString(R.string.item_top));
+				topItem.setTitleSize(18);
+				topItem.setTitleColor(Color.WHITE);
+				// add to menu
+				menu.addMenuItem(topItem);
+
+				// create "delete" item
+				SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity().getApplicationContext());
+				// set item background
+				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+				// set item width
+				deleteItem.setWidth(ScreenUtils.dip2px(getActivity(),90));
+				deleteItem.setTitle(getString(R.string.item_delete));
+				deleteItem.setTitleSize(18);
+				deleteItem.setTitleColor(Color.WHITE);
+				// add to menu
+				menu.addMenuItem(deleteItem);
             }
         };
         // set creator
@@ -103,18 +110,19 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 			public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 				switch (index) {
 					case 0:
-						Toaster.showDefToast(getActivity(),"delete:"+position);
+						Collect temp = mCollectList.remove(position);
+						mCollectList.add(0, temp);
+						mCollectAdapter.notifyDataSetChanged();
+						break;
+					case 1:
+						mCollectList.remove(position);
+						mCollectAdapter.notifyDataSetChanged();
 						break;
 				}
 				// false : close the menu; true : not close the menu
 				return false;
 			}
 		});
-	}
-	
-	@Override
-	public boolean isCandelete(int position) {
-		return true;
 	}
 	
 	@Override
@@ -182,9 +190,6 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 				holder.mTitle = (TextView) convertView.findViewById(R.id.content_title);
 				holder.mContent = (TextView) convertView.findViewById(R.id.content_detail);
 				
-				holder.mTop = (TextView) convertView.findViewById(R.id.item_top);
-				holder.mDelete = (TextView) convertView.findViewById(R.id.item_delete);
-				
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -192,30 +197,9 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 			
 			Collect contentType= mCollectList.get(position);
 			if(contentType!=null){
-				ImageLoader.getInstance().displayImage(contentType.getImgUrl(), holder.mImage,Config.getInstance().getDisplayImageOptions());
+				ImageLoader.getInstance().displayImage(contentType.getImgUrl(), holder.mImage, Config.getInstance().getDisplayImageOptions());
 				holder.mTitle.setText(contentType.getTitle());
 				holder.mContent.setText(contentType.getContent());
-				
-				holder.mTop.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						Collect temp = mCollectList.remove(position);
-						mCollectList.add(0, temp);
-//						mSwipeListView.resetItem();
-						notifyDataSetChanged();
-					}
-				});
-				
-				holder.mDelete.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						mCollectList.remove(position);
-//						mSwipeListView.deleteItem();
-						notifyDataSetChanged();
-					}
-				});
 			}
 			return convertView;
 		}
@@ -224,10 +208,6 @@ public class CollectFragment extends AbsFragment implements OnDeleteListioner,On
 			ImageView mImage;
 			TextView mTitle;
 			TextView mContent;
-			
-			TextView mTop;
-			TextView mDelete;
-			
 			
 		}
 	}

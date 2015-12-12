@@ -37,12 +37,16 @@
                 android:id="@+id/version_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_sixteen"
+                android:textColor="?attr/fontContentColor"
                 android:layout_marginTop="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textSize="@dimen/font_size_sixteen"
+                android:textColor="?attr/fontContentColor"
                 android:text="@string/wechat_number"/>
 
             <ImageView

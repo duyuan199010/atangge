@@ -2,13 +2,15 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     -->
     <style name="AppBaseTheme" parent="@android:style/Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
+
         -->
     </style>
 
@@ -20,6 +22,8 @@
     <style name="DayTheme" parent="Theme.PageIndicatorDefaults">
         <item name="bgColor">@color/bg_color</item>
         <item name="bottomBgColor">@color/lightgray</item>
+        <item name="fontTitleColor">@color/content_font_color_deep</item>
+        <item name="fontContentColor">@color/content_font_color</item>
         <item name="floatValue">0.35</item>
         <item name="integerValue">33</item>
         <item name="booleanValue">true</item>
@@ -33,6 +37,8 @@
     <style name="NightTheme" parent="Theme.PageIndicatorDefaults">
         <item name="bgColor">@color/night_bg_color</item>
         <item name="bottomBgColor">@color/night_bottom_color</item>
+        <item name="fontTitleColor">@color/content_font_color_deep</item>
+        <item name="fontContentColor">@color/content_font_color</item>
         <item name="floatValue">1.44</item>
         <item name="integerValue">55</item>
         <item name="booleanValue">false</item>

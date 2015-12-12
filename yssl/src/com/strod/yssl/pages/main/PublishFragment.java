@@ -80,7 +80,6 @@ public class PublishFragment extends AbsFragment{
 			@Override
 			public boolean setViewValue(View view, Object data,
 										String textRepresentation) {
-				// TODO Auto-generated method stub
 				if(view instanceof ImageView && data instanceof Bitmap){
 					ImageView i = (ImageView)view;
 					i.setImageBitmap((Bitmap) data);

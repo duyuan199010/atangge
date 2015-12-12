@@ -11,6 +11,8 @@
        android:background="@drawable/edit_background"
        android:padding="8dp"
        android:hint="@string/publish_title_hint"
+       android:textColor="?attr/fontContentColor"
+       android:textColorHint="@color/hint_text_color"
        android:textSize="12sp"
        android:singleLine="true"
        android:maxLength="40"
@@ -21,6 +23,8 @@
         android:layout_height="150dp"
         android:padding="8dp"
         android:layout_marginTop="16dp"
+        android:textColor="?attr/fontContentColor"
+        android:textColorHint="@color/hint_text_color"
         android:background="@drawable/edit_background"
         android:hint="@string/publish_content_hint"
         android:gravity="left"
@@ -46,5 +50,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/publish_image_hint"
         android:textSize="12sp"
+        android:textColor="?attr/fontContentColor"
         android:gravity="left" />
 </LinearLayout>

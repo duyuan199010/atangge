@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.dialog.LoadingDialog;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
@@ -160,7 +162,15 @@ public class SettingActivity extends AbsFragmentActivity implements OnItemClickL
 		if(CommonUtils.isFastDoubleClick())return;
 		switch (position) {
 		case CLEAR_CACHE:
-			clearCache();
+			final LoadingDialog mLoadingDialog = LoadingDialog.show(this);
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					clearCache();
+					mLoadingDialog.dismiss();
+				}
+			},500);
+
 			break;
 		case SCORE_ATANGGE:
 			scoreAtangge();

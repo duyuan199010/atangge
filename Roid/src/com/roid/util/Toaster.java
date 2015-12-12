@@ -14,29 +14,25 @@ import android.widget.Toast;
  */
 public class Toaster {
 
-	private static long lastTime = 0;
-	private static long minTimeInterval = 500;
+	private static Toast sToast;
+
+	private static void init(Context context) {
+		if (sToast == null) {
+			sToast = Toast.makeText(context,"",Toast.LENGTH_SHORT);
+		}
+	}
 	
 	public static void showToast(Context context, String text) {
-		long currentTime = System.currentTimeMillis();
-		long duration = currentTime - lastTime;
-		lastTime = currentTime;
-		if (duration > 0 && duration < minTimeInterval)
-			return;
-		else
-			Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-		
+		init(context);
+		sToast.setText(text);
+		sToast.show();
+
 	}
 
 	public static void showResIdToast(Context context, int resId) {
-		long currentTime = System.currentTimeMillis();
-		long duration = currentTime - lastTime;
-		lastTime = currentTime;
-		if (duration > 0 && duration < minTimeInterval)
-			return;
-		else
-			Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
-		
+		init(context);
+		sToast.setText(resId);
+		sToast.show();
 	}
 
 	/**

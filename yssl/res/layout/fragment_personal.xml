@@ -39,6 +39,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/head_img"
                 android:singleLine="true"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="atangge" />
             <ImageView
                 android:layout_width="wrap_content"
@@ -72,6 +74,8 @@
                 android:drawableLeft="@drawable/account_icon"
                 android:drawablePadding="20dp"
                 android:gravity="center"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/mine_publish" />
 
             <ImageView
@@ -105,6 +109,8 @@
                 android:drawableLeft="@drawable/account_icon"
                 android:drawablePadding="20dp"
                 android:gravity="center"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/night_mode" />
 
             <com.strod.yssl.view.SwitchButton
@@ -140,6 +146,8 @@
                 android:drawableLeft="@drawable/account_icon"
                 android:drawablePadding="20dp"
                 android:gravity="center"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/feed_back" />
 
             <ImageView
@@ -174,6 +182,8 @@
                 android:drawableLeft="@drawable/account_icon"
                 android:drawablePadding="20dp"
                 android:gravity="center"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/about_our" />
 
             <ImageView
@@ -207,6 +217,8 @@
                 android:drawableLeft="@drawable/account_icon"
                 android:drawablePadding="20dp"
                 android:gravity="center"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/setting" />
 
             <ImageView
@@ -237,6 +249,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/margin_ordinary"
+                android:textColor="?attr/fontContentColor"
+                android:textSize="@dimen/font_size_fourteen"
                 android:text="@string/exit_account" />
         </com.strod.yssl.view.RippleView>
     </LinearLayout>

@@ -51,8 +51,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="@string/qq_login"
-                    android:textColor="#333333"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_size_twelve"
+                    android:textColor="?attr/fontContentColor" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,8 +77,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="@string/wechat_login"
-                    android:textColor="#333333"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_size_twelve"
+                    android:textColor="?attr/fontContentColor" />
             </LinearLayout>
 
             <LinearLayout
@@ -103,8 +103,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="@string/sinaweibo"
-                    android:textColor="#333333"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_size_twelve"
+                    android:textColor="?attr/fontContentColor" />
             </LinearLayout>
         </LinearLayout>
     </com.strod.yssl.view.RippleView>

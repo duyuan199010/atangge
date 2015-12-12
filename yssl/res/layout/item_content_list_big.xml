@@ -19,6 +19,9 @@
         android:id="@+id/content_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="?attr/fontTitleColor"
+        android:textSize="@dimen/font_size_fourteen"
+        android:ellipsize="end"
         android:singleLine="true" />
 
     <ImageView
@@ -36,6 +39,8 @@
         android:layout_height="wrap_content"
         android:minWidth="50dp"
         android:maxWidth="100dp"
+        android:textColor="?attr/fontContentColor"
+        android:textSize="@dimen/font_size_ten"
         android:layout_marginTop="8dp"
         android:layout_below="@+id/content_img"
         android:text="collect" />
@@ -46,6 +51,8 @@
         android:layout_height="wrap_content"
         android:minWidth="50dp"
         android:maxWidth="100dp"
+        android:textColor="?attr/fontContentColor"
+        android:textSize="@dimen/font_size_ten"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_below="@+id/content_img"
@@ -58,6 +65,8 @@
         android:layout_height="wrap_content"
         android:minWidth="50dp"
         android:maxWidth="100dp"
+        android:textColor="?attr/fontContentColor"
+        android:textSize="@dimen/font_size_ten"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_below="@+id/content_img"
@@ -68,6 +77,8 @@
         android:id="@+id/content_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="?attr/fontContentColor"
+        android:textSize="@dimen/font_size_ten"
         android:gravity="right"
         android:layout_marginTop="8dp"
         android:layout_below="@+id/content_img"
