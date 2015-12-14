@@ -9,11 +9,7 @@ public class DateUtil {
 		String interval = "";
 		//当前时间和time时间的间隔
 		long millis = System.currentTimeMillis() - time;
-		if (millis / 1000 < 10 && millis / 1000 >= 0) {
-			// 如果时间间隔小于10秒则显示“刚刚”millis/10得出的时间间隔的单位是秒
-			interval = "刚刚";
-
-		} else if (millis / 1000 < 60 && millis / 1000 > 0) {
+		if (millis / 1000 < 60 && millis / 1000 >= 0) {
 			// 如果时间间隔小于60秒则显示多少秒前
 			int se = (int) ((millis % 60000) / 1000);
 			interval = se + "秒前";

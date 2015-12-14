@@ -6,7 +6,8 @@
     <string name="net_data_error">不好意思，阿汤哥被外星人接走了</string>
     <string name="data_newest">已经是最新数据了</string>
     <string name="data_no_more">没有更多数据了</string>
-    
+    <string name="data_empty">阿汤哥正在路上，客官请骚等</string>
+
     <!-- guide -->
     <string name="start">立即进入</string>
 

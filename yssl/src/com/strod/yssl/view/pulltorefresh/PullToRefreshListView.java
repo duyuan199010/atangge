@@ -29,6 +29,8 @@ import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.util.DateUtil;
 import com.strod.yssl.view.pulltorefresh.internal.EmptyViewMethodAccessor;
 import com.strod.yssl.view.pulltorefresh.internal.LoadingLayout;
 import com.strod.yssl.R;
@@ -343,4 +345,20 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 
 	}
 
+	/**
+	 * listView overload setRefreshing,display last refresh time
+	 * @param key
+	 */
+	public final void setRefreshing(String key) {
+		long lastRefreshTime = Config.getInstance().getLastRefreshTime(key);
+
+		//have last refresh time,update label
+		if (lastRefreshTime != 0) {
+			String label = DateUtil.formatDateToString(lastRefreshTime);
+			// Update the LastUpdatedLabel
+			getHeaderLayout().setLastUpdatedLabel(getContext().getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
+			mHeaderLoadingView.setLastUpdatedLabel(getContext().getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
+		}
+		setRefreshing(true);
+	}
 }

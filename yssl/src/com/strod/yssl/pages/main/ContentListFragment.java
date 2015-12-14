@@ -67,6 +67,11 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	private ArrayList<ContentType> mContentList;
 	/** listview adapter */
 	private ContentListAdapter mAdapter;
+	/** empty view*/
+	private View mEmptyView;
+
+	/** data key*/
+	private String mKey;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,42 +85,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_content_list, container, false);
+		//init key value
+		mKey = mItemType.getItemId() + mItemType.getName();
 		DebugLog.e(TAG, "[id:%d name:%s] onCreateView()", mItemType.getItemId(), mItemType.getName());
 		if (mContentList == null) {
 			mContentList = new ArrayList<ContentType>();
 			readCache();
 		}
-
-//		mContentList = new ArrayList<ContentType>();
-//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//
-//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,""));
-//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//
-//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//
-//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//
-//		mContentList.add(new ContentType(0,21,"","","","大图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,22,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,23,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(1,24,"","","","左图右文模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
-//		mContentList.add(new ContentType(2,25,"","","","一标三图模式","","阿汤哥",12,24,1287260660l,"http://www.09jike.com/Home/Article/detail/id/3.html"));
 
 
 		initView(rootView);
@@ -129,8 +105,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	private void readCache() {
 		long start = System.currentTimeMillis();
 		// read cache from disk
-		String key = mItemType.getItemId() + mItemType.getName();
-		String json = Config.getInstance().readContentCache(key);
+		String json = Config.getInstance().readContentCache(mKey);
 		if (json == null || json.equals("")) {
 			// no cache
 			return;
@@ -151,6 +126,8 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	 */
 	private void initView(View rootView) {
 		mPullRefreshListView = (PullToRefreshListView) rootView.findViewById(R.id.pull_refresh_list);
+		mEmptyView = rootView.findViewById(R.id.empty_layout);
+
 		ListView actualListView = mPullRefreshListView.getRefreshableView();
 
 		mAdapter = new ContentListAdapter(getActivity(), mContentList);
@@ -162,34 +139,25 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			public void onPullEvent(PullToRefreshBase<ListView> refreshView, PullToRefreshBase.State state, PullToRefreshBase.Mode direction) {
 				if (state.equals(PullToRefreshBase.State.PULL_TO_REFRESH)) {
 
-					if (direction == PullToRefreshBase.Mode.PULL_FROM_START){
-//						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_pull_label));
-//						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_release_label));
-//						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_refreshing_label));
+					if (direction == PullToRefreshBase.Mode.PULL_FROM_START) {
 
-						String key = mItemType.getItemId() + mItemType.getName();
-						long lastRefreshTime = Config.getInstance().getLastRefreshTime(key);
+						long lastRefreshTime = Config.getInstance().getLastRefreshTime(mKey);
 
 						//have last refresh time,update label
 						if (lastRefreshTime != 0) {
 							String label = DateUtil.formatDateToString(lastRefreshTime);
 							// Update the LastUpdatedLabel
-							refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
+							refreshView.getHeaderLayout().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
 							mPullRefreshListView.getHeaderLoadingLayout().setLastUpdatedLabel(getString(R.string.pull_to_refresh_last_refresh_label) + " : " + label);
 						}
-					}else if (direction == PullToRefreshBase.Mode.PULL_FROM_END){
-//						refreshView.getLoadingLayoutProxy().setPullLabel(getString(R.string.pull_to_refresh_from_bottom_pull_label));
-//						refreshView.getLoadingLayoutProxy().setReleaseLabel(getString(R.string.pull_to_refresh_from_bottom_release_label));
-//						refreshView.getLoadingLayoutProxy().setRefreshingLabel(getString(R.string.pull_to_refresh_from_bottom_refreshing_label));
+					} else if (direction == PullToRefreshBase.Mode.PULL_FROM_END) {
 
-						refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("");
-						mPullRefreshListView.getFooterLoadingLayout().setLastUpdatedLabel("");
+						refreshView.getFooterLayout().setLastUpdatedLabel("");
 					}
 
 				}
 			}
 		});
-//		actualListView.setSelector(R.drawable.item_background_selector);
 		actualListView.setOnItemClickListener(this);
 		
 	}
@@ -202,13 +170,13 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		if(!NetMonitor.isNetworkConnected(getActivity())){
 			return needRequest;
 		}
-		long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getItemId() + mItemType.getName());
+		long time = Config.getInstance().getCacheLastModified(getActivity(), mKey);
 		long currentTime = System.currentTimeMillis();
-		// judge cache last mofified time,in wifi state,if >four hours,need request data
+		// judge cache last modified time,in wifi state,if >4 hours,need request data
 		if (currentTime - time > 4 * 60 *60 * 1000 && NetMonitor.isWifiState(getActivity())) {
 			needRequest = true;
 		} else if (currentTime - time > 24 * 60 * 60 * 1000 && (!NetMonitor.isWifiState(getActivity()))) {
-			// judge cache last mofified time,not in wifi state,if >24 hours,need request data
+			// judge cache last modified time,not in wifi state,if >24 hours,need request data
 			needRequest = true;
 		} else {
 			//other didn't need request
@@ -221,7 +189,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	public void onResume() {
 		super.onResume();
 		if (isNeedRequest()) {
-			mPullRefreshListView.setRefreshing(true);
+			mPullRefreshListView.setRefreshing(mKey);
 		}
 	}
 
@@ -236,8 +204,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 		//save refresh time
-		String key = mItemType.getItemId() + mItemType.getName();
-		Config.getInstance().setLastRefreshTime(key,System.currentTimeMillis());
+		Config.getInstance().setLastRefreshTime(mKey,System.currentTimeMillis());
 
 		ArticleFactory articleFactory = new ArticleFactory(mItemType.getItemId(),Config.REFRESH,getRefreshTime());
 		HttpManager.getInstance().post(this.getActivity(), this, HttpRequestId.CONTENT_LIST_REFRESH, HttpRequestURL.CONTENT_LIST, 
@@ -286,11 +253,11 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		RippleView rippleView = (RippleView) view.findViewById(R.id.ripple_view);
 		rippleView.setOnRippleCompleteListener(new OnRippleCompleteListener() {
-			
+
 			@Override
 			public void onComplete(RippleView rippleView) {
 				Intent intent = new Intent(getActivity(), DetailsActivity.class);
-				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position-1));
+				intent.putExtra(DetailsActivity.ARTICLE, mContentList.get(position - 1));
 				startActivity(intent);
 			}
 		});
@@ -335,7 +302,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 		String cacheJson = parser.toJson(article);
 		// save cache data
-		Config.getInstance().writeContentCache(mItemType.getItemId() + mItemType.getName(), cacheJson);
+		Config.getInstance().writeContentCache(mKey, cacheJson);
 	}
 
 	@Override
@@ -348,12 +315,14 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			Article article = new Gson().fromJson(json, Article.class);
 			if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
 				//if haven't refresh data,return
-				if(article.getData().size()==0){
-					if(isVisible())
+				if(article.getData()==null || article.getData().size()==0){
+					if(isVisible() && (!isHidden())) {
 						Toaster.showDefToast(getActivity(), R.string.data_newest);
+						setEmptyView();
+					}
 					return;
 				}
-				long time = Config.getInstance().getCacheLastModified(getActivity(), mItemType.getItemId() + mItemType.getName());
+				long time = Config.getInstance().getCacheLastModified(getActivity(), mKey);
 				long currentTime = System.currentTimeMillis();
 				
 				// judge cache last mofified time,if > one day,clear cache data
@@ -365,9 +334,11 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 				mContentList.addAll(0, article.getData());
 			} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
 				//if haven't no more data,return
-				if(article.getData().size()==0){
-					if(isVisible())
+				if(article.getData()==null || article.getData().size()==0){
+					if(isVisible() && (!isHidden())) {
 						Toaster.showDefToast(getActivity(), R.string.data_no_more);
+						setEmptyView();
+					}
 					return;
 				}
 				
@@ -379,8 +350,10 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		} catch (Exception e) {
 			DebugLog.i(TAG,json);
 			e.printStackTrace();
-			if(isVisible())
+			if(isVisible() && (!isHidden())) {
 				Toaster.showDefToast(getActivity(), R.string.net_data_error);
+				setEmptyView();
+			}
 		}
 	}
 
@@ -389,8 +362,20 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		DebugLog.d(TAG, "onHttpFailure:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
 		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
-		if(isVisible())
+		if(isVisible() && (!isHidden())) {
 			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
+			setEmptyView();
+		}
+
+	}
+
+	/**
+	 * set empty view when listview no data
+	 */
+	private void setEmptyView() {
+		if (mContentList==null || mContentList.size()==0){
+			mPullRefreshListView.setEmptyView(mEmptyView);
+		}
 	}
 
 	@Override

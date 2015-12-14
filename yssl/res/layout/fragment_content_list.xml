@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.strod.yssl.view.pulltorefresh.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/pull_refresh_list"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:cacheColorHint="#00000000"
-    android:divider="@color/divider_color"
-    android:dividerHeight="1px"
-    android:fadingEdge="none"
-    android:fastScrollEnabled="false"
-    android:footerDividersEnabled="true"
-    android:headerDividersEnabled="true"
-    android:smoothScrollbar="true"
-    android:overScrollMode="never"
-    app:ptrShowIndicator = "false"
-    app:ptrMode = "both"
-    app:ptrAnimationStyle = "flip"
-     />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <com.strod.yssl.view.pulltorefresh.PullToRefreshListView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/divider_color"
+        android:dividerHeight="1px"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:overScrollMode="never"
+        android:smoothScrollbar="true"
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="both"
+        app:ptrShowIndicator="false" />
+
+    <LinearLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/data_empty"
+            android:textSize="12sp"
+            android:textColor="?attr/fontContentColor"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+
