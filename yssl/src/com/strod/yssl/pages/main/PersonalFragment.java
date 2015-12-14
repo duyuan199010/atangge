@@ -18,7 +18,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.roid.ui.AbsFragment;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
+import com.strod.yssl.bean.personal.User;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.database.DatabaseHelper;
 import com.strod.yssl.pages.account.LoginActivity;
 import com.strod.yssl.pages.personal.AboutUsActivity;
 import com.strod.yssl.pages.personal.FeedBackActivity;
@@ -26,6 +28,8 @@ import com.strod.yssl.pages.personal.MyPublishActivity;
 import com.strod.yssl.pages.personal.SettingActivity;
 import com.strod.yssl.view.RippleView;
 import com.strod.yssl.view.SwitchButton;
+
+import java.util.List;
 
 public class PersonalFragment extends AbsFragment implements OnClickListener {
 
@@ -42,6 +46,10 @@ public class PersonalFragment extends AbsFragment implements OnClickListener {
      */
     private SwitchButton mNightModeSwitchButton;
 
+    /**database*/
+    private DatabaseHelper mDatabaseHelper;
+    private User mUser;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,15 @@ public class PersonalFragment extends AbsFragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_personal, container, false);
 
+        if (mDatabaseHelper==null){
+            mDatabaseHelper = new DatabaseHelper<User>();
+            List<User> userList = mDatabaseHelper.queryForAll(User.class);
+            if (userList != null && userList.size()>0){
+                mUser = userList.get(0);
+            }else {
+                mUser = new User();
+            }
+        }
         initView(rootView);
 
         return rootView;
@@ -74,6 +91,8 @@ public class PersonalFragment extends AbsFragment implements OnClickListener {
 
         mExitRV = (RippleView) rootView.findViewById(R.id.exit_layout);
         mExitRV.setOnClickListener(this);
+
+        mExitRV.setVisibility(mUser.isLogin() ? View.VISIBLE : View.GONE);
 
         mHeadImg = (ImageView) rootView.findViewById(R.id.head_img);
         ImageLoader.getInstance().displayImage("http://c.hiphotos.baidu.com/image/h%3D200/sign=d14b41218501a18befeb154fae2e0761/eaf81a4c510fd9f98db59264272dd42a2834a419.jpg", mHeadImg, Config.getInstance().getDisplayImageOptionsCircle());

@@ -248,6 +248,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:background="@drawable/btn_shape_background"
                 android:padding="@dimen/margin_ordinary"
                 android:textColor="?attr/fontContentColor"
                 android:textSize="@dimen/font_size_fourteen"
