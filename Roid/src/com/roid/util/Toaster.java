@@ -8,9 +8,6 @@ import android.widget.Toast;
 
 /**
  * 自定义Toast
- * 
- * @author gryps
- * 
  */
 public class Toaster {
 
