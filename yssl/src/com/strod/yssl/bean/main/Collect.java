@@ -3,11 +3,13 @@ package com.strod.yssl.bean.main;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/10/30.
  */
 @DatabaseTable(tableName = "collect")
-public class Collect {
+public class Collect implements Serializable{
     /**id*/
     @DatabaseField(generatedId = true)
     private int id;

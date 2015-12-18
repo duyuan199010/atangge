@@ -9,6 +9,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.roid.db.BaseSQLiteHelperOrm;
 import com.strod.yssl.bean.main.Collect;
+import com.strod.yssl.bean.personal.User;
 
 public class SQLiteHelperOrm extends BaseSQLiteHelperOrm {
 
@@ -16,6 +17,7 @@ public class SQLiteHelperOrm extends BaseSQLiteHelperOrm {
 	public void createTable() {
 		// TODO Auto-generated method stub
 		try {
+			TableUtils.createTable(connectionSource, User.class);
 			TableUtils.createTable(connectionSource, Collect.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -31,6 +33,7 @@ public class SQLiteHelperOrm extends BaseSQLiteHelperOrm {
 	public void dropTable() {
 		// TODO Auto-generated method stub
 		try {
+			TableUtils.dropTable(connectionSource, User.class, true);
 			TableUtils.dropTable(connectionSource, Collect.class, true);
 		} catch (SQLException e) {
 			e.printStackTrace();
