@@ -72,6 +72,9 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	/** data key*/
 	private String mKey;
+
+	/** hidden */
+	private boolean mIsHidden;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -316,7 +319,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			if (taskId == HttpRequestId.CONTENT_LIST_REFRESH) {
 				//if haven't refresh data,return
 				if(article.getData()==null || article.getData().size()==0){
-					if(isVisible() && (!isHidden())) {
+					if(isVisible() && (!mIsHidden)) {
 						Toaster.showDefToast(getActivity(), R.string.data_newest);
 						setEmptyView();
 					}
@@ -335,7 +338,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			} else if (taskId == HttpRequestId.CONTENT_LIST_LOADMORE) {
 				//if haven't no more data,return
 				if(article.getData()==null || article.getData().size()==0){
-					if(isVisible() && (!isHidden())) {
+					if(isVisible() && (!mIsHidden)) {
 						Toaster.showDefToast(getActivity(), R.string.data_no_more);
 						setEmptyView();
 					}
@@ -350,7 +353,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		} catch (Exception e) {
 			DebugLog.i(TAG,json);
 			e.printStackTrace();
-			if(isVisible() && (!isHidden())) {
+			if(isVisible() && (!mIsHidden)) {
 				Toaster.showDefToast(getActivity(), R.string.net_data_error);
 				setEmptyView();
 			}
@@ -362,7 +365,7 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		DebugLog.d(TAG, "onHttpFailure:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
 		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
-		if(isVisible() && (!isHidden())) {
+		if(isVisible() && (!mIsHidden)) {
 			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
 			setEmptyView();
 		}
@@ -376,6 +379,12 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 		if (mContentList==null || mContentList.size()==0){
 			mPullRefreshListView.setEmptyView(mEmptyView);
 		}
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		mIsHidden = hidden;
 	}
 
 	@Override

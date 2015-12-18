@@ -17,9 +17,11 @@ import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
+import com.strod.yssl.clientcore.service.OnSwitchThemeListener;
+import com.strod.yssl.clientcore.service.SwitchThemeListenerMgr;
 import com.strod.yssl.view.TitleBar;
 
-public class MainActivity extends AbsFragmentActivity implements OnCheckedChangeListener {
+public class MainActivity extends AbsFragmentActivity implements OnCheckedChangeListener ,OnSwitchThemeListener{
 
 	// Debugging
 	private static final String TAG = "MainActivity";
@@ -72,10 +74,13 @@ public class MainActivity extends AbsFragmentActivity implements OnCheckedChange
 
 		// show indexFragment
 		showIndexFragment();
+
+		SwitchThemeListenerMgr.getInstance().addListener(this);
 	}
 
-	public void switchTheme() {
-		if (Config.getInstance().isNightMode) {
+	@Override
+	public void switchTheme(boolean isNight) {
+		if (isNight) {
 			mRadioGroup.setBackgroundResource(R.color.night_bottom_color);
 			mCenterLayout.setBackgroundResource(R.color.night_bg_color);
 		} else {
@@ -204,6 +209,7 @@ public class MainActivity extends AbsFragmentActivity implements OnCheckedChange
 
 	@Override
 	protected void onDestroy() {
+		SwitchThemeListenerMgr.getInstance().removeListener(this);
 		super.onDestroy();
 	}
 
