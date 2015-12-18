@@ -21,17 +21,21 @@ public class LoginListenerMgr {
         loginListeners = new Vector<OnLoginListener>();
     }
 
-    public synchronized void addListener(OnLoginListener onLoginListener){
-        loginListeners.add(onLoginListener);
+    public synchronized void addListener(OnLoginListener onLoginListener) {
+        if (!loginListeners.contains(onLoginListener)) {
+            loginListeners.add(onLoginListener);
+        }
     }
 
-    public synchronized void removeListener(OnLoginListener onLoginListener){
-        loginListeners.remove(onLoginListener);
+    public synchronized void removeListener(OnLoginListener onLoginListener) {
+        if (loginListeners.contains(onLoginListener)) {
+            loginListeners.remove(onLoginListener);
+        }
     }
 
-    public void notifyLoginChanged(User user){
+    public void notifyLoginChanged(User user) {
         Enumeration<OnLoginListener> enumo = loginListeners.elements();
-        while(enumo.hasMoreElements()){
+        while (enumo.hasMoreElements()) {
             enumo.nextElement().onLogin(user);
         }
     }

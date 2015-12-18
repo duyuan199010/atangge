@@ -1,7 +1,5 @@
 package com.strod.yssl.clientcore.service;
 
-import com.strod.yssl.bean.personal.User;
-
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -21,17 +19,21 @@ public class SwitchThemeListenerMgr {
         switchThemeListeners = new Vector<OnSwitchThemeListener>();
     }
 
-    public synchronized void addListener(OnSwitchThemeListener onSwitchThemeListener){
-        switchThemeListeners.add(onSwitchThemeListener);
+    public synchronized void addListener(OnSwitchThemeListener onSwitchThemeListener) {
+        if (!switchThemeListeners.contains(onSwitchThemeListener)) {
+            switchThemeListeners.add(onSwitchThemeListener);
+        }
     }
 
-    public synchronized void removeListener(OnSwitchThemeListener onSwitchThemeListener){
-        switchThemeListeners.remove(onSwitchThemeListener);
+    public synchronized void removeListener(OnSwitchThemeListener onSwitchThemeListener) {
+        if (switchThemeListeners.contains(onSwitchThemeListener)) {
+            switchThemeListeners.remove(onSwitchThemeListener);
+        }
     }
 
-    public void notifySwitchTheme(boolean isNight){
+    public void notifySwitchTheme(boolean isNight) {
         Enumeration<OnSwitchThemeListener> enumo = switchThemeListeners.elements();
-        while(enumo.hasMoreElements()){
+        while (enumo.hasMoreElements()) {
             enumo.nextElement().switchTheme(isNight);
         }
     }
