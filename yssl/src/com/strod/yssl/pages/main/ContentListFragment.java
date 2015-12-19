@@ -43,8 +43,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 
 	/** debug log tag */
 	private static final String TAG = "ContentListFragment";
-	/** refresh complete tag */
-	private static final int REFRESH_COMPLETE = 0;
 	/** save the most cache data size */
 	private static final int CACHE_SIZE = 30;
 
@@ -265,23 +263,6 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 			}
 		});
 	}
-	
-	Handler mHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			switch (msg.what) {
-			case REFRESH_COMPLETE:
-				mPullRefreshListView.onRefreshComplete();
-				break;
-
-			default:
-				break;
-			}
-		}
-
-	};
 
 	/**
 	 * sava data to cache
@@ -312,7 +293,12 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	public void onHttpSuccess(int taskId, Object response, String json) {
 		DebugLog.d(TAG, "onHttpSuccess:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
-		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				mPullRefreshListView.onRefreshComplete();
+			}
+		});
 		try {
 			DebugLog.i(TAG,json);
 			Article article = new Gson().fromJson(json, Article.class);
@@ -364,7 +350,12 @@ public final class ContentListFragment extends AbsFragment implements OnRefreshL
 	public void onHttpFailure(int taskId, String message) {
 		DebugLog.d(TAG, "onHttpFailure:" + taskId);
 		// Call onRefreshComplete when the list has been refreshed.
-		mHandler.sendEmptyMessage(REFRESH_COMPLETE);
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				mPullRefreshListView.onRefreshComplete();
+			}
+		});
 		if(isVisible() && (!mIsHidden)) {
 			Toaster.showDefToast(getActivity(), R.string.error_network_connection);
 			setEmptyView();

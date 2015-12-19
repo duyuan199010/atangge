@@ -1,17 +1,18 @@
 package com.strod.yssl.pages.account;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.pages.main.MainActivity;
+
+import java.lang.ref.WeakReference;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * app first start activity
@@ -19,35 +20,47 @@ import com.strod.yssl.pages.main.MainActivity;
  * @author user
  *
  */
-public class SplashActivity extends AbsFragmentActivity {
+public class SplashActivity extends AbsActivity {
 
 	/**the timer task delay*/
 	public static final long DELAY = 1500;
 	public static final int START_ACTIVITY = 0;
 
-	Handler handler = new Handler() {
+	private Handler mHandler;
+
+	private static class MyHandler extends Handler{
+
+		private final WeakReference<SplashActivity> activityWeakReference;
+
+		public MyHandler(SplashActivity splashActivity){
+			this.activityWeakReference = new WeakReference<SplashActivity>(splashActivity);
+		}
+
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what) {
-			case START_ACTIVITY:
-				if(Config.getInstance().getGuide()){
-					startActivity(new Intent(SplashActivity.this,MainActivity.class));
-				}else{
-					startActivity(new Intent(SplashActivity.this,GuideActivity.class));
-				}
-				SplashActivity.this.finish();
-				break;
+				case START_ACTIVITY:
+					if(Config.getInstance().getGuide()){
+						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity.class));
+					}else{
+						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(),GuideActivity.class));
+					}
+					activityWeakReference.get().finish();
+					break;
 
-			default:
-				break;
+				default:
+					break;
 			}
-		};
-	};
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+
+		mHandler = new MyHandler(this);
+
 		timer.schedule(task, DELAY);
 	}
 
@@ -59,7 +72,7 @@ public class SplashActivity extends AbsFragmentActivity {
 		public void run() {
 			Message message = new Message();
 			message.what = START_ACTIVITY;
-			handler.sendMessage(message);
+			mHandler.sendMessage(message);
 		}
 	};
 

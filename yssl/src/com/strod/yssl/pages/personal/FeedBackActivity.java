@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
@@ -21,7 +18,7 @@ import com.strod.yssl.view.TitleBar;
  *
  * @author user
  */
-public class FeedBackActivity extends AbsFragmentActivity implements OnClickListener{
+public class FeedBackActivity extends AbsActivity implements OnClickListener{
 
     private static final String TAG = "FeedBackActivity";
 

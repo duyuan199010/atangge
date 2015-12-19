@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.roid.net.http.OnHttpRespondLisenter;
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
 import com.roid.util.Toaster;
@@ -27,7 +27,7 @@ import com.strod.yssl.view.WebViewProgress;
  *
  * @author user
  */
-public class DetailsActivity extends AbsFragmentActivity implements OnClickListener, OnHttpRespondLisenter {
+public class DetailsActivity extends AbsActivity implements OnClickListener, OnHttpRespondLisenter {
 
     /**
      * tag

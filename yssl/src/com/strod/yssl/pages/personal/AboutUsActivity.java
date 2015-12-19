@@ -6,7 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.TitleBar;
@@ -16,7 +16,7 @@ import com.strod.yssl.view.TitleBar;
  *
  * @author user
  */
-public class AboutUsActivity extends AbsFragmentActivity {
+public class AboutUsActivity extends AbsActivity {
 
     private static final String TAG = "AboutUsActivity";
 

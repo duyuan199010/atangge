@@ -1,16 +1,12 @@
 package com.strod.yssl.pages.personal;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.roid.ui.AbsFragmentActivity;
-import com.roid.util.Toaster;
+import com.roid.ui.AbsActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.TitleBar;
@@ -21,7 +17,7 @@ import com.strod.yssl.view.pulltorefresh.PullToRefreshListView;
  *
  * @author user
  */
-public class MyPublishActivity extends AbsFragmentActivity {
+public class MyPublishActivity extends AbsActivity {
 
     private static final String TAG = "MyPublishActivity";
 

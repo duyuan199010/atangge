@@ -1,9 +1,5 @@
 package com.strod.yssl.pages.personal;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.roid.ui.dialog.LoadingDialog;
 import com.roid.util.CommonUtils;
 import com.roid.util.DebugLog;
@@ -34,13 +30,17 @@ import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.SwitchButton;
 import com.strod.yssl.view.TitleBar;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * setting activity
  * 
  * @author user
  *
  */
-public class SettingActivity extends AbsFragmentActivity implements OnItemClickListener {
+public class SettingActivity extends AbsActivity implements OnItemClickListener {
 
 	private static final String TAG = "SettingActivity";
 

@@ -6,8 +6,9 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
-import com.roid.ui.AbsFragmentActivity;
+import com.roid.ui.AbsActivity;
 import com.roid.util.DebugLog;
+import com.roid.util.Toaster;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.view.RippleView;
@@ -27,7 +28,7 @@ import cn.sharesdk.wechat.friends.Wechat;
  *
  * @author user
  */
-public class LoginActivity extends AbsFragmentActivity implements View.OnClickListener, PlatformActionListener {
+public class LoginActivity extends AbsActivity implements View.OnClickListener, PlatformActionListener {
 
     /**
      * UI
@@ -166,17 +167,17 @@ public class LoginActivity extends AbsFragmentActivity implements View.OnClickLi
             switch (msg.what) {
                 case MSG_AUTH_CANCEL: {
                     //取消授权
-                    Toast.makeText(LoginActivity.this, "取消授权", Toast.LENGTH_SHORT).show();
+                    Toaster.showDefToast(LoginActivity.this,"取消授权");
                 }
                 break;
                 case MSG_AUTH_ERROR: {
                     //授权失败
-                    Toast.makeText(LoginActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
+                    Toaster.showDefToast(LoginActivity.this, "授权失败");
                 }
                 break;
                 case MSG_AUTH_COMPLETE: {
                     //授权成功
-                    Toast.makeText(LoginActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
+                    Toaster.showDefToast(LoginActivity.this, "授权成功");
                     Object[] objs = (Object[]) msg.obj;
                     String platform = (String) objs[0];
                     HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
