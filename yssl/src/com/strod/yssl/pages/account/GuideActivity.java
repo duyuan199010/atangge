@@ -1,5 +1,6 @@
 package com.strod.yssl.pages.account;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,21 +31,14 @@ public class GuideActivity extends AbsActivity {
 	
 	ViewPager mPager;
 	PageIndicator mIndicator;
-	List<Integer> guideList;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
 
-		guideList = new ArrayList<Integer>();
-		guideList.add(0);
-		guideList.add(1);
-		guideList.add(2);
-		guideList.add(3);
-
 		mPager = (ViewPager) findViewById(R.id.pager);
-		mPager.setAdapter(new ImagePagerAdapter(this,guideList));
+		mPager.setAdapter(new ImagePagerAdapter(this));
 
 		mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
 		mIndicator.setViewPager(mPager);
@@ -54,44 +48,69 @@ public class GuideActivity extends AbsActivity {
 	private class ImagePagerAdapter extends PagerAdapter{
 
 		private Context mContext;
-		List<Integer> mGuideList;
+		List<View> pageViews = new ArrayList<View>();
 
 
-		public ImagePagerAdapter(Context context,List<Integer> guideList){
+		public ImagePagerAdapter(Context context){
 			this.mContext = context;
-			this.mGuideList = guideList;
+
+			ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+			ImageView view1 = new ImageView(mContext);
+			view1.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			view1.setLayoutParams(params);
+			view1.setImageResource(R.drawable.guide_one);
+			pageViews.add(view1);
+
+			ImageView view2 = new ImageView(mContext);
+			view2.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			view2.setLayoutParams(params);
+			view2.setImageResource(R.drawable.guide_two);
+			pageViews.add(view2);
+
+			ImageView view3 = new ImageView(mContext);
+			view3.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			view3.setLayoutParams(params);
+			view3.setImageResource(R.drawable.guide_three);
+			pageViews.add(view3);
+
+			ImageView view4 = new ImageView(mContext);
+			view4.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			view4.setLayoutParams(params);
+			view4.setImageResource(R.drawable.guide_four);
+			pageViews.add(view4);
 		}
 
 
 		@Override
 		public int getCount() {
-			return guideList.size();
+			return pageViews.size();
 		}
 
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
-			ImageView iv = new ImageView(mContext);
-			ViewGroup.LayoutParams params = iv.getLayoutParams();
-			params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-			params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-			iv.setLayoutParams(params);
-        	iv.setBackgroundResource(R.color.title_bg_color);
-			container.addView(iv);
-			if (position == 3){
-				iv.setOnClickListener(new View.OnClickListener() {
+			View view = pageViews.get(position);
+			container.addView(view);
+			if (position == pageViews.size()-1){
+				view.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						startActivity(new Intent(GuideActivity.this, MainActivity.class));
-						GuideActivity.this.finish();
+						startActivity(new Intent(mContext, MainActivity.class));
+						((Activity)mContext).finish();
 					}
 				});
 			}
-			return iv;
+			return view;
 		}
 
 		@Override
 		public boolean isViewFromObject(View view, Object o) {
-			return false;
+			return view==o;
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((View) object);
 		}
 	}
 
