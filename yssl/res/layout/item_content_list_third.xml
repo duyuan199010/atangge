@@ -3,7 +3,7 @@
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ripple_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     ripple:rv_color="#88888888"
     ripple:rv_rippleDuration="400"
     ripple:rv_type="rectangle">

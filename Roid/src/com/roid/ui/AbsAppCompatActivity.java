@@ -1,9 +1,9 @@
 package com.roid.ui;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -12,7 +12,7 @@ import com.roid.util.DebugLog;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AbsActivity extends Activity {
+public class AbsAppCompatActivity extends AppCompatActivity {
 	private List<Runnable> mPendingActions = null;
 	private boolean mFragActResumed = false;
 
@@ -101,7 +101,7 @@ public class AbsActivity extends Activity {
 	protected void onDestroy() {
 		/* Pop Activity off stack */
 		ActivityManager.getInstance().popActivity(this);
-		DebugLog.i(AbsActivity.class.getSimpleName(), "onDestroy()...");
+		DebugLog.i(AbsAppCompatActivity.class.getSimpleName(), "onDestroy()...");
 		super.onDestroy();
 	}
 

@@ -9,6 +9,7 @@ import com.roid.ui.AbsActivity;
 import com.strod.yssl.R;
 import com.strod.yssl.clientcore.Config;
 import com.strod.yssl.pages.main.MainActivity;
+import com.strod.yssl.pages.main.MainActivity2;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;
@@ -41,7 +42,7 @@ public class SplashActivity extends AbsActivity {
 			switch (msg.what) {
 				case START_ACTIVITY:
 					if(Config.getInstance().getGuide()){
-						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity.class));
+						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity2.class));
 					}else{
 						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(),GuideActivity.class));
 					}

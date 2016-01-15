@@ -6,8 +6,8 @@
     android:gravity="center"
     android:orientation="vertical"
      >
-    
-    <com.strod.yssl.view.TitleBar 
+
+    <com.strod.yssl.view.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"

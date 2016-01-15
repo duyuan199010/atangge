@@ -2,6 +2,7 @@
 <resources>
 
     <color name="title_bg_color">#36A803</color>
+    <color name="title_bg_color_dark">#FF009600</color>
     <color name="title_bg_color_transport">#8836A803</color>
     <color name="title_font_color">#f8f8f8</color>
     

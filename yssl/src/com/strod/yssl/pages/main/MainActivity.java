@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.roid.ui.AbsAppCompatActivity;
 import com.roid.ui.AbsFragment;
 import com.roid.ui.AbsFragmentActivity;
 import com.roid.ui.ActivityManager;
@@ -21,7 +22,7 @@ import com.strod.yssl.clientcore.service.OnSwitchThemeListener;
 import com.strod.yssl.clientcore.service.SwitchThemeListenerMgr;
 import com.strod.yssl.view.TitleBar;
 
-public class MainActivity extends AbsFragmentActivity implements OnCheckedChangeListener ,OnSwitchThemeListener{
+public class MainActivity extends AbsAppCompatActivity implements OnCheckedChangeListener ,OnSwitchThemeListener{
 
 	// Debugging
 	private static final String TAG = "MainActivity";

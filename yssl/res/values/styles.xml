@@ -19,7 +19,22 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="DayTheme" parent="Theme.PageIndicatorDefaults">
+    <!-- 蓝色为主色调 -->
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--选中状态icon的颜色和字体颜色-->
+        <item name="colorPrimary">@color/title_bg_color</item>
+        <item name="colorPrimaryDark">@color/title_bg_color_dark</item>
+        <item name="colorAccent">@color/title_bg_color</item>
+        <!--正常状态下字体颜色和icon颜色-->
+        <item name="android:textColorPrimary">@color/white</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DayTheme" parent="MyTheme">
         <item name="bgColor">@color/bg_color</item>
         <item name="bottomBgColor">@color/lightgray</item>
         <item name="fontTitleColor">@color/content_font_color_deep</item>
@@ -34,7 +49,7 @@
         <item name="imageValue">@drawable/ic_launcher</item>
     </style>
 
-    <style name="NightTheme" parent="Theme.PageIndicatorDefaults">
+    <style name="NightTheme" parent="MyTheme">
         <item name="bgColor">@color/night_bg_color</item>
         <item name="bottomBgColor">@color/night_bottom_color</item>
         <item name="fontTitleColor">@color/content_font_color_deep</item>

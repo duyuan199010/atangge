@@ -40,12 +40,12 @@ public class Banner extends RelativeLayout{
         initView(context);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Banner(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        this.context = context;
-        initView(context);
-    }
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    public Banner(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//        this.context = context;
+//        initView(context);
+//    }
 
     public void initView(Context act) {
         View mView = LayoutInflater.from(act).inflate(R.layout.banner, this, true);
