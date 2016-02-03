@@ -42,7 +42,8 @@ public class SplashActivity extends AbsActivity {
 			switch (msg.what) {
 				case START_ACTIVITY:
 					if(Config.getInstance().getGuide()){
-						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity2.class));
+						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity.class));
+//						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(), MainActivity2.class));
 					}else{
 						activityWeakReference.get().startActivity(new Intent(activityWeakReference.get(),GuideActivity.class));
 					}

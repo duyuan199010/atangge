@@ -22,7 +22,6 @@
         android:id="@+id/id_appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
@@ -89,22 +88,31 @@
             并且下面的这个控件必须是可滚动的。
         当设置了layout_behavior的控件滑动时，就会触发设置了layout_scrollFlags的控件发生状态的改变。
     -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+
         <android.support.v4.view.ViewPager
             android:id="@+id/id_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+             />
 
 
         <FrameLayout
             android:id="@+id/main_center_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="?attr/bgColor"
             android:visibility="gone"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
     <!--android:layout_gravity="bottom|end"-->
@@ -112,7 +120,6 @@
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         android:layout_gravity="bottom"
         android:paddingBottom="5dp"
         android:background="?attr/bottomBgColor"
@@ -165,5 +172,6 @@
             android:gravity="center"
             android:text="@string/main_personal" />
     </RadioGroup>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

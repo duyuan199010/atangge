@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.roid.AbsApplication;
 import com.roid.config.AbsConfig;
+import com.roid.core.EventLoop;
 import com.roid.util.DebugLog;
 import com.strod.yssl.MyApplication;
 import com.strod.yssl.R;
@@ -325,6 +326,7 @@ public class Config extends AbsConfig {
 		if(json==null||json.equals("")){
 			return;
 		}
+		/*
 		new Thread(new Runnable() {
 
 			@Override
@@ -343,7 +345,26 @@ public class Config extends AbsConfig {
 					DebugLog.e(TAG, uniqu+" writeContentCache() error");
 				}
 			}
-		}).start();
+		}).start();*/
+
+		EventLoop.getInstance().postBg(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					String key = hashKeyForDisk(uniqu);
+					DiskLruCache.Editor editor = mContentDiskLruCache.edit(key);
+					if (editor != null) {
+						OutputStream outputStream = editor.newOutputStream(0);
+						outputStream.write(json.getBytes());
+						editor.commit();
+					}
+					mContentDiskLruCache.flush();
+				} catch (Exception e) {
+					e.printStackTrace();
+					DebugLog.e(TAG, uniqu+" writeContentCache() error");
+				}
+			}
+		});
 	}
 
 	/**

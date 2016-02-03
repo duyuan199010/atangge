@@ -30,8 +30,8 @@ proguard/
 /.metadata
 /.recommenders
 .idea
-atangge.iml
-Roid/Roid.iml
-Roid/build.gradle
-yssl/Build.gradle
-yssl/yssl.iml
+/atangge.iml
+/Roid/Roid.iml
+/Roid/build.gradle
+/yssl/Build.gradle
+/yssl/yssl.iml
